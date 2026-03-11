@@ -99,6 +99,11 @@ When behavior, structure, or naming changes:
 2. Use a clear, scoped commit message (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`).
 3. Do not amend unless explicitly requested.
 4. Never rewrite user changes without request.
+5. Use a dedicated branch for each feature, fix, refactor, docs, or chore change.
+6. Name branches by change type (`feat/<topic>`, `fix/<topic>`, `refactor/<topic>`, `docs/<topic>`, `chore/<topic>`).
+7. Keep one logical change per branch and integrate through a pull request whenever possible.
+8. Keep `trunk` as stable integration; do not commit directly to `trunk` unless explicitly approved.
+9. Re-run relevant validation gates after rebasing or merging latest `trunk` into a branch before merge.
 
 ## Domain-Specific Standards
 

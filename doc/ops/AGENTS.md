@@ -71,6 +71,16 @@ Without such a trigger, execute normal engineering work directly.
 - Always verify with command-line checks relevant to the modified scope.
 - Surface concrete risks early (runtime regressions, template compatibility, packaging side effects).
 
+## Branch and Review Policy
+
+- Use a dedicated branch for each change intended for merge or release.
+- Use branch names that match the change type: `feat/<topic>`, `fix/<topic>`, `refactor/<topic>`, `docs/<topic>`, `chore/<topic>`.
+- Keep one logical change per branch.
+- Prefer pull requests for integration and keep `trunk` as the stable integration branch.
+- Require green validation checks before merge.
+- Prefer squash merges to keep history linear and readable.
+- Direct commits to `trunk` are exceptions and require explicit user approval.
+
 ## Definition of Done
 
 A task is done when all are true:
