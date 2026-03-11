@@ -1,0 +1,289 @@
+{
+    "meta": {},
+    "blocks": [
+        {
+            "t": "Header",
+            "c": [
+                1,
+                [
+                    "mark-example",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Mark"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Example"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "Header",
+            "c": [
+                3,
+                [
+                    "kr-2-1-2-wertbeitrag-der-ea-messen",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "RawInline",
+                        "c": [
+                            "html",
+                            "<mark style=\"background: #FFB86CA6;\">"
+                        ]
+                    },
+                    {
+                        "t": "Str",
+                        "c": "(KR-2"
+                    },
+                    {
+                        "t": "RawInline",
+                        "c": [
+                            "html",
+                            "</mark>"
+                        ]
+                    },
+                    {
+                        "t": "RawInline",
+                        "c": [
+                            "html",
+                            "<mark style=\"background: #FFB8EBA6;\">"
+                        ]
+                    },
+                    {
+                        "t": "Str",
+                        "c": "-1-2):"
+                    },
+                    {
+                        "t": "RawInline",
+                        "c": [
+                            "html",
+                            "</mark>"
+                        ]
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Wertbeitrag"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "der"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "EA"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "messen"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "Paragraph"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "with"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "an"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "inline"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "RawInline",
+                    "c": [
+                        "html",
+                        "<mark style=\"background: #FFD700;\">"
+                    ]
+                },
+                {
+                    "t": "Str",
+                    "c": "highlighted"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "segment"
+                },
+                {
+                    "t": "RawInline",
+                    "c": [
+                        "html",
+                        "</mark>"
+                    ]
+                },
+                {
+                    "t": "Str",
+                    "c": "."
+                }
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "Adjacent"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "marks:"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "RawInline",
+                    "c": [
+                        "html",
+                        "<mark style=\"background: #FFB86CA6;\">"
+                    ]
+                },
+                {
+                    "t": "Str",
+                    "c": "A"
+                },
+                {
+                    "t": "RawInline",
+                    "c": [
+                        "html",
+                        "</mark>"
+                    ]
+                },
+                {
+                    "t": "RawInline",
+                    "c": [
+                        "html",
+                        "<mark style=\"background-color: #ABCDEF;\">"
+                    ]
+                },
+                {
+                    "t": "Str",
+                    "c": "B"
+                },
+                {
+                    "t": "RawInline",
+                    "c": [
+                        "html",
+                        "</mark>"
+                    ]
+                },
+                {
+                    "t": "Str",
+                    "c": "."
+                }
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "Default"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "mark"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "without"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "explicit"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "style:"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "RawInline",
+                    "c": [
+                        "html",
+                        "<mark>"
+                    ]
+                },
+                {
+                    "t": "Str",
+                    "c": "Default"
+                },
+                {
+                    "t": "RawInline",
+                    "c": [
+                        "html",
+                        "</mark>"
+                    ]
+                },
+                {
+                    "t": "Str",
+                    "c": "."
+                }
+            ]
+        }
+    ]
+}

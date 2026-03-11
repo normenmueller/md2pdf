@@ -1,0 +1,85 @@
+{
+    "meta": {},
+    "blocks": [
+        {
+            "t": "Header",
+            "c": [
+                1,
+                [
+                    "tikz-example",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "TikZ"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Example"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "CodeBlock",
+            "c": [
+                [
+                    "",
+                    [
+                        "tikz"
+                    ],
+                    [
+                        [
+                            "width",
+                            "0.5\\linewidth"
+                        ],
+                        [
+                            "height",
+                            "4cm"
+                        ],
+                        [
+                            "scale",
+                            "0.8"
+                        ],
+                        [
+                            "caption",
+                            "Fit Test"
+                        ],
+                        [
+                            "label",
+                            "fig:fit-test"
+                        ],
+                        [
+                            "placement",
+                            "ht"
+                        ]
+                    ]
+                ],
+                "\\usepackage{tikz-cd}\n\\usetikzlibrary{fit,positioning}\n\n\\begin{document}\n\\begin{tikzpicture}\n  \\node (a) {A};\n  \\node (b) [right=of a] {B};\n  \\node[draw, fit=(a)(b)] (box) {};\n\\end{tikzpicture}\n\\end{document}"
+            ]
+        },
+        {
+            "t": "CodeBlock",
+            "c": [
+                [
+                    "",
+                    [
+                        "tikz"
+                    ],
+                    [
+                        [
+                            "scale",
+                            "0.6"
+                        ]
+                    ]
+                ],
+                "\\begin{tikzpicture}[>=Stealth]\n  \\node (x) at (0,0) {X};\n  \\node (y) at (2,0) {Y};\n  \\draw[->] (x) -- (y);\n\\end{tikzpicture}"
+            ]
+        }
+    ]
+}

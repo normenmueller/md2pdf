@@ -1,0 +1,302 @@
+{
+    "meta": {},
+    "blocks": [
+        {
+            "t": "Header",
+            "c": [
+                1,
+                [
+                    "callout-example",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Callout"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Example"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "BlockQuote",
+            "c": [
+                {
+                    "t": "Para",
+                    "c": [
+                        {
+                            "t": "Str",
+                            "c": "[!note]"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "Simple"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "title"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "only"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "t": "BlockQuote",
+            "c": [
+                {
+                    "t": "Para",
+                    "c": [
+                        {
+                            "t": "Str",
+                            "c": "[!warning]-"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "Watch"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "out"
+                        },
+                        {
+                            "t": "SoftBreak"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "Multi-line"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "content"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "with"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Emph",
+                            "c": [
+                                {
+                                    "t": "Str",
+                                    "c": "emphasis"
+                                }
+                            ]
+                        },
+                        {
+                            "t": "Str",
+                            "c": "."
+                        }
+                    ]
+                },
+                {
+                    "t": "BulletList",
+                    "c": [
+                        [
+                            {
+                                "t": "Plain",
+                                "c": [
+                                    {
+                                        "t": "Str",
+                                        "c": "Item"
+                                    },
+                                    {
+                                        "t": "Space"
+                                    },
+                                    {
+                                        "t": "Str",
+                                        "c": "1"
+                                    }
+                                ]
+                            }
+                        ],
+                        [
+                            {
+                                "t": "Plain",
+                                "c": [
+                                    {
+                                        "t": "Str",
+                                        "c": "Item"
+                                    },
+                                    {
+                                        "t": "Space"
+                                    },
+                                    {
+                                        "t": "Str",
+                                        "c": "2"
+                                    }
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "t": "BlockQuote",
+                    "c": [
+                        {
+                            "t": "Para",
+                            "c": [
+                                {
+                                    "t": "Str",
+                                    "c": "[!danger]"
+                                },
+                                {
+                                    "t": "Space"
+                                },
+                                {
+                                    "t": "Str",
+                                    "c": "Nested"
+                                },
+                                {
+                                    "t": "Space"
+                                },
+                                {
+                                    "t": "Str",
+                                    "c": "callout"
+                                },
+                                {
+                                    "t": "SoftBreak"
+                                },
+                                {
+                                    "t": "Str",
+                                    "c": "Nested"
+                                },
+                                {
+                                    "t": "Space"
+                                },
+                                {
+                                    "t": "Str",
+                                    "c": "content."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "t": "Para",
+                    "c": [
+                        {
+                            "t": "Image",
+                            "c": [
+                                [
+                                    "",
+                                    [],
+                                    []
+                                ],
+                                [],
+                                [
+                                    "../assets/sample-diagram.png",
+                                    ""
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "t": "Figure",
+                    "c": [
+                        [
+                            "fig:sample-diagram",
+                            [],
+                            []
+                        ],
+                        [
+                            null,
+                            [
+                                {
+                                    "t": "Plain",
+                                    "c": [
+                                        {
+                                            "t": "Str",
+                                            "c": "Sample"
+                                        },
+                                        {
+                                            "t": "Space"
+                                        },
+                                        {
+                                            "t": "Str",
+                                            "c": "Diagram"
+                                        }
+                                    ]
+                                }
+                            ]
+                        ],
+                        [
+                            {
+                                "t": "Plain",
+                                "c": [
+                                    {
+                                        "t": "Image",
+                                        "c": [
+                                            [
+                                                "",
+                                                [],
+                                                [
+                                                    [
+                                                        "width",
+                                                        "0.9\\linewidth"
+                                                    ]
+                                                ]
+                                            ],
+                                            [
+                                                {
+                                                    "t": "Str",
+                                                    "c": "Sample"
+                                                },
+                                                {
+                                                    "t": "Space"
+                                                },
+                                                {
+                                                    "t": "Str",
+                                                    "c": "Diagram"
+                                                }
+                                            ],
+                                            [
+                                                "../assets/sample-diagram.png",
+                                                ""
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            ]
+        }
+    ]
+}

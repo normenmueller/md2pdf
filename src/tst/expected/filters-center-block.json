@@ -1,0 +1,170 @@
+{
+    "meta": {},
+    "blocks": [
+        {
+            "t": "Header",
+            "c": [
+                1,
+                [
+                    "center-block-example",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Center"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Block"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Example"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "RawBlock",
+            "c": [
+                "html",
+                "<center>"
+            ]
+        },
+        {
+            "t": "Plain",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "Centered"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Strong",
+                    "c": [
+                        {
+                            "t": "Str",
+                            "c": "bold"
+                        }
+                    ]
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "text."
+                }
+            ]
+        },
+        {
+            "t": "RawBlock",
+            "c": [
+                "html",
+                "</center>"
+            ]
+        },
+        {
+            "t": "RawBlock",
+            "c": [
+                "html",
+                "<center>"
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "A"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "multi-line"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "centered"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "block"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "with"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "a"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "list:"
+                }
+            ]
+        },
+        {
+            "t": "BulletList",
+            "c": [
+                [
+                    {
+                        "t": "Plain",
+                        "c": [
+                            {
+                                "t": "Str",
+                                "c": "First"
+                            }
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "t": "Plain",
+                        "c": [
+                            {
+                                "t": "Str",
+                                "c": "Second"
+                            }
+                        ]
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "RawBlock",
+            "c": [
+                "html",
+                "</center>"
+            ]
+        }
+    ]
+}

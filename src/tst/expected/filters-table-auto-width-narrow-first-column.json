@@ -1,0 +1,838 @@
+{
+    "meta": {},
+    "blocks": [
+        {
+            "t": "Header",
+            "c": [
+                1,
+                [
+                    "table-auto-width-narrow-first-column",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Table"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Auto"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Width"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Narrow"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "First"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Column"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "Table",
+            "c": [
+                [
+                    "",
+                    [],
+                    []
+                ],
+                [
+                    null,
+                    []
+                ],
+                [
+                    [
+                        {
+                            "t": "AlignDefault"
+                        },
+                        {
+                            "t": "ColWidth",
+                            "c": 0.03488372093023256
+                        }
+                    ],
+                    [
+                        {
+                            "t": "AlignDefault"
+                        },
+                        {
+                            "t": "ColWidth",
+                            "c": 0.23255813953488372
+                        }
+                    ],
+                    [
+                        {
+                            "t": "AlignDefault"
+                        },
+                        {
+                            "t": "ColWidth",
+                            "c": 0.3430232558139535
+                        }
+                    ],
+                    [
+                        {
+                            "t": "AlignDefault"
+                        },
+                        {
+                            "t": "ColWidth",
+                            "c": 0.38953488372093026
+                        }
+                    ]
+                ],
+                [
+                    [
+                        "",
+                        [],
+                        []
+                    ],
+                    [
+                        [
+                            [
+                                "",
+                                [],
+                                []
+                            ],
+                            [
+                                [
+                                    [
+                                        "",
+                                        [],
+                                        []
+                                    ],
+                                    {
+                                        "t": "AlignDefault"
+                                    },
+                                    1,
+                                    1,
+                                    [
+                                        {
+                                            "t": "Plain",
+                                            "c": [
+                                                {
+                                                    "t": "Str",
+                                                    "c": "Option"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "",
+                                        [],
+                                        []
+                                    ],
+                                    {
+                                        "t": "AlignDefault"
+                                    },
+                                    1,
+                                    1,
+                                    [
+                                        {
+                                            "t": "Plain",
+                                            "c": [
+                                                {
+                                                    "t": "Str",
+                                                    "c": "Reference"
+                                                },
+                                                {
+                                                    "t": "Space"
+                                                },
+                                                {
+                                                    "t": "Str",
+                                                    "c": "Model"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "",
+                                        [],
+                                        []
+                                    ],
+                                    {
+                                        "t": "AlignDefault"
+                                    },
+                                    1,
+                                    1,
+                                    [
+                                        {
+                                            "t": "Plain",
+                                            "c": [
+                                                {
+                                                    "t": "Str",
+                                                    "c": "Pro"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "",
+                                        [],
+                                        []
+                                    ],
+                                    {
+                                        "t": "AlignDefault"
+                                    },
+                                    1,
+                                    1,
+                                    [
+                                        {
+                                            "t": "Plain",
+                                            "c": [
+                                                {
+                                                    "t": "Str",
+                                                    "c": "Con"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                [
+                    [
+                        [
+                            "",
+                            [],
+                            []
+                        ],
+                        0,
+                        [],
+                        [
+                            [
+                                [
+                                    "",
+                                    [],
+                                    []
+                                ],
+                                [
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Strong",
+                                                        "c": [
+                                                            {
+                                                                "t": "Str",
+                                                                "c": "A"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "Capability"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "Owner"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "profile"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "Clearly"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "defined"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "ownership"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "and"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "stakeholder"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "accountability"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "Can"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "be"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "too"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "broad"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "for"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "narrowly"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "scoped"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "architecture"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "decisions"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                [
+                                    "",
+                                    [],
+                                    []
+                                ],
+                                [
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Strong",
+                                                        "c": [
+                                                            {
+                                                                "t": "Str",
+                                                                "c": "B"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "External"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "best-practice"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "role"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "definition"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "Focused"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "domain-specific"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "framing"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "Requires"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "adaptation"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "to"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "internal"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "governance"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "and"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "terminology"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                [
+                                    "",
+                                    [],
+                                    []
+                                ],
+                                [
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Strong",
+                                                        "c": [
+                                                            {
+                                                                "t": "Str",
+                                                                "c": "C"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "Internal"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "architecture"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "competency"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "profile"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "Reuses"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "existing"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "skill"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "matrix"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "and"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "role"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "taxonomy"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    [
+                                        [
+                                            "",
+                                            [],
+                                            []
+                                        ],
+                                        {
+                                            "t": "AlignDefault"
+                                        },
+                                        1,
+                                        1,
+                                        [
+                                            {
+                                                "t": "Plain",
+                                                "c": [
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "Requires"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "supplemental"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "operational"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "responsibilities"
+                                                    },
+                                                    {
+                                                        "t": "Space"
+                                                    },
+                                                    {
+                                                        "t": "Str",
+                                                        "c": "documentation"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                [
+                    [
+                        "",
+                        [],
+                        []
+                    ],
+                    []
+                ]
+            ]
+        }
+    ]
+}

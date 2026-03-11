@@ -1,0 +1,431 @@
+{
+    "meta": {},
+    "blocks": [
+        {
+            "t": "Header",
+            "c": [
+                1,
+                [
+                    "embed-example",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Embed"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Example"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "Intro"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "paragraph."
+                }
+            ]
+        },
+        {
+            "t": "Header",
+            "c": [
+                2,
+                [
+                    "embed-inner-1-1-inner-one",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Inner"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "One"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "Header",
+            "c": [
+                3,
+                [
+                    "embed-inner-1-1-inner-section",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Inner"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Section"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "Paragraph"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "in"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "inner"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "one."
+                }
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "After"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "first"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "embed."
+                }
+            ]
+        },
+        {
+            "t": "Header",
+            "c": [
+                3,
+                [
+                    "embed-inner-2-1-inner-two",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Inner"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Two"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "Header",
+            "c": [
+                4,
+                [
+                    "embed-inner-2-1-inner-two-section",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Inner"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Two"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Section"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "More"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "content."
+                }
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "A"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "normal"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "link"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "to"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "the"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "same"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "file:"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Link",
+                    "c": [
+                        [
+                            "",
+                            [],
+                            []
+                        ],
+                        [
+                            {
+                                "t": "Str",
+                                "c": "Inner"
+                            },
+                            {
+                                "t": "Space"
+                            },
+                            {
+                                "t": "Str",
+                                "c": "One"
+                            }
+                        ],
+                        [
+                            "embed-inner-1.md",
+                            ""
+                        ]
+                    ]
+                },
+                {
+                    "t": "Str",
+                    "c": "."
+                }
+            ]
+        },
+        {
+            "t": "BlockQuote",
+            "c": [
+                {
+                    "t": "Para",
+                    "c": [
+                        {
+                            "t": "Str",
+                            "c": "[!info]"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "Callout"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "with"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "embed"
+                        },
+                        {
+                            "t": "SoftBreak"
+                        }
+                    ]
+                },
+                {
+                    "t": "Header",
+                    "c": [
+                        1,
+                        [
+                            "embed-inner-3-1-inner-callout",
+                            [
+                                "unnumbered",
+                                "unlisted"
+                            ],
+                            []
+                        ],
+                        [
+                            {
+                                "t": "Str",
+                                "c": "Inner"
+                            },
+                            {
+                                "t": "Space"
+                            },
+                            {
+                                "t": "Str",
+                                "c": "Callout"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "t": "Header",
+                    "c": [
+                        2,
+                        [
+                            "embed-inner-3-1-inner-callout-section",
+                            [
+                                "unnumbered",
+                                "unlisted"
+                            ],
+                            []
+                        ],
+                        [
+                            {
+                                "t": "Str",
+                                "c": "Inner"
+                            },
+                            {
+                                "t": "Space"
+                            },
+                            {
+                                "t": "Str",
+                                "c": "Callout"
+                            },
+                            {
+                                "t": "Space"
+                            },
+                            {
+                                "t": "Str",
+                                "c": "Section"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "t": "Para",
+                    "c": [
+                        {
+                            "t": "Str",
+                            "c": "Content"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "inside"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "callout"
+                        },
+                        {
+                            "t": "Space"
+                        },
+                        {
+                            "t": "Str",
+                            "c": "embed."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

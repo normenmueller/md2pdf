@@ -1,0 +1,315 @@
+{
+    "meta": {},
+    "blocks": [
+        {
+            "t": "Header",
+            "c": [
+                1,
+                [
+                    "hide-block-example",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Hide"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Block"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Example"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "Visible"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "line"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "before."
+                }
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "Visible"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "line"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "after."
+                }
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "Inline"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "hide"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "keeps"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "surrounding"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "text:"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "keep"
+                },
+                {
+                    "t": "Space"
+                }
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "keep."
+                }
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "Ordered"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "list"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "should"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "stay"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "intact:"
+                }
+            ]
+        },
+        {
+            "t": "OrderedList",
+            "c": [
+                [
+                    1,
+                    {
+                        "t": "Decimal"
+                    },
+                    {
+                        "t": "Period"
+                    }
+                ],
+                [
+                    [
+                        {
+                            "t": "Plain",
+                            "c": [
+                                {
+                                    "t": "Str",
+                                    "c": "First"
+                                },
+                                {
+                                    "t": "Space"
+                                },
+                                {
+                                    "t": "Str",
+                                    "c": "item"
+                                }
+                            ]
+                        }
+                    ],
+                    [
+                        {
+                            "t": "Plain",
+                            "c": [
+                                {
+                                    "t": "Str",
+                                    "c": "Second"
+                                },
+                                {
+                                    "t": "Space"
+                                },
+                                {
+                                    "t": "Str",
+                                    "c": "item"
+                                }
+                            ]
+                        }
+                    ],
+                    [
+                        {
+                            "t": "Plain",
+                            "c": [
+                                {
+                                    "t": "Str",
+                                    "c": "Third"
+                                },
+                                {
+                                    "t": "Space"
+                                },
+                                {
+                                    "t": "Str",
+                                    "c": "item"
+                                }
+                            ]
+                        }
+                    ]
+                ]
+            ]
+        },
+        {
+            "t": "OrderedList",
+            "c": [
+                [
+                    1,
+                    {
+                        "t": "UpperAlpha"
+                    },
+                    {
+                        "t": "OneParen"
+                    }
+                ],
+                [
+                    [
+                        {
+                            "t": "Plain",
+                            "c": [
+                                {
+                                    "t": "Str",
+                                    "c": "Option"
+                                },
+                                {
+                                    "t": "Space"
+                                },
+                                {
+                                    "t": "Str",
+                                    "c": "alpha"
+                                }
+                            ]
+                        }
+                    ],
+                    [
+                        {
+                            "t": "Plain",
+                            "c": [
+                                {
+                                    "t": "Str",
+                                    "c": "Option"
+                                },
+                                {
+                                    "t": "Space"
+                                },
+                                {
+                                    "t": "Str",
+                                    "c": "beta"
+                                }
+                            ]
+                        }
+                    ],
+                    [
+                        {
+                            "t": "Plain",
+                            "c": [
+                                {
+                                    "t": "Str",
+                                    "c": "Option"
+                                },
+                                {
+                                    "t": "Space"
+                                },
+                                {
+                                    "t": "Str",
+                                    "c": "gamma"
+                                }
+                            ]
+                        }
+                    ]
+                ]
+            ]
+        }
+    ]
+}

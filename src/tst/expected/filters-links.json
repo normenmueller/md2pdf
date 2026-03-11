@@ -1,0 +1,144 @@
+{
+    "meta": {},
+    "blocks": [
+        {
+            "t": "Header",
+            "c": [
+                1,
+                [
+                    "link-normalisation-example",
+                    [],
+                    []
+                ],
+                [
+                    {
+                        "t": "Str",
+                        "c": "Link"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Normalisation"
+                    },
+                    {
+                        "t": "Space"
+                    },
+                    {
+                        "t": "Str",
+                        "c": "Example"
+                    }
+                ]
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Str",
+                    "c": "![[Wiki"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "Target]]"
+                },
+                {
+                    "t": "SoftBreak"
+                },
+                {
+                    "t": "Str",
+                    "c": "[[Wiki"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "Target|Alias"
+                },
+                {
+                    "t": "Space"
+                },
+                {
+                    "t": "Str",
+                    "c": "Text]]"
+                }
+            ]
+        },
+        {
+            "t": "Para",
+            "c": [
+                {
+                    "t": "Link",
+                    "c": [
+                        [
+                            "",
+                            [],
+                            []
+                        ],
+                        [
+                            {
+                                "t": "Str",
+                                "c": "Internal"
+                            }
+                        ],
+                        [
+                            "docs/internal-guide.pdf",
+                            ""
+                        ]
+                    ]
+                },
+                {
+                    "t": "SoftBreak"
+                },
+                {
+                    "t": "Link",
+                    "c": [
+                        [
+                            "",
+                            [],
+                            []
+                        ],
+                        [
+                            {
+                                "t": "Str",
+                                "c": "External"
+                            }
+                        ],
+                        [
+                            "https://example.com",
+                            ""
+                        ]
+                    ]
+                },
+                {
+                    "t": "SoftBreak"
+                },
+                {
+                    "t": "Link",
+                    "c": [
+                        [
+                            "",
+                            [],
+                            []
+                        ],
+                        [
+                            {
+                                "t": "Str",
+                                "c": "Section"
+                            }
+                        ],
+                        [
+                            "#local-anchor",
+                            ""
+                        ]
+                    ]
+                }
+            ]
+        }
+    ]
+}

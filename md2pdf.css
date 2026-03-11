@@ -1,0 +1,167 @@
+/* =========================================================
+ * Obsidian callouts aligned with md2pdf LaTeX scheme
+ * ======================================================= */
+
+/* Keep title and icon slightly darker than the box color. */
+.callout {
+  --callout-title-color: rgba(var(--callout-color), 0.85);
+  --callout-icon-color: rgba(var(--callout-color), 0.85);
+}
+
+/* --- Gray {{{1 */
+
+.callout[data-callout="tldr"],
+.callout[data-callout="summary"],
+.callout[data-callout="abstract"],
+.callout[data-callout="cite"],
+.callout[data-callout="quote"] {
+  --callout-color: 168, 175, 198;
+}
+
+.callout[data-callout="tldr"],
+.callout[data-callout="summary"],
+.callout[data-callout="abstract"] {
+  --callout-icon: lucide-chevrons-right;
+}
+
+.callout[data-callout="cite"],
+.callout[data-callout="quote"] {
+  --callout-icon: lucide-quote;
+}
+
+/* --- Blue {{{1 */
+
+.callout[data-callout="note"],
+.callout[data-callout="info"],
+.callout[data-callout="hint"],
+.callout[data-callout="addendum"] {
+  /*--callout-color: 180, 210, 255;*/
+  --callout-color: 150, 180, 240;
+  --callout-icon: lucide-square-plus;
+}
+
+.callout[data-callout="note"] {
+  --callout-icon: lucide-pen-line;
+}
+
+.callout[data-callout="info"] {
+  --callout-icon: lucide-info;
+}
+
+.callout[data-callout="hint"] {
+  --callout-icon: lucide-hand;
+}
+
+/* --- Teal {{{1 */
+
+.callout[data-callout="faq"],
+.callout[data-callout="help"],
+.callout[data-callout="question"]{
+  /* --callout-color: 150, 205, 200; */
+  --callout-color: 140, 195, 210;
+}
+
+.callout[data-callout="help"] {
+  --callout-icon: lucide-life-buoy;
+}
+
+.callout[data-callout="faq"],
+.callout[data-callout="question"] {
+  --callout-icon: lucide-help-circle;
+}
+
+/* --- Cyan {{{1 */
+
+.callout[data-callout="example"] {
+  --callout-color: 150, 200, 225;
+  --callout-icon: lucide-flask-conical;
+}
+
+/* --- Pink {{{1 */
+
+.callout[data-callout="definition"] {
+  --callout-color: 210, 150, 225;
+  --callout-icon: lucide-book-open-check;
+}
+
+/* --- Green {{{1 */
+
+.callout[data-callout="success"],
+.callout[data-callout="check"],
+.callout[data-callout="done"] {
+  --callout-color: 155, 205, 170;
+  --callout-icon: lucide-check-circle-2;
+}
+
+/* --- Orange {{{1 */
+
+.callout[data-callout="tip"],
+.callout[data-callout="warning"],
+.callout[data-callout="caution"],
+.callout[data-callout="attention"] {
+  /* --callout-color: 250, 200, 160; */
+  --callout-color: 248, 187, 144;
+  --callout-icon: lucide-alert-triangle;
+}
+
+.callout[data-callout="tip"] {
+  --callout-icon: lucide-pin;
+}
+
+.callout[data-callout="warning"],
+.callout[data-callout="caution"] {
+  --callout-icon: lucide-alert-triangle;
+}
+
+.callout[data-callout="attention"] {
+  --callout-icon: lucide-shield-alert;
+}
+
+/* --- Lavender {{{1 */
+
+.callout[data-callout="terminus"] {
+  --callout-color: 196, 176, 255;
+  --callout-icon: lucide-tag;
+}
+
+.callout[data-callout="terminus"] .callout-title-inner {
+  color: #A88EF0;
+}
+
+/* --- Soft red {{{1 */
+
+.callout[data-callout="fail"],
+.callout[data-callout="failure"],
+.callout[data-callout="missing"] {
+  --callout-color: 210, 155, 160;
+  --callout-icon: lucide-x-octagon;
+}
+
+.callout[data-callout="important"] {
+  --callout-color: 210, 155, 160;
+  --callout-icon: lucide-alert-circle;
+}
+
+/* --- Strong red {{{1 */
+
+.callout[data-callout="bug"],
+.callout[data-callout="error"],
+.callout[data-callout="danger"] {
+  --callout-color: 230, 140, 145;
+}
+
+.callout[data-callout="bug"],
+.callout[data-callout="error"] {
+  --callout-icon: lucide-bug;
+}
+
+.callout[data-callout="danger"] {
+  --callout-icon: lucide-skull;
+}
+
+/* --- Light Yellow {{{1 */
+
+.callout[data-callout="todo"]{
+  --callout-color: 245, 215, 120; /* #F5D778 */
+  --callout-icon: lucide-square;
+}

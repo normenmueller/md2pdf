@@ -1,0 +1,34 @@
+\section{Table Auto Width Narrow First
+Column}\label{table-auto-width-narrow-first-column}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1431}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2455}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2937}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3178}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Option
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reference Model
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Pro
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Con
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{A} & Capability Owner profile & Clearly defined ownership and
+stakeholder accountability & Can be too broad for narrowly scoped
+architecture decisions \\
+\textbf{B} & External best-practice role definition & Focused
+domain-specific framing & Requires adaptation to internal governance and
+terminology \\
+\textbf{C} & Internal architecture competency profile & Reuses existing
+skill matrix and role taxonomy & Requires supplemental operational
+responsibilities documentation \\
+\end{longtable}
+}

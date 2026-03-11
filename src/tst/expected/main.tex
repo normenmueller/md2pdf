@@ -1,0 +1,1600 @@
+\begin{center}
+
+\(\approx\) Text \(\approx\)
+
+\end{center}
+
+\section{Section 1 - Basic Structure}\label{section-1---basic-structure}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae
+\textbf{bold text} magna, sed \emph{italic text} mi. Aenean
+\texttt{inline-code} vel sapien non, volutpat
+\href{https://example.com}{an external link}. Lorem ipsum Project Brief
+dolor an internal link sit amet, Project Brief consectetur adipiscing
+elit.\footnote{Footnote in normal text in Section 1.}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://example.com}{an external link}
+\item
+  Project Brief
+\item
+  an internal link
+\item
+  Project Brief
+\end{itemize}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; tl;dr}]
+
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sample Diagram}]{assets/sample-diagram.png}}
+
+\end{tcolorbox}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; tl;dr}]
+
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sample Diagram}]{assets/sample-diagram.png}}
+
+\end{tcolorbox}
+
+\subsection{Heading Level 2}\label{heading-level-2}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+\subsubsection{Heading Level 3}\label{heading-level-3}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+\paragraph{Heading Level 4}\label{heading-level-4}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+\subparagraph{Heading Level 5}\label{heading-level-5}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+Heading Level 6
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+\subsection{Code fences}\label{code-fences}
+
+\begin{verbatim}
+{
+ "For Loop": {
+   "prefix": "for",
+   "body": [
+     "for (let ${1:i} = 0; ${1:i} < ${2:array}.length; ${1:i}++) {",
+     "\tconst ${3:element} = ${2:array}[${1:i}];",
+     "\t$0",
+     "}"
+   ],
+   "description": "A for loop."
+ }
+}
+\end{verbatim}
+
+\begin{tcolorbox}[breakable,colback=ocBluBack,colframe=ocBluFrame,coltitle=ocBluTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconAddendum\; Addendum}]
+
+\begin{verbatim}
+{
+ "For Loop": {
+   "prefix": "for",
+   "body": [
+     "for (let ${1:i} = 0; ${1:i} < ${2:array}.length; ${1:i}++) {",
+     "\tconst ${3:element} = ${2:array}[${1:i}];",
+     "\t$0",
+     "}"
+   ],
+   "description": "A for loop."
+ }
+}
+\end{verbatim}
+
+\end{tcolorbox}
+
+\subsection{TikZ}\label{tikz}
+
+\par\medskip
+
+\begin{figure}[ht]
+\centering
+\resizebox{0.6\linewidth}{!}{
+
+\begin{tikzpicture}[>=Stealth]
+  \node (a) at (0,0) {A};
+  \node (b) at (1,0) {B};
+  \draw[->] (a) -- (b);
+\end{tikzpicture}
+}
+\caption{TikZ Test}
+\label{fig:tikz-test}
+\end{figure}
+
+\par\medskip
+
+\subsection{Lists}\label{lists}
+
+Paragraph before a bullet list.
+
+\begin{itemize}
+\tightlist
+\item
+  Bullet one with some lorem ipsum dolor sit amet, consectetur
+  adipiscing elit.
+\item
+  Bullet two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nested bullet A
+  \item
+    Nested bullet B
+  \end{itemize}
+\item
+  Bullet three with \texttt{inline-code} and \textbf{bold}.
+\end{itemize}
+
+Paragraph before an ordered list:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  First item
+\item
+  Second item with \emph{emphasis}
+\item
+  Third item with a nested list:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sub bullet one
+  \item
+    Sub bullet two
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Blockquotes}\label{blockquotes}
+
+\begin{quote}
+This is a \textbf{normal blockquote}, not a callout. It starts with
+\texttt{\textgreater{}} but has no \texttt{{[}!tag{]}}, so the Lua
+filter must ignore it.
+\end{quote}
+
+\subsection{Tables}\label{tables}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2278}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2278}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5445}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Heading 1
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Heading 2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Heading 3
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Lorem ipsum dolor sit amet. & Lorem ipsum dolor sit amet. & Lorem ipsum
+dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
+Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum
+dolor sit amet. \\
+\end{longtable}
+}
+
+\section{Section 2 - Callouts}\label{section-2---callouts}
+
+\subsection{Simple Callouts}\label{simple-callouts}
+
+\subsubsection{Callout with title and body (single
+paragraph)}\label{callout-with-title-and-body-single-paragraph}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; A simple NOTE callout}]
+
+This is the body of the note. It contains \textbf{bold}, \emph{italic},
+\texttt{code}, and a \href{https://example.com}{link}.
+
+\end{tcolorbox}
+
+\subsubsection{Callout with title and multi-paragraph
+body}\label{callout-with-title-and-multi-paragraph-body}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconInfo\; Info with multi-paragraph body}]
+
+First paragraph of the INFO body. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit.
+
+Second paragraph of the INFO body, with some more text.
+
+\end{tcolorbox}
+
+\subsubsection{Callout with title-only (no
+body)}\label{callout-with-title-only-no-body}
+
+\vspace{2mm}
+
+\noindent\begin{tcolorbox}[colback=ocYelBack,colframe=ocYelFrame,coltitle=ocYelTitle,left=3mm,width=\linewidth,boxrule=0pt]
+
+\hspace*{-2.5mm}\iconHint\; Only a title
+
+\end{tcolorbox}
+
+This paragraph is outside the TIP callout and should not be inside the
+box.
+
+\subsubsection{Callout without explicit title, with
+body}\label{callout-without-explicit-title-with-body}
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Warning}]
+
+This WARNING callout has no explicit title. The filter should use the
+default title "Warning".
+
+Second paragraph of the WARNING body with \textbf{bold text}.
+
+\end{tcolorbox}
+
+\subsection{Fold markers and variants}\label{fold-markers-and-variants}
+
+\subsubsection{\texorpdfstring{Collapsed state marker \texttt{-} and
+explicit
+title}{Collapsed state marker - and explicit title}}\label{collapsed-state-marker---and-explicit-title}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; Abstract with fold marker}]
+
+Body of the ABSTRACT callout. The \texttt{-} fold marker should be
+ignored by the Lua filter.
+
+\end{tcolorbox}
+
+\subsubsection{\texorpdfstring{Expanded state marker \texttt{+} and
+explicit
+title}{Expanded state marker + and explicit title}}\label{expanded-state-marker-and-explicit-title}
+
+\begin{tcolorbox}[breakable,colback=ocGreBack,colframe=ocGreFrame,coltitle=ocGreTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconCheck\; Title with plus marker}]
+
+Body of the SUCCESS callout. The \texttt{+} fold marker must be ignored.
+
+\end{tcolorbox}
+
+\subsubsection{Fold marker attached to
+tag}\label{fold-marker-attached-to-tag}
+
+\begin{tcolorbox}[breakable,colback=yellow!5!white,colframe=yellow!50!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTodo\; TODO}]
+
+This TODO callout has the fold state attached directly to the marker.
+
+\end{tcolorbox}
+
+\subsection{Callouts with Markdown-rich
+bodies}\label{callouts-with-markdown-rich-bodies}
+
+\subsubsection{Body with list and code
+block}\label{body-with-list-and-code-block}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; NOTE with list and code}]
+
+This NOTE contains a list:
+
+\begin{itemize}
+\tightlist
+\item
+  Item one
+\item
+  Item two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sub item A
+  \item
+    Sub item B
+  \end{itemize}
+\end{itemize}
+
+And a fenced code block:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/usr/bin/env bash}
+\BuiltInTok{echo} \StringTok{"Hello from inside a NOTE callout"}
+\end{Highlighting}
+\end{Shaded}
+
+\end{tcolorbox}
+
+\subsubsection{Mixed inline formatting in
+title}\label{mixed-inline-formatting-in-title}
+
+\begin{tcolorbox}[breakable,colback=gray!5!white,colframe=gray!60!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconQuote\; A \textbf{Markdown} \emph{formatted} title}]
+
+Body paragraph for the QUOTE callout. The title must be rendered with
+bold and italic formatting in LaTeX.
+
+\end{tcolorbox}
+
+\subsection{Nested Callouts}\label{nested-callouts}
+
+\subsubsection{Two-level nesting (NOTE contains
+WARNING)}\label{two-level-nesting-note-contains-warning}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; Outer NOTE title}]
+
+This is the outer NOTE body, first paragraph.
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Inner WARNING title}]
+
+This is the inner WARNING body, with a list:
+
+\begin{itemize}
+\tightlist
+\item
+  Inner item one
+\item
+  Inner item two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nested inner bullet
+  \end{itemize}
+\end{itemize}
+
+Final inner paragraph with \textbf{bold} and \emph{italic}.
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+Paragraph after the nested callouts. This must be outside all boxes.
+
+\subsubsection{Three-level nesting (ABSTRACT -\textgreater{} TIP
+-\textgreater{}
+DANGER)}\label{three-level-nesting-abstract---tip---danger}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; Level 1 - Abstract}]
+
+Level-1 body, first paragraph.
+
+\begin{tcolorbox}[breakable,colback=ocYelBack,colframe=ocYelFrame,coltitle=ocYelTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconHint\; Level 2 - Tip}]
+
+Level-2 body paragraph with \emph{italic} and \textbf{bold}.
+
+\begin{tcolorbox}[breakable,colback=ocRed2Back,colframe=ocRed2Frame,coltitle=ocRed2Title,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDanger\; Danger}]
+
+Level-3 DANGER body only, no explicit title, using default "Danger".
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ nested(level: }\BuiltInTok{int}\NormalTok{) }\OperatorTok{{-}\textgreater{}} \BuiltInTok{str}\NormalTok{:}
+    \ControlFlowTok{return} \SpecialStringTok{f"Level }\SpecialCharTok{\{}\NormalTok{level}\SpecialCharTok{\}}\SpecialStringTok{"}
+
+\BuiltInTok{print}\NormalTok{(nested(}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\subsection{Edge Cases}\label{edge-cases}
+
+\subsubsection{Only marker, no title, no
+body}\label{only-marker-no-title-no-body}
+
+\vspace{2mm}
+
+\noindent\begin{tcolorbox}[colback=ocRed2Back,colframe=ocRed2Frame,coltitle=ocRed2Title,left=3mm,width=\linewidth,boxrule=0pt]
+
+\hspace*{-2.5mm}\iconBug\; Bug
+
+\end{tcolorbox}
+
+This paragraph is outside the BUG callout and should not be inside the
+box.
+
+\subsubsection{Marker plus inline title on next line (SoftBreak
+case)}\label{marker-plus-inline-title-on-next-line-softbreak-case}
+
+\begin{tcolorbox}[breakable,colback=ocPinBack,colframe=ocPinFrame,coltitle=ocPinTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDefinition\; Definition}]
+
+Definition title on next line
+
+Body paragraph of the DEFINITION callout. The first line after the
+marker should be treated as title, not body.
+
+\end{tcolorbox}
+
+\subsubsection{Marker with inline title and immediate
+body}\label{marker-with-inline-title-and-immediate-body}
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Caution title}]
+
+This is the CAUTION body, first paragraph.
+
+Second paragraph of the CAUTION body.
+
+\end{tcolorbox}
+
+\subsection{Mixed Content with
+Footnotes}\label{mixed-content-with-footnotes}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.\footnote{Footnote
+  in normal text in Section 7.} Phasellus fermentum nunc at
+\textbf{arcu} placerat.
+
+\begin{tcolorbox}[breakable,colback=ocPinBack,colframe=ocPinFrame,coltitle=ocPinTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDefinition\; Definition with footnote}]
+
+This is a DEFINITION-like callout with a footnote inside.\footnote{Footnote
+  inside a callout body in Section 7.}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable,colback=yellow!5!white,colframe=yellow!50!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTodo\; TODO with inline code}]
+
+Remember to check \texttt{obsidian-callouts.lua} and update the style
+mappings if new tags are introduced.
+
+\end{tcolorbox}
+
+\section{Section 3 - Embedding}\label{section-3---embedding}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+\subsection{Section 1 - Basic
+Structure}\label{inner-1-section-1---basic-structure}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae
+\textbf{bold text} magna, sed \emph{italic text} mi. Aenean
+\texttt{inline-code} vel sapien non, volutpat
+\href{https://example.com}{an external link}. Lorem ipsum Project Brief
+dolor an internal link sit amet, Project Brief consectetur adipiscing
+elit.\footnote{Footnote in normal text in Section 1.}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://example.com}{an external link}
+\item
+  Project Brief
+\item
+  an internal link
+\item
+  Project Brief
+\end{itemize}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet.
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; tl;dr}]
+
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sample Diagram}]{assets/sample-diagram.png}}
+
+\end{tcolorbox}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; tl;dr}]
+
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sample Diagram}]{assets/sample-diagram.png}}
+
+\end{tcolorbox}
+
+\subsubsection{Subsection 1.1 -
+Lists}\label{inner-1-subsection-1.1---lists}
+
+Paragraph before a bullet list.
+
+\begin{itemize}
+\tightlist
+\item
+  Bullet one with some lorem ipsum dolor sit amet, consectetur
+  adipiscing elit.
+\item
+  Bullet two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nested bullet A
+  \item
+    Nested bullet B
+  \end{itemize}
+\item
+  Bullet three with \texttt{inline-code} and \textbf{bold}.
+\end{itemize}
+
+Paragraph before an ordered list:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  First item
+\item
+  Second item with \emph{emphasis}
+\item
+  Third item with a nested list:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sub bullet one
+  \item
+    Sub bullet two
+  \end{itemize}
+\end{enumerate}
+
+\paragraph{Subsubsection 1.1.1 - Normal
+Blockquote}\label{inner-1-subsubsection-1.1.1---normal-blockquote}
+
+\begin{quote}
+This is a \textbf{normal blockquote}, not a callout. It starts with
+\texttt{\textgreater{}} but has no \texttt{{[}!tag{]}}, so the Lua
+filter must ignore it.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Section 2 - Simple
+Callouts}\label{inner-1-section-2---simple-callouts}
+
+\subsubsection{Callout with title and body (single
+paragraph)}\label{inner-1-callout-with-title-and-body-single-paragraph}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; A simple NOTE callout}]
+
+This is the body of the note. It contains \textbf{bold}, \emph{italic},
+\texttt{code}, and a \href{https://example.com}{link}.
+
+\end{tcolorbox}
+
+\subsubsection{Callout with title and multi-paragraph
+body}\label{inner-1-callout-with-title-and-multi-paragraph-body}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconInfo\; Info with multi-paragraph body}]
+
+First paragraph of the INFO body. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit.
+
+Second paragraph of the INFO body, with some more text.
+
+\end{tcolorbox}
+
+\subsubsection{Callout with title-only (no
+body)}\label{inner-1-callout-with-title-only-no-body}
+
+\vspace{2mm}
+
+\noindent\begin{tcolorbox}[colback=ocYelBack,colframe=ocYelFrame,coltitle=ocYelTitle,left=3mm,width=\linewidth,boxrule=0pt]
+
+\hspace*{-2.5mm}\iconHint\; Only a title
+
+\end{tcolorbox}
+
+This paragraph is outside the TIP callout and should not be inside the
+box.
+
+\subsubsection{Callout without explicit title, with
+body}\label{inner-1-callout-without-explicit-title-with-body}
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Warning}]
+
+This WARNING callout has no explicit title. The filter should use the
+default title ``Warning''.
+
+Second paragraph of the WARNING body with \textbf{bold text}.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Section 3 - Fold markers and
+variants}\label{inner-1-section-3---fold-markers-and-variants}
+
+\subsubsection{\texorpdfstring{Collapsed state marker \texttt{-} and
+explicit
+title}{Collapsed state marker - and explicit title}}\label{inner-1-collapsed-state-marker---and-explicit-title}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; Abstract with fold marker}]
+
+Body of the ABSTRACT callout. The \texttt{-} fold marker should be
+ignored by the Lua filter.
+
+\end{tcolorbox}
+
+\subsubsection{\texorpdfstring{Expanded state marker \texttt{+} and
+explicit
+title}{Expanded state marker + and explicit title}}\label{inner-1-expanded-state-marker-and-explicit-title}
+
+\begin{tcolorbox}[breakable,colback=ocGreBack,colframe=ocGreFrame,coltitle=ocGreTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconCheck\; Title with plus marker}]
+
+Body of the SUCCESS callout. The \texttt{+} fold marker must be ignored.
+
+\end{tcolorbox}
+
+\subsubsection{Fold marker attached to
+tag}\label{inner-1-fold-marker-attached-to-tag}
+
+\begin{tcolorbox}[breakable,colback=yellow!5!white,colframe=yellow!50!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTodo\; TODO}]
+
+This TODO callout has the fold state attached directly to the marker.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Section 4 - Callouts with Markdown-rich
+bodies}\label{inner-1-section-4---callouts-with-markdown-rich-bodies}
+
+\subsubsection{Body with list and code
+block}\label{inner-1-body-with-list-and-code-block}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; NOTE with list and code}]
+
+This NOTE contains a list:
+
+\begin{itemize}
+\tightlist
+\item
+  Item one
+\item
+  Item two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sub item A
+  \item
+    Sub item B
+  \end{itemize}
+\end{itemize}
+
+And a fenced code block:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/usr/bin/env bash}
+\BuiltInTok{echo} \StringTok{"Hello from inside a NOTE callout"}
+\end{Highlighting}
+\end{Shaded}
+
+\end{tcolorbox}
+
+\subsubsection{Mixed inline formatting in
+title}\label{inner-1-mixed-inline-formatting-in-title}
+
+\begin{tcolorbox}[breakable,colback=gray!5!white,colframe=gray!60!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconQuote\; A \textbf{Markdown} \emph{formatted} title}]
+
+Body paragraph for the QUOTE callout. The title must be rendered with
+bold and italic formatting in LaTeX.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Section 5 - Nested
+Callouts}\label{inner-1-section-5---nested-callouts}
+
+\subsubsection{Two-level nesting (NOTE contains
+WARNING)}\label{inner-1-two-level-nesting-note-contains-warning}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; Outer NOTE title}]
+
+This is the outer NOTE body, first paragraph.
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Inner WARNING title}]
+
+This is the inner WARNING body, with a list:
+
+\begin{itemize}
+\tightlist
+\item
+  Inner item one
+\item
+  Inner item two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nested inner bullet
+  \end{itemize}
+\end{itemize}
+
+Final inner paragraph with \textbf{bold} and \emph{italic}.
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+Paragraph after the nested callouts. This must be outside all boxes.
+
+\subsubsection{Three-level nesting (ABSTRACT -\textgreater{} TIP
+-\textgreater{}
+DANGER)}\label{inner-1-three-level-nesting-abstract---tip---danger}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; Level 1 - Abstract}]
+
+Level-1 body, first paragraph.
+
+\begin{tcolorbox}[breakable,colback=ocYelBack,colframe=ocYelFrame,coltitle=ocYelTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconHint\; Level 2 - Tip}]
+
+Level-2 body paragraph with \emph{italic} and \textbf{bold}.
+
+\begin{tcolorbox}[breakable,colback=ocRed2Back,colframe=ocRed2Frame,coltitle=ocRed2Title,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDanger\; Danger}]
+
+Level-3 DANGER body only, no explicit title, using default ``Danger''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ nested(level: }\BuiltInTok{int}\NormalTok{) }\OperatorTok{{-}\textgreater{}} \BuiltInTok{str}\NormalTok{:}
+    \ControlFlowTok{return} \SpecialStringTok{f"Level }\SpecialCharTok{\{}\NormalTok{level}\SpecialCharTok{\}}\SpecialStringTok{"}
+
+\BuiltInTok{print}\NormalTok{(nested(}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Section 6 - Edge
+Cases}\label{inner-1-section-6---edge-cases}
+
+\subsubsection{Only marker, no title, no
+body}\label{inner-1-only-marker-no-title-no-body}
+
+\vspace{2mm}
+
+\noindent\begin{tcolorbox}[colback=ocRed2Back,colframe=ocRed2Frame,coltitle=ocRed2Title,left=3mm,width=\linewidth,boxrule=0pt]
+
+\hspace*{-2.5mm}\iconBug\; Bug
+
+\end{tcolorbox}
+
+This paragraph is outside the BUG callout and should not be inside the
+box.
+
+\subsubsection{Marker plus inline title on next line (SoftBreak
+case)}\label{inner-1-marker-plus-inline-title-on-next-line-softbreak-case}
+
+\begin{tcolorbox}[breakable,colback=ocPinBack,colframe=ocPinFrame,coltitle=ocPinTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDefinition\; Definition}]
+
+Definition title on next line
+
+Body paragraph of the DEFINITION callout. The first line after the
+marker should be treated as title, not body.
+
+\end{tcolorbox}
+
+\subsubsection{Marker with inline title and immediate
+body}\label{inner-1-marker-with-inline-title-and-immediate-body}
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Caution title}]
+
+This is the CAUTION body, first paragraph.
+
+Second paragraph of the CAUTION body.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Section 7 - Mixed Content with
+Footnotes}\label{inner-1-section-7---mixed-content-with-footnotes}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.\footnote{Footnote
+  in normal text in Section 7.} Phasellus fermentum nunc at
+\textbf{arcu} placerat.
+
+\begin{tcolorbox}[breakable,colback=ocPinBack,colframe=ocPinFrame,coltitle=ocPinTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDefinition\; Definition with footnote}]
+
+This is a DEFINITION-like callout with a footnote inside.\footnote{Footnote
+  inside a callout body in Section 7.}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable,colback=yellow!5!white,colframe=yellow!50!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTodo\; TODO with inline code}]
+
+Remember to check \texttt{obsidian-callouts.lua} and update the style
+mappings if new tags are introduced.
+
+\end{tcolorbox}
+
+inner as simple link should remain a regular hyperlink handled by the
+link normaliser.
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconInfo\; md2pdf - inner without explicit \texttt{shift-heading=0}}]
+
+\section*{Section 1 - Basic
+Structure}\label{inner-2-section-1---basic-structure}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae
+\textbf{bold text} magna, sed \emph{italic text} mi. Aenean
+\texttt{inline-code} vel sapien non, volutpat
+\href{https://example.com}{an external link}. Lorem ipsum Project Brief
+dolor an internal link sit amet, Project Brief consectetur adipiscing
+elit.\footnote{Footnote in normal text in Section 1.}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://example.com}{an external link}
+\item
+  Project Brief
+\item
+  an internal link
+\item
+  Project Brief
+\end{itemize}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet.
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; tl;dr}]
+
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sample Diagram}]{assets/sample-diagram.png}}
+
+\end{tcolorbox}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; tl;dr}]
+
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sample Diagram}]{assets/sample-diagram.png}}
+
+\end{tcolorbox}
+
+\subsection*{Subsection 1.1 -
+Lists}\label{inner-2-subsection-1.1---lists}
+
+Paragraph before a bullet list.
+
+\begin{itemize}
+\tightlist
+\item
+  Bullet one with some lorem ipsum dolor sit amet, consectetur
+  adipiscing elit.
+\item
+  Bullet two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nested bullet A
+  \item
+    Nested bullet B
+  \end{itemize}
+\item
+  Bullet three with \texttt{inline-code} and \textbf{bold}.
+\end{itemize}
+
+Paragraph before an ordered list:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  First item
+\item
+  Second item with \emph{emphasis}
+\item
+  Third item with a nested list:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sub bullet one
+  \item
+    Sub bullet two
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Subsubsection 1.1.1 - Normal
+Blockquote}\label{inner-2-subsubsection-1.1.1---normal-blockquote}
+
+\begin{quote}
+This is a \textbf{normal blockquote}, not a callout. It starts with
+\texttt{\textgreater{}} but has no \texttt{{[}!tag{]}}, so the Lua
+filter must ignore it.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 2 - Simple
+Callouts}\label{inner-2-section-2---simple-callouts}
+
+\subsection*{Callout with title and body (single
+paragraph)}\label{inner-2-callout-with-title-and-body-single-paragraph}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; A simple NOTE callout}]
+
+This is the body of the note. It contains \textbf{bold}, \emph{italic},
+\texttt{code}, and a \href{https://example.com}{link}.
+
+\end{tcolorbox}
+
+\subsection*{Callout with title and multi-paragraph
+body}\label{inner-2-callout-with-title-and-multi-paragraph-body}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconInfo\; Info with multi-paragraph body}]
+
+First paragraph of the INFO body. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit.
+
+Second paragraph of the INFO body, with some more text.
+
+\end{tcolorbox}
+
+\subsection*{Callout with title-only (no
+body)}\label{inner-2-callout-with-title-only-no-body}
+
+\vspace{2mm}
+
+\noindent\begin{tcolorbox}[colback=ocYelBack,colframe=ocYelFrame,coltitle=ocYelTitle,left=3mm,width=\linewidth,boxrule=0pt]
+
+\hspace*{-2.5mm}\iconHint\; Only a title
+
+\end{tcolorbox}
+
+This paragraph is outside the TIP callout and should not be inside the
+box.
+
+\subsection*{Callout without explicit title, with
+body}\label{inner-2-callout-without-explicit-title-with-body}
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Warning}]
+
+This WARNING callout has no explicit title. The filter should use the
+default title ``Warning''.
+
+Second paragraph of the WARNING body with \textbf{bold text}.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 3 - Fold markers and
+variants}\label{inner-2-section-3---fold-markers-and-variants}
+
+\subsection*{\texorpdfstring{Collapsed state marker \texttt{-} and
+explicit
+title}{Collapsed state marker - and explicit title}}\label{inner-2-collapsed-state-marker---and-explicit-title}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; Abstract with fold marker}]
+
+Body of the ABSTRACT callout. The \texttt{-} fold marker should be
+ignored by the Lua filter.
+
+\end{tcolorbox}
+
+\subsection*{\texorpdfstring{Expanded state marker \texttt{+} and
+explicit
+title}{Expanded state marker + and explicit title}}\label{inner-2-expanded-state-marker-and-explicit-title}
+
+\begin{tcolorbox}[breakable,colback=ocGreBack,colframe=ocGreFrame,coltitle=ocGreTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconCheck\; Title with plus marker}]
+
+Body of the SUCCESS callout. The \texttt{+} fold marker must be ignored.
+
+\end{tcolorbox}
+
+\subsection*{Fold marker attached to
+tag}\label{inner-2-fold-marker-attached-to-tag}
+
+\begin{tcolorbox}[breakable,colback=yellow!5!white,colframe=yellow!50!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTodo\; TODO}]
+
+This TODO callout has the fold state attached directly to the marker.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 4 - Callouts with Markdown-rich
+bodies}\label{inner-2-section-4---callouts-with-markdown-rich-bodies}
+
+\subsection*{Body with list and code
+block}\label{inner-2-body-with-list-and-code-block}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; NOTE with list and code}]
+
+This NOTE contains a list:
+
+\begin{itemize}
+\tightlist
+\item
+  Item one
+\item
+  Item two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sub item A
+  \item
+    Sub item B
+  \end{itemize}
+\end{itemize}
+
+And a fenced code block:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/usr/bin/env bash}
+\BuiltInTok{echo} \StringTok{"Hello from inside a NOTE callout"}
+\end{Highlighting}
+\end{Shaded}
+
+\end{tcolorbox}
+
+\subsection*{Mixed inline formatting in
+title}\label{inner-2-mixed-inline-formatting-in-title}
+
+\begin{tcolorbox}[breakable,colback=gray!5!white,colframe=gray!60!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconQuote\; A \textbf{Markdown} \emph{formatted} title}]
+
+Body paragraph for the QUOTE callout. The title must be rendered with
+bold and italic formatting in LaTeX.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 5 - Nested
+Callouts}\label{inner-2-section-5---nested-callouts}
+
+\subsection*{Two-level nesting (NOTE contains
+WARNING)}\label{inner-2-two-level-nesting-note-contains-warning}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; Outer NOTE title}]
+
+This is the outer NOTE body, first paragraph.
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Inner WARNING title}]
+
+This is the inner WARNING body, with a list:
+
+\begin{itemize}
+\tightlist
+\item
+  Inner item one
+\item
+  Inner item two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nested inner bullet
+  \end{itemize}
+\end{itemize}
+
+Final inner paragraph with \textbf{bold} and \emph{italic}.
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+Paragraph after the nested callouts. This must be outside all boxes.
+
+\subsection*{Three-level nesting (ABSTRACT -\textgreater{} TIP
+-\textgreater{}
+DANGER)}\label{inner-2-three-level-nesting-abstract---tip---danger}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; Level 1 - Abstract}]
+
+Level-1 body, first paragraph.
+
+\begin{tcolorbox}[breakable,colback=ocYelBack,colframe=ocYelFrame,coltitle=ocYelTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconHint\; Level 2 - Tip}]
+
+Level-2 body paragraph with \emph{italic} and \textbf{bold}.
+
+\begin{tcolorbox}[breakable,colback=ocRed2Back,colframe=ocRed2Frame,coltitle=ocRed2Title,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDanger\; Danger}]
+
+Level-3 DANGER body only, no explicit title, using default ``Danger''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ nested(level: }\BuiltInTok{int}\NormalTok{) }\OperatorTok{{-}\textgreater{}} \BuiltInTok{str}\NormalTok{:}
+    \ControlFlowTok{return} \SpecialStringTok{f"Level }\SpecialCharTok{\{}\NormalTok{level}\SpecialCharTok{\}}\SpecialStringTok{"}
+
+\BuiltInTok{print}\NormalTok{(nested(}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 6 - Edge Cases}\label{inner-2-section-6---edge-cases}
+
+\subsection*{Only marker, no title, no
+body}\label{inner-2-only-marker-no-title-no-body}
+
+\vspace{2mm}
+
+\noindent\begin{tcolorbox}[colback=ocRed2Back,colframe=ocRed2Frame,coltitle=ocRed2Title,left=3mm,width=\linewidth,boxrule=0pt]
+
+\hspace*{-2.5mm}\iconBug\; Bug
+
+\end{tcolorbox}
+
+This paragraph is outside the BUG callout and should not be inside the
+box.
+
+\subsection*{Marker plus inline title on next line (SoftBreak
+case)}\label{inner-2-marker-plus-inline-title-on-next-line-softbreak-case}
+
+\begin{tcolorbox}[breakable,colback=ocPinBack,colframe=ocPinFrame,coltitle=ocPinTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDefinition\; Definition}]
+
+Definition title on next line
+
+Body paragraph of the DEFINITION callout. The first line after the
+marker should be treated as title, not body.
+
+\end{tcolorbox}
+
+\subsection*{Marker with inline title and immediate
+body}\label{inner-2-marker-with-inline-title-and-immediate-body}
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Caution title}]
+
+This is the CAUTION body, first paragraph.
+
+Second paragraph of the CAUTION body.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 7 - Mixed Content with
+Footnotes}\label{inner-2-section-7---mixed-content-with-footnotes}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.\footnote{Footnote
+  in normal text in Section 7.} Phasellus fermentum nunc at
+\textbf{arcu} placerat.
+
+\begin{tcolorbox}[breakable,colback=ocPinBack,colframe=ocPinFrame,coltitle=ocPinTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDefinition\; Definition with footnote}]
+
+This is a DEFINITION-like callout with a footnote inside.\footnote{Footnote
+  inside a callout body in Section 7.}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable,colback=yellow!5!white,colframe=yellow!50!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTodo\; TODO with inline code}]
+
+Remember to check \texttt{obsidian-callouts.lua} and update the style
+mappings if new tags are introduced.
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconInfo\; md2pdf - inner with explicit \texttt{shift-heading=0}}]
+
+\section*{Section 1 - Basic
+Structure}\label{inner-3-section-1---basic-structure}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae
+\textbf{bold text} magna, sed \emph{italic text} mi. Aenean
+\texttt{inline-code} vel sapien non, volutpat
+\href{https://example.com}{an external link}. Lorem ipsum Project Brief
+dolor an internal link sit amet, Project Brief consectetur adipiscing
+elit.\footnote{Footnote in normal text in Section 1.}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://example.com}{an external link}
+\item
+  Project Brief
+\item
+  an internal link
+\item
+  Project Brief
+\end{itemize}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet.
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; tl;dr}]
+
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sample Diagram}]{assets/sample-diagram.png}}
+
+\end{tcolorbox}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; tl;dr}]
+
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sample Diagram}]{assets/sample-diagram.png}}
+
+\end{tcolorbox}
+
+\subsection*{Subsection 1.1 -
+Lists}\label{inner-3-subsection-1.1---lists}
+
+Paragraph before a bullet list.
+
+\begin{itemize}
+\tightlist
+\item
+  Bullet one with some lorem ipsum dolor sit amet, consectetur
+  adipiscing elit.
+\item
+  Bullet two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nested bullet A
+  \item
+    Nested bullet B
+  \end{itemize}
+\item
+  Bullet three with \texttt{inline-code} and \textbf{bold}.
+\end{itemize}
+
+Paragraph before an ordered list:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  First item
+\item
+  Second item with \emph{emphasis}
+\item
+  Third item with a nested list:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sub bullet one
+  \item
+    Sub bullet two
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Subsubsection 1.1.1 - Normal
+Blockquote}\label{inner-3-subsubsection-1.1.1---normal-blockquote}
+
+\begin{quote}
+This is a \textbf{normal blockquote}, not a callout. It starts with
+\texttt{\textgreater{}} but has no \texttt{{[}!tag{]}}, so the Lua
+filter must ignore it.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 2 - Simple
+Callouts}\label{inner-3-section-2---simple-callouts}
+
+\subsection*{Callout with title and body (single
+paragraph)}\label{inner-3-callout-with-title-and-body-single-paragraph}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; A simple NOTE callout}]
+
+This is the body of the note. It contains \textbf{bold}, \emph{italic},
+\texttt{code}, and a \href{https://example.com}{link}.
+
+\end{tcolorbox}
+
+\subsection*{Callout with title and multi-paragraph
+body}\label{inner-3-callout-with-title-and-multi-paragraph-body}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconInfo\; Info with multi-paragraph body}]
+
+First paragraph of the INFO body. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit.
+
+Second paragraph of the INFO body, with some more text.
+
+\end{tcolorbox}
+
+\subsection*{Callout with title-only (no
+body)}\label{inner-3-callout-with-title-only-no-body}
+
+\vspace{2mm}
+
+\noindent\begin{tcolorbox}[colback=ocYelBack,colframe=ocYelFrame,coltitle=ocYelTitle,left=3mm,width=\linewidth,boxrule=0pt]
+
+\hspace*{-2.5mm}\iconHint\; Only a title
+
+\end{tcolorbox}
+
+This paragraph is outside the TIP callout and should not be inside the
+box.
+
+\subsection*{Callout without explicit title, with
+body}\label{inner-3-callout-without-explicit-title-with-body}
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Warning}]
+
+This WARNING callout has no explicit title. The filter should use the
+default title ``Warning''.
+
+Second paragraph of the WARNING body with \textbf{bold text}.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 3 - Fold markers and
+variants}\label{inner-3-section-3---fold-markers-and-variants}
+
+\subsection*{\texorpdfstring{Collapsed state marker \texttt{-} and
+explicit
+title}{Collapsed state marker - and explicit title}}\label{inner-3-collapsed-state-marker---and-explicit-title}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; Abstract with fold marker}]
+
+Body of the ABSTRACT callout. The \texttt{-} fold marker should be
+ignored by the Lua filter.
+
+\end{tcolorbox}
+
+\subsection*{\texorpdfstring{Expanded state marker \texttt{+} and
+explicit
+title}{Expanded state marker + and explicit title}}\label{inner-3-expanded-state-marker-and-explicit-title}
+
+\begin{tcolorbox}[breakable,colback=ocGreBack,colframe=ocGreFrame,coltitle=ocGreTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconCheck\; Title with plus marker}]
+
+Body of the SUCCESS callout. The \texttt{+} fold marker must be ignored.
+
+\end{tcolorbox}
+
+\subsection*{Fold marker attached to
+tag}\label{inner-3-fold-marker-attached-to-tag}
+
+\begin{tcolorbox}[breakable,colback=yellow!5!white,colframe=yellow!50!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTodo\; TODO}]
+
+This TODO callout has the fold state attached directly to the marker.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 4 - Callouts with Markdown-rich
+bodies}\label{inner-3-section-4---callouts-with-markdown-rich-bodies}
+
+\subsection*{Body with list and code
+block}\label{inner-3-body-with-list-and-code-block}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; NOTE with list and code}]
+
+This NOTE contains a list:
+
+\begin{itemize}
+\tightlist
+\item
+  Item one
+\item
+  Item two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sub item A
+  \item
+    Sub item B
+  \end{itemize}
+\end{itemize}
+
+And a fenced code block:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/usr/bin/env bash}
+\BuiltInTok{echo} \StringTok{"Hello from inside a NOTE callout"}
+\end{Highlighting}
+\end{Shaded}
+
+\end{tcolorbox}
+
+\subsection*{Mixed inline formatting in
+title}\label{inner-3-mixed-inline-formatting-in-title}
+
+\begin{tcolorbox}[breakable,colback=gray!5!white,colframe=gray!60!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconQuote\; A \textbf{Markdown} \emph{formatted} title}]
+
+Body paragraph for the QUOTE callout. The title must be rendered with
+bold and italic formatting in LaTeX.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 5 - Nested
+Callouts}\label{inner-3-section-5---nested-callouts}
+
+\subsection*{Two-level nesting (NOTE contains
+WARNING)}\label{inner-3-two-level-nesting-note-contains-warning}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconNote\; Outer NOTE title}]
+
+This is the outer NOTE body, first paragraph.
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Inner WARNING title}]
+
+This is the inner WARNING body, with a list:
+
+\begin{itemize}
+\tightlist
+\item
+  Inner item one
+\item
+  Inner item two
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nested inner bullet
+  \end{itemize}
+\end{itemize}
+
+Final inner paragraph with \textbf{bold} and \emph{italic}.
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+Paragraph after the nested callouts. This must be outside all boxes.
+
+\subsection*{Three-level nesting (ABSTRACT -\textgreater{} TIP
+-\textgreater{}
+DANGER)}\label{inner-3-three-level-nesting-abstract---tip---danger}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTldr\; Level 1 - Abstract}]
+
+Level-1 body, first paragraph.
+
+\begin{tcolorbox}[breakable,colback=ocYelBack,colframe=ocYelFrame,coltitle=ocYelTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconHint\; Level 2 - Tip}]
+
+Level-2 body paragraph with \emph{italic} and \textbf{bold}.
+
+\begin{tcolorbox}[breakable,colback=ocRed2Back,colframe=ocRed2Frame,coltitle=ocRed2Title,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDanger\; Danger}]
+
+Level-3 DANGER body only, no explicit title, using default ``Danger''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ nested(level: }\BuiltInTok{int}\NormalTok{) }\OperatorTok{{-}\textgreater{}} \BuiltInTok{str}\NormalTok{:}
+    \ControlFlowTok{return} \SpecialStringTok{f"Level }\SpecialCharTok{\{}\NormalTok{level}\SpecialCharTok{\}}\SpecialStringTok{"}
+
+\BuiltInTok{print}\NormalTok{(nested(}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 6 - Edge Cases}\label{inner-3-section-6---edge-cases}
+
+\subsection*{Only marker, no title, no
+body}\label{inner-3-only-marker-no-title-no-body}
+
+\vspace{2mm}
+
+\noindent\begin{tcolorbox}[colback=ocRed2Back,colframe=ocRed2Frame,coltitle=ocRed2Title,left=3mm,width=\linewidth,boxrule=0pt]
+
+\hspace*{-2.5mm}\iconBug\; Bug
+
+\end{tcolorbox}
+
+This paragraph is outside the BUG callout and should not be inside the
+box.
+
+\subsection*{Marker plus inline title on next line (SoftBreak
+case)}\label{inner-3-marker-plus-inline-title-on-next-line-softbreak-case}
+
+\begin{tcolorbox}[breakable,colback=ocPinBack,colframe=ocPinFrame,coltitle=ocPinTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDefinition\; Definition}]
+
+Definition title on next line
+
+Body paragraph of the DEFINITION callout. The first line after the
+marker should be treated as title, not body.
+
+\end{tcolorbox}
+
+\subsection*{Marker with inline title and immediate
+body}\label{inner-3-marker-with-inline-title-and-immediate-body}
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Caution title}]
+
+This is the CAUTION body, first paragraph.
+
+Second paragraph of the CAUTION body.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{Section 7 - Mixed Content with
+Footnotes}\label{inner-3-section-7---mixed-content-with-footnotes}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.\footnote{Footnote
+  in normal text in Section 7.} Phasellus fermentum nunc at
+\textbf{arcu} placerat.
+
+\begin{tcolorbox}[breakable,colback=ocPinBack,colframe=ocPinFrame,coltitle=ocPinTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDefinition\; Definition with footnote}]
+
+This is a DEFINITION-like callout with a footnote inside.\footnote{Footnote
+  inside a callout body in Section 7.}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable,colback=yellow!5!white,colframe=yellow!50!black,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconTodo\; TODO with inline code}]
+
+Remember to check \texttt{obsidian-callouts.lua} and update the style
+mappings if new tags are introduced.
+
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable,colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconInfo\; md2pdf - link syntax inside callouts stays plain text}]
+
+inner
+
+\end{tcolorbox}

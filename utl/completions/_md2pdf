@@ -1,0 +1,24 @@
+#compdef md2pdf
+
+# Zsh completion for md2pdf
+
+_md2pdf_templates() {
+  local -a templates
+  templates=("${(@f)$(${words[1]} --list-templates 2>/dev/null)}")
+  if (( ${#templates[@]} > 0 )); then
+    _describe -t templates 'template' templates
+  else
+    _files
+  fi
+}
+
+_arguments -s -S \
+  '(-o --output)'{-o,--output}'[Output PDF]:output file:_files' \
+  '--template[Template name from templates/ or explicit .tex path]:template:_md2pdf_templates' \
+  '--no-crossref[Disable pandoc-crossref filter]' \
+  '--list-templates[List available template names and exit]' \
+  '--asset-link[Symlink asset directory into input folder]:asset dir:_files -/' \
+  '--debug[Enable debug output]' \
+  '--version[Show version and exit]' \
+  '--[End of md2pdf options; following are input.md and pandoc args]' \
+  '*:pandoc arg:_files'

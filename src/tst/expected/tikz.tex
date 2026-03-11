@@ -1,0 +1,29 @@
+\section{TikZ Example}\label{tikz-example}
+
+\par\medskip
+
+\begin{figure}[ht]
+\centering
+\resizebox{0.5\linewidth}{4cm}{
+
+\begin{tikzpicture}[scale=0.8]
+  \node (a) {A};
+  \node (b) [right=of a] {B};
+  \node[draw, fit=(a)(b)] (box) {};
+\end{tikzpicture}
+}
+\caption{Fit Test}
+\label{fig:fit-test}
+\end{figure}
+
+\par\medskip
+
+\par\medskip
+
+\begin{tikzpicture}[>=Stealth,scale=0.6]
+  \node (x) at (0,0) {X};
+  \node (y) at (2,0) {Y};
+  \draw[->] (x) -- (y);
+\end{tikzpicture}
+
+\par\medskip

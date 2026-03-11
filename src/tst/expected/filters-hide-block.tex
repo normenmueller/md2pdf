@@ -1,0 +1,33 @@
+\section{Hide Block Example}\label{hide-block-example}
+
+Visible line before.
+
+Visible line after.
+
+Inline hide keeps surrounding text: keep
+
+keep.
+
+Ordered list should stay intact:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  First item
+\item
+  Second item
+\item
+  Third item
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\tightlist
+\item
+  Option alpha
+\item
+  Option beta
+\item
+  Option gamma
+\end{enumerate}

@@ -1,0 +1,36 @@
+\section{Callout Example}\label{callout-example}
+
+\vspace{2mm}
+
+\noindent\begin{tcolorbox}[colback=ocGryBack,colframe=ocGryFrame,coltitle=ocGryTitle,left=3mm,width=\linewidth,boxrule=0pt]
+
+\hspace*{-2.5mm}\iconNote\; Simple title only
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable,colback=ocOrgBack,colframe=ocOrgFrame,coltitle=ocOrgTitle,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconWarning\; Watch out}]
+
+Multi-line content with \emph{emphasis}.
+
+\begin{itemize}
+\tightlist
+\item
+  Item 1
+\item
+  Item 2
+\end{itemize}
+
+\begin{tcolorbox}[breakable,colback=ocRed2Back,colframe=ocRed2Frame,coltitle=ocRed2Title,left=3mm,boxed title style={left=1mm},title={\hspace*{-2.5mm}\iconDanger\; Nested callout}]
+
+Nested content.
+
+\end{tcolorbox}
+
+\pandocbounded{\includegraphics[keepaspectratio]{../assets/sample-diagram.png}}
+
+{\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sample Diagram}]{../assets/sample-diagram.png}}
+\captionof{figure}{Sample Diagram}\label{fig:sample-diagram}
+\par}
+
+\end{tcolorbox}

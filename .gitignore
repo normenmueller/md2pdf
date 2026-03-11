@@ -1,0 +1,9 @@
+acc/3rd
+*.pdf
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+[Ss]cratch.md
