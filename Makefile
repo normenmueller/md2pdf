@@ -18,9 +18,13 @@ install:
 	install -m 0755 "$(SCRIPT)" "$(DESTDIR)$(BINDIR)/$(BIN_NAME)"
 	install -d "$(DESTDIR)$(DATADIR)"
 	install -d "$(DESTDIR)$(DATADIR)/templates"
+	rm -f "$(DESTDIR)$(DATADIR)/templates/"*.tex
+	rm -f "$(DESTDIR)$(DATADIR)/templates/"*.icl
 	install -m 0644 src/lib/templates/*.tex "$(DESTDIR)$(DATADIR)/templates/"
 	install -m 0644 src/lib/templates/*.icl "$(DESTDIR)$(DATADIR)/templates/"
 	install -d "$(DESTDIR)$(DATADIR)/filters"
+	rm -f "$(DESTDIR)$(DATADIR)/filters/"*.lua
+	rm -f "$(DESTDIR)$(DATADIR)/filters/manifest.sh"
 	install -m 0644 src/lib/filters/*.lua "$(DESTDIR)$(DATADIR)/filters/"
 	install -m 0644 src/lib/filters/manifest.sh "$(DESTDIR)$(DATADIR)/filters/"
 	install -d "$(DESTDIR)$(BASH_COMPLETION_DIR)"
