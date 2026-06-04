@@ -1,1 +1,1 @@
-doc/ops/AGENTS.md
+.ai4X/BEHAVIOR.md

@@ -1,0 +1,210 @@
+# Purpose
+
+This file is volatile project memory for future agents. Update it after meaningful progress, decisions, blockers, verification results, failed attempts, or handoff-relevant repository changes.
+
+# Snapshot
+
+- Snapshot time: 2026-06-04 16:02:11 CEST.
+- Project root: `/Users/normenmueller/Documents/RND/etc/md2pdf`.
+- Root-selection evidence: `git rev-parse --show-toplevel` returned `/Users/normenmueller/Documents/RND/etc/md2pdf`.
+- Branch before writing bootstrap files: `trunk...origin/trunk`.
+- Branch used for this change: `chore/ai4x-bootstrap`.
+- Pre-update working tree: clean according to `git status --short --branch`.
+- Current phase: administrative migration of agent operational memory from `doc/ops` and root adapter into canonical `.ai4X/`.
+- Prior `.ai4X/` bootstrap files: absent. Evidence: `find .ai4X -maxdepth 2 -type f -print` failed with `No such file or directory`.
+- Prior host-specific artifacts: `doc/ops/AGENTS.md`, `doc/ops/_workflow.md`, and root symlink `AGENTS.md -> doc/ops/AGENTS.md` existed before migration.
+- Current host-specific adapter: root symlink `AGENTS.md -> .ai4X/BEHAVIOR.md`.
+- Bootstrap file status: `.ai4X/BEHAVIOR.md`, `.ai4X/CONTEXT.md`, and `.ai4X/STATE.md` were newly created during this operation.
+
+# Evidence Freshness
+
+Inspected for this update:
+
+- Active user instruction in the current session.
+- `git rev-parse --show-toplevel`.
+- `git status --short --branch`.
+- `rg --files`.
+- `ls -la`.
+- `find .ai4X -maxdepth 2 -type f -print`.
+- `doc/ops/AGENTS.md`.
+- `doc/ops/_workflow.md`.
+- `README.md`.
+- `Makefile`.
+- `CHANGELOG.md`.
+- `.gitignore`.
+- `src/app/md2pdf.sh`.
+- `src/tst/run.sh`.
+- `src/lib/filters/manifest.sh`.
+- `utl/check-templates.sh`.
+- `utl/check-charset.sh`.
+- Bash, Zsh, and Fish completion files under `utl/completions`.
+
+Not inspected in detail:
+
+- Every individual Lua filter implementation.
+- Every LaTeX template body.
+- Every golden fixture body.
+- Generated PDFs or ignored LaTeX auxiliary outputs.
+- External tool versions.
+
+Detected stale or superseded facts:
+
+- `doc/ops/AGENTS.md` and `doc/ops/_workflow.md` are superseded by `.ai4X/` after this migration.
+- `README.md` project structure previously listed `doc/ops`; it must be updated when old artifacts are removed.
+
+# Working Tree
+
+- Pre-update observation boundary: before creating `.ai4X/`, the working tree was observed as clean on `trunk...origin/trunk`.
+- Branch change: `git checkout -b chore/ai4x-bootstrap` was run before writing files.
+- Changes caused by this bootstrap operation:
+  - Created `.ai4X/BEHAVIOR.md`.
+  - Created `.ai4X/CONTEXT.md`.
+  - Created `.ai4X/STATE.md`.
+  - Removed superseded old artifacts: `doc/ops/AGENTS.md`, `doc/ops/_workflow.md`, empty `doc/ops/`, and root symlink `AGENTS.md`.
+  - Created new root adapter symlink `AGENTS.md -> .ai4X/BEHAVIOR.md` after explicit user confirmation.
+  - Updated `README.md` project structure to remove `doc/ops` and add `.ai4X`.
+- Existing user-owned changes before this operation: none observed by `git status --short --branch`.
+- Ownership of all files modified during this operation: agent-owned for this bootstrap migration.
+- State observation boundary: this file records the pre-write state and bootstrap changes. A post-write status check must be run before final handoff.
+- Post-write status check was run after old artifact removal and before final validation; expected changed files were present.
+
+# Current State
+
+- `.ai4X/` is now the intended canonical location for agent operational memory.
+- `.ai4X/BEHAVIOR.md` contains durable agent role, cognitive capabilities, startup protocol, source-of-truth rules, workflow, standards, commands, safety rules, and maintenance rules.
+- `.ai4X/CONTEXT.md` contains stable project understanding, domain model, repository map, architecture/design notes, constraints, non-goals, and user preferences.
+- `.ai4X/STATE.md` contains the current volatile snapshot, change ownership, open questions, assumptions, risks, verification status, attempt history, next actions, and handoff notes.
+- Old operational artifacts were removed after confirming their useful content was transferred into `.ai4X/`.
+- Root `AGENTS.md` now exists as a host-specific adapter to `.ai4X/BEHAVIOR.md`.
+
+# Accepted Definitions
+
+- `.ai4X/BEHAVIOR.md`: durable operating contract for future agents.
+- `.ai4X/CONTEXT.md`: durable or slowly changing project understanding.
+- `.ai4X/STATE.md`: volatile current project memory and handoff snapshot.
+- Host-specific adapter: a file or symlink such as root-level `AGENTS.md` that points an AI runtime to operational instructions but is not canonical storage.
+- Golden tests: deterministic expected JSON AST and LaTeX outputs under `src/tst/expected`.
+- Unified quality gate: `make verify`.
+
+# Decisions
+
+- 2026-06-04: Use `.ai4X/` as canonical agent bootstrap memory. Source: active user instruction.
+- 2026-06-04: Generate repository artifacts in English and continue chat in German. Source: active user instruction and former agent profile.
+- 2026-06-04: Treat old `doc/ops` artifacts and root `AGENTS.md` symlink as superseded after successful migration. Source: active user instruction; evidence from repository.
+- 2026-06-04: Use branch `chore/ai4x-bootstrap` for this administrative change. Rationale: project branch policy requires dedicated branches for changes intended for merge. Source: former agent profile and workflow.
+- 2026-06-04: Create a new root adapter `AGENTS.md -> .ai4X/BEHAVIOR.md`. Source: explicit user answer after bootstrap migration.
+- 2026-06-04: Do not record this administrative migration in `CHANGELOG.md`. Source: explicit user answer after bootstrap migration.
+- 2026-06-04: There are no additional active technical objectives beyond the bootstrap migration. Source: explicit user answer after bootstrap migration.
+- Existing decision: keep `trunk` as stable integration and avoid direct commits to `trunk` without explicit approval. Source: former agent profile and workflow.
+
+# Change Ownership
+
+Files created during this bootstrap operation:
+
+- `.ai4X/BEHAVIOR.md`
+- `.ai4X/CONTEXT.md`
+- `.ai4X/STATE.md`
+- `AGENTS.md` as symlink to `.ai4X/BEHAVIOR.md`
+
+Files updated during this bootstrap operation:
+
+- `README.md`
+
+Files deleted during this bootstrap operation after migration confidence:
+
+- `doc/ops/AGENTS.md`
+- `doc/ops/_workflow.md`
+- old `AGENTS.md` symlink to `doc/ops/AGENTS.md`
+- `doc/ops/` as an empty directory.
+
+Existing user changes preserved:
+
+- None observed before this operation.
+
+Files intentionally not touched:
+
+- Application code under `src/app`.
+- Lua filters under `src/lib/filters`.
+- LaTeX templates under `src/lib/templates`.
+- Golden fixtures under `src/tst/expected`.
+- Shell completions under `utl/completions`.
+- `CHANGELOG.md`, unless the user later requests changelog tracking for this administrative change.
+
+Ownership uncertainties:
+
+- UNKNOWN after future edits until a fresh `git status --short --branch` is inspected.
+
+# Open Questions
+
+- Should `.ai4X/README.md` exist to explain the bootstrap structure to humans? Impact: not required by the user and would add another artifact to maintain.
+
+# Assumptions
+
+- Assumption: Deleting `doc/ops/AGENTS.md`, `doc/ops/_workflow.md`, and the old root `AGENTS.md -> doc/ops/AGENTS.md` symlink satisfies "delete the old artifacts" after migration. Confidence: high. The user separately confirmed that a new adapter should be created.
+- Assumption: No external research is needed because the task is repository-local and policy/instruction migration is based on local files and active user instruction. Confidence: high.
+- Assumption: `make verify` is sufficient validation for this administrative migration after file changes, even though no runtime code changes are made. Confidence: medium; invalidated if environment lacks Pandoc or LaTeX.
+- Assumption: `.ai4X/STATE.md` should record this operation even though writing it makes the tree dirty. Confidence: high; required by active user instruction.
+
+# Risks
+
+- Root adapter discovery risk is mitigated by the new symlink `AGENTS.md -> .ai4X/BEHAVIOR.md`.
+- Removing `doc/ops/_workflow.md` means strict workflow content must remain discoverable in `.ai4X/BEHAVIOR.md`; migration must preserve quality gates, release approval rules, and risk controls.
+- `utl/check-charset.sh` scans tracked files only. Newly created `.ai4X/` files will be checked by `make verify` only after they are tracked or when the check is adjusted. Post-write validation should still inspect charset manually or via `git add -N` before relying on `make verify`.
+- Full `make verify` may fail if Pandoc, LaTeX, or `pandoc-crossref` are missing in the local environment. That would be an environment/tooling issue, not necessarily a migration defect.
+
+# Working Model Status
+
+- Working model: `md2pdf` is a deterministic Bash/Pandoc/LaTeX conversion tool whose correctness relies on stable CLI behavior, a fixed Lua filter order, paired templates/includes, installable runtime assets, aligned completions/docs, and golden tests.
+- Confidence: high for inspected architecture and tooling paths.
+- Evidence basis: `README.md`, `Makefile`, `src/app/md2pdf.sh`, `src/tst/run.sh`, `src/lib/filters/manifest.sh`, validation scripts, completions, and former operations docs.
+- Unknowns: exact behavior of each Lua filter and each template body was not reviewed during this bootstrap migration.
+
+# Runtime And Tooling Status
+
+- Git is available and project root resolution succeeded.
+- `rg` is available and was used for file discovery.
+- `date` is available and produced the snapshot time.
+- No external network access was needed.
+- Runtime dependencies required by `make verify` were available in this environment.
+- `make verify` passed after the bootstrap migration.
+
+# Verification Log
+
+- `git rev-parse --show-toplevel`: passed; returned project root.
+- `git status --short --branch`: passed before writing; reported `## trunk...origin/trunk`.
+- `rg --files`: passed; listed repository files.
+- `find .ai4X -maxdepth 2 -type f -print`: failed because `.ai4X/` did not exist; expected pre-update result.
+- `sed` reads of old operations docs and key project files: passed.
+- `git checkout -b chore/ai4x-bootstrap`: passed; created and switched to migration branch.
+- Manual `.ai4X/` charset check: passed. Rationale: `utl/check-charset.sh` checks tracked files via `git ls-files`, while `.ai4X/` files were still untracked during this operation.
+- Post-write `git status --short --branch`: passed; showed expected migration changes on `chore/ai4x-bootstrap`.
+- `make verify`: passed after the adapter decision update. It ran shell syntax checks, template checks, tracked-file charset check, CLI template listing, and all golden regression tests.
+- Fresh-agent dry run: passed. Using `.ai4X/BEHAVIOR.md`, `.ai4X/CONTEXT.md`, `.ai4X/STATE.md`, and repository files, a new agent can identify startup protocol, active objective, constraints, relevant files, verified commands, unknowns, and immediate next action.
+
+# Attempt History
+
+- No failed implementation attempts.
+- `.ai4X/` absence was expected and caused creation of new bootstrap files.
+- No external research was attempted because the task is local and instruction-driven.
+
+# Next Actions
+
+Immediate:
+
+1. Review `git diff --stat` and file diffs before staging or opening a pull request.
+2. Stage intended files and open a pull request from `chore/ai4x-bootstrap` after user approval.
+
+Optional follow-up:
+
+- Stage intended files and open a pull request from `chore/ai4x-bootstrap` after user approval.
+
+# Handoff Notes
+
+- A future agent should begin by reading `.ai4X/BEHAVIOR.md`, `.ai4X/CONTEXT.md`, and this file, then run `git status --short --branch`.
+- Briefing outline for the returning user:
+  - Current objective: migrate operational agent memory into `.ai4X/`.
+  - Current state: `.ai4X/` files created; old artifacts removed; root `AGENTS.md` adapter points to `.ai4X/BEHAVIOR.md`.
+  - Open decisions: only whether `.ai4X/README.md` is useful.
+  - Immediate next action: review diff and prepare staging or PR if requested.
+  - Known risks: full verification depends on local Pandoc/LaTeX tooling, but it passed in this environment.
+- Do not restore `doc/ops` or the old `AGENTS.md -> doc/ops/AGENTS.md` adapter.

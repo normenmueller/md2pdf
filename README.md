@@ -124,9 +124,9 @@ src/tst/run.sh
 
 ```text
 .
+|-- .ai4X
 |-- doc
-|   |-- exp
-|   `-- ops
+|   `-- exp
 |-- src
 |   |-- app
 |   |-- lib
