@@ -19,6 +19,8 @@ This file is volatile project memory for future agents. Update it after meaningf
 - Integration plan: commit on `fix/block-heading-spacing`, merge into `trunk`, verify `trunk`, then tag `v0.1.2` on `trunk`.
 - Release completion: `fix/block-heading-spacing` was fast-forward merged into `trunk`; `make verify` passed on `trunk`; `v0.1.2` was tagged on commit `7a02c00`; `origin/trunk` and tag `v0.1.2` were pushed; GitHub Release `v0.1.2` was created at `https://github.com/normenmueller/md2pdf/releases/tag/v0.1.2`.
 - Post-release note: this state update is intentionally after the release tag so the tag remains on the verified release commit.
+- Post-release branch cleanup on 2026-06-06 22:57:45 CEST: `git fetch --prune origin` found no remote feature/fix branches; only `origin/trunk` remains. Local merged branch `fix/block-heading-spacing` was deleted. Local branch `pre-initial-20260311-190137` remains because it is not a feature/fix cleanup target and is not merged into `trunk`.
+- Current working tree note: `.gitignore` now ignores `tmp/` so user-provided/generated diagnostic files remain out of Git. `trunk` was synchronized with `origin/trunk` before this state-note update.
 
 # Snapshot
 
