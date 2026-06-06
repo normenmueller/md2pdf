@@ -173,9 +173,21 @@
   {\color{yrMuted}\thesubsubsection}
   {0.6em}
   {#1}
+\titleformat{\paragraph}[block]
+  {\normalsize\bfseries\color{yrMainColor!70!black}}
+  {\color{yrMuted}\theparagraph}
+  {0.6em}
+  {#1}
+\titleformat{\subparagraph}[block]
+  {\normalsize\bfseries\color{yrMainColor!70!black}}
+  {\color{yrMuted}\thesubparagraph}
+  {0.6em}
+  {#1}
 \titlespacing*{\section}{0pt}{2.4ex plus .5ex minus .2ex}{0.9ex}
 \titlespacing*{\subsection}{0pt}{1.8ex plus .4ex minus .2ex}{0.7ex}
 \titlespacing*{\subsubsection}{0pt}{1.3ex plus .3ex minus .2ex}{0.5ex}
+\titlespacing*{\paragraph}{0pt}{1.1ex plus .3ex minus .2ex}{0.55ex}
+\titlespacing*{\subparagraph}{0pt}{1.0ex plus .3ex minus .2ex}{0.5ex}
 \hypersetup{
   colorlinks=true,
   linkcolor=yrMainColor,

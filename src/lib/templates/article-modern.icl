@@ -159,9 +159,17 @@
 \titleformat{\subsubsection}
   {\normalsize\bfseries\color{mdModernAccent}}
   {\thesubsubsection}{0.6em}{}
+\titleformat{\paragraph}[block]
+  {\normalsize\bfseries\color{mdModernAccent}}
+  {\theparagraph}{0.6em}{}
+\titleformat{\subparagraph}[block]
+  {\normalsize\bfseries\color{mdModernAccent}}
+  {\thesubparagraph}{0.6em}{}
 \titlespacing*{\section}{0pt}{2.0ex plus .5ex minus .2ex}{0.9ex}
 \titlespacing*{\subsection}{0pt}{1.6ex plus .4ex minus .2ex}{0.8ex}
 \titlespacing*{\subsubsection}{0pt}{1.2ex plus .3ex minus .2ex}{0.6ex}
+\titlespacing*{\paragraph}{0pt}{1.1ex plus .3ex minus .2ex}{0.55ex}
+\titlespacing*{\subparagraph}{0pt}{1.0ex plus .3ex minus .2ex}{0.5ex}
 \hypersetup{
   colorlinks=true,
   linkcolor=mdModernPrimary,

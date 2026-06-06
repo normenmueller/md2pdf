@@ -2,6 +2,22 @@
 
 This file is volatile project memory for future agents. Update it after meaningful progress, decisions, blockers, verification results, failed attempts, or handoff-relevant repository changes.
 
+# Current Session Update
+
+- Snapshot time: 2026-06-06 16:56:18 CEST.
+- Active user request: diagnose and fix overly tight text placement after Markdown level-4 headings when running `md2pdf -o o2i.pdf -- o2i.md`; user-provided examples are under `tmp/`.
+- Root-selection evidence: `git rev-parse --show-toplevel` returned `/Users/normenmueller/Documents/RND/etc/md2pdf`.
+- Branch/status evidence before edits: `git status --short --branch` reported `## trunk...origin/trunk` and untracked `tmp/`.
+- Diagnosis: Pandoc maps Markdown level 4 and 5 headings to LaTeX `\paragraph` and `\subparagraph`; LaTeX defaults render these as run-in headings, causing following content to sit too close to the heading.
+- Change made: template include files now define `\paragraph` and `\subparagraph` as block headings with explicit `titlesec` spacing. Touched files: `src/lib/templates/default.icl`, `src/lib/templates/article-modern.icl`, `src/lib/templates/article-stylish.icl`, `src/lib/templates/article-stylish-2col.icl`, `src/lib/templates/note-modern.icl`, and `src/lib/templates/report-stylish.icl`.
+- Verification passed: `make verify`.
+- Example verification passed: `./src/app/md2pdf.sh -o tmp/o2i-fixed.pdf -- tmp/o2i.md`.
+- Visual verification passed: rendered page 4 of `tmp/o2i-fixed.pdf` to `tmp/o2i-fixed-page-04.png`; level-4 headings such as `3.1.1.1 Leitprinzipien` and `3.1.1.2 Mission` render as separate block headings with visible spacing before the following definition boxes.
+- Working tree after edits: expected modified template include files plus this state file; `tmp/` remains untracked and user-provided/generated diagnostic output.
+- Release plan approved by user on 2026-06-06. Active release branch: `fix/block-heading-spacing`.
+- Release target: `v0.1.2` as a patch release. Version bump applied in `src/app/md2pdf.sh`; `CHANGELOG.md` entry added for 2026-06-06.
+- Integration plan: commit on `fix/block-heading-spacing`, merge into `trunk`, verify `trunk`, then tag `v0.1.2` on `trunk`.
+
 # Snapshot
 
 - Snapshot time: 2026-06-04 16:02:11 CEST.

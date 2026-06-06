@@ -174,9 +174,21 @@
   {\thesubsubsection}
   {0.5em}
   {#1}
+\titleformat{\paragraph}[block]
+  {\sffamily\small\bfseries}
+  {\theparagraph}
+  {0.5em}
+  {#1}
+\titleformat{\subparagraph}[block]
+  {\sffamily\small\bfseries}
+  {\thesubparagraph}
+  {0.5em}
+  {#1}
 \titlespacing*{\section}{0pt}{2.2ex plus .5ex minus .2ex}{0.7ex}
 \titlespacing*{\subsection}{0pt}{1.8ex plus .4ex minus .2ex}{0.5ex}
 \titlespacing*{\subsubsection}{0pt}{1.4ex plus .3ex minus .2ex}{0.4ex}
+\titlespacing*{\paragraph}{0pt}{1.1ex plus .3ex minus .2ex}{0.55ex}
+\titlespacing*{\subparagraph}{0pt}{1.0ex plus .3ex minus .2ex}{0.5ex}
 \hypersetup{
   colorlinks=true,
   linkcolor=stlPrimary,

@@ -168,9 +168,21 @@
   {\color{lnMuted}\thesubsubsection}
   {0.6em}
   {#1}
+\titleformat{\paragraph}[block]
+  {\normalsize\bfseries\color{lnPrimary!65!black}}
+  {\color{lnMuted}\theparagraph}
+  {0.6em}
+  {#1}
+\titleformat{\subparagraph}[block]
+  {\normalsize\bfseries\color{lnPrimary!65!black}}
+  {\color{lnMuted}\thesubparagraph}
+  {0.6em}
+  {#1}
 \titlespacing*{\section}{0pt}{2.2ex plus .5ex minus .2ex}{0.8ex}
 \titlespacing*{\subsection}{0pt}{1.7ex plus .4ex minus .2ex}{0.6ex}
 \titlespacing*{\subsubsection}{0pt}{1.3ex plus .3ex minus .2ex}{0.5ex}
+\titlespacing*{\paragraph}{0pt}{1.1ex plus .3ex minus .2ex}{0.55ex}
+\titlespacing*{\subparagraph}{0pt}{1.0ex plus .3ex minus .2ex}{0.5ex}
 \hypersetup{
   colorlinks=true,
   linkcolor=lnPrimary,

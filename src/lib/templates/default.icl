@@ -60,6 +60,7 @@
 % -----------------------------------
 
 \usepackage{tocloft}
+\usepackage{titlesec}
 \setlength{\cftbeforesecskip}{1pt}     % spacing before \section entries
 \setlength{\cftbeforesubsecskip}{0pt}  % spacing before \subsection entries
 \makeatletter
@@ -69,13 +70,18 @@
 }{}
 \makeatother
 
-%% Make "clones" of the commands
-%\let\originalparagraph\paragraph
-%\let\originalsubparagraph\subparagraph
-%
-%% Redefine the commands using the "clones"
-%\renewcommand{\paragraph}[1]{\originalparagraph{#1}\hfill}
-%\renewcommand{\subparagraph}[1]{\originalsubparagraph{#1}\hfill}
+\titleformat{\paragraph}[block]
+  {\normalsize\bfseries}
+  {\theparagraph}
+  {0.6em}
+  {}
+\titleformat{\subparagraph}[block]
+  {\normalsize\bfseries}
+  {\thesubparagraph}
+  {0.6em}
+  {}
+\titlespacing*{\paragraph}{0pt}{1.1ex plus .3ex minus .2ex}{0.55ex}
+\titlespacing*{\subparagraph}{0pt}{1.0ex plus .3ex minus .2ex}{0.5ex}
 
 % -----------------------------------
 % The Enum package
