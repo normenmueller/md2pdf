@@ -35,6 +35,8 @@ This file is volatile project memory for future agents. Update it after meaningf
   - A manual LaTeX-control command first failed because it used relative md2pdf filter paths from the O2I directory; rerun with absolute filter paths passed.
   - `pipx list` failed in the sandbox because pipx tried to write logs outside the workspace. Direct file inspection confirmed the pipx installation layout.
 - Next actions: review diff, decide whether to commit, and release/tag only after explicit user approval.
+- Release completion update: user approved commit, push, merge to `trunk`, and release creation in the active session. Commit `538bc43` (`feat: require pandoc include and crossref`) was pushed on branch `feat/require-pandoc-include`, fast-forward merged into `trunk`, verified with `make verify`, tagged as `v0.2.0`, and pushed to `origin/trunk` plus `origin/v0.2.0`. GitHub Release `v0.2.0` was created at `https://github.com/normenmueller/md2pdf/releases/tag/v0.2.0`.
+- Post-release note: this state update is intentionally after the release tag so the tag remains on the verified release commit.
 
 # Current Session Update
 
