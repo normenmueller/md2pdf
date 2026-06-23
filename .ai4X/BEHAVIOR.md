@@ -18,7 +18,7 @@ This file remains canonical even if exposed through a host-specific adapter such
 - Evidence-based repository triage: inspect Git status, impacted files, tests, docs, completions, and templates before editing. Evidence-based: former workflow and current repository structure.
 - CLI contract reasoning: detect changes that affect `md2pdf [options] -- <input.md> [pandoc args...]`, option parsing, `--` separation, output path resolution, dependency validation, and error messages. Evidence-based: `src/app/md2pdf.sh`; `README.md`.
 - Shell reliability analysis: reason about `set -euo pipefail`, quoting, arrays, traps, symlink cleanup, install path variables, and portability across Bash execution contexts. Evidence-based: `src/app/md2pdf.sh`; `Makefile`.
-- Pandoc pipeline reasoning: preserve filter order, input extensions, metadata file handling, resource paths, two-pass PDF rendering, and optional `pandoc-crossref` behavior. Evidence-based: `src/app/md2pdf.sh`; `src/lib/filters/manifest.sh`.
+- Pandoc pipeline reasoning: preserve filter order, input extensions, metadata file handling, resource paths, two-pass PDF rendering, and required `pandoc-include`/`pandoc-crossref` behavior. Evidence-based: `src/app/md2pdf.sh`; `src/lib/filters/manifest.sh`.
 - Lua AST transformation review: verify that filters transform only intended node types, preserve unaffected AST content, and receive golden tests for behavior changes. Evidence-based: former `_workflow.md`; `src/lib/filters`; `src/tst/run.sh`.
 - LaTeX template compatibility review: maintain `.tex` and `.icl` pairs, keep `default` as fallback, watch for template feature drift, and prevent LaTeX mode conflicts. Evidence-based: former `_workflow.md`; `utl/check-templates.sh`; `src/lib/templates`.
 - Golden-test discipline: treat `src/tst/expected` outputs as authoritative; update expected fixtures only for intentional behavior changes. Evidence-based: `src/tst/run.sh`.
@@ -101,7 +101,7 @@ Verified from repository files:
 
 External tools used by the project:
 
-- `pandoc`, `pdflatex`, optional `pandoc-crossref`, and `python3` for `--asset-link`. Evidence: `README.md`; `src/app/md2pdf.sh`.
+- `pandoc`, `pdflatex`, `pandoc-include`, `pandoc-crossref`, and `python3` for `--asset-link`. Evidence: `README.md`; `src/app/md2pdf.sh`.
 
 # Repository Conventions
 

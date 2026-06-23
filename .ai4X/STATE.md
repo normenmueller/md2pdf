@@ -4,6 +4,40 @@ This file is volatile project memory for future agents. Update it after meaningf
 
 # Current Session Update
 
+- Snapshot time: 2026-06-23 12:26:54 CEST.
+- Active user request: make `pandoc-include` and `pandoc-crossref` fixed md2pdf runtime dependencies, remove the optional `--no-crossref` mode, and treat the change as a clear breaking release.
+- Version decision: use `0.2.0` rather than `0.1.3` because the change removes a CLI option and adds a standard runtime dependency. User accepted `0.2` wording; implementation uses full SemVer-style `0.2.0`.
+- Branch: `feat/require-pandoc-include`.
+- Working tree before edits: clean on `trunk...origin/trunk`; branch was created before editing.
+- Implementation changes:
+  - `src/app/md2pdf.sh` version bumped to `0.2.0`.
+  - `--no-crossref` removed from usage and option parsing.
+  - Runtime dependency check now requires `pandoc`, `pdflatex`, `pandoc-include`, and `pandoc-crossref`; `python3` remains conditional for `--asset-link`.
+  - Pandoc command now runs `pandoc-include` before the md2pdf Lua filter pipeline and always runs `pandoc-crossref` after it.
+  - README documents required filters, `pipx install pandoc-include`, PATH verification, and a source-snippet include example.
+  - Bash, Zsh, and Fish completions no longer advertise `--no-crossref`.
+  - `CHANGELOG.md` has a `0.2.0 - 2026-06-23` breaking-change entry.
+  - Test runner now invokes `pandoc-include` before md2pdf Lua filters and runs from the repository root for deterministic relative include paths.
+  - New include regression fixture: `doc/exp/filters/include-code.md`, `doc/exp/filters/include-source.hs`, and matching golden JSON/LaTeX outputs.
+  - `.ai4X/BEHAVIOR.md` and `.ai4X/CONTEXT.md` now describe required `pandoc-include`/`pandoc-crossref`.
+- Local dependency observation: `pandoc-include` is available at `/opt/homebrew/bin/pandoc-include`, which symlinks to `/Users/normenmueller/.local/bin/pandoc-include`; that wrapper uses the pipx venv at `/Users/normenmueller/.local/pipx/venvs/pandoc-include`. Homebrew has no local `pandoc-include` formula installed.
+- Verification passed:
+  - `bash -n src/app/md2pdf.sh`
+  - `bash -n src/tst/run.sh`
+  - `./src/app/md2pdf.sh --version` returned `md2pdf, v0.2.0, (C) 2026 nemron`
+  - `./src/app/md2pdf.sh --list-templates`
+  - `src/tst/run.sh`
+  - `make verify`
+  - `./src/app/md2pdf.sh --debug -o /tmp/o2i-include.pdf -- /Users/normenmueller/Documents/RND/str/mdl/o2i/o2i.md`
+  - Manual LaTeX-control command confirmed O2I include directives expand into Haskell code and no literal `!include` remains in matched output.
+- Failed/non-impacting attempts:
+  - A search command using double quotes around a pattern with backticks accidentally executed `pandoc-crossref` with no arguments; it only printed its help/error text and did not modify files.
+  - A manual LaTeX-control command first failed because it used relative md2pdf filter paths from the O2I directory; rerun with absolute filter paths passed.
+  - `pipx list` failed in the sandbox because pipx tried to write logs outside the workspace. Direct file inspection confirmed the pipx installation layout.
+- Next actions: review diff, decide whether to commit, and release/tag only after explicit user approval.
+
+# Current Session Update
+
 - Snapshot time: 2026-06-06 16:56:18 CEST.
 - Active user request: diagnose and fix overly tight text placement after Markdown level-4 headings when running `md2pdf -o o2i.pdf -- o2i.md`; user-provided examples are under `tmp/`.
 - Root-selection evidence: `git rev-parse --show-toplevel` returned `/Users/normenmueller/Documents/RND/etc/md2pdf`.

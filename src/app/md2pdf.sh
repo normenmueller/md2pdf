@@ -41,7 +41,7 @@ datadir="$(resolve_datadir)"
 # ----------------------------------------------------------------------
 # Version information
 # ----------------------------------------------------------------------
-VERSION="0.1.2"
+VERSION="0.2.0"
 COPYRIGHT_YEAR="2026"
 AUTHOR="nemron"
 
@@ -59,7 +59,6 @@ Usage: $0 [options] -- <input.md> [pandoc args...]
 Options:
   -o, --output <file>     Output PDF (default: <input>.pdf)
   --template <name|path>  Template name from templates/ or explicit .tex path
-  --no-crossref           Disable pandoc-crossref filter
   --list-templates        List available template names and exit
   --asset-link <dir>      Symlink asset directory into input folder (repeatable)
   --debug                 Enable debug output
@@ -76,7 +75,6 @@ fi
 # Defaults
 # ----------------------------------------------------------------------
 debug_mode=false
-crossref_enabled=true
 input=""
 output=""
 template_selector="default"
@@ -143,12 +141,8 @@ build_filter_args() {
 
 check_dependencies() {
     local missing=()
-    local required=(pandoc pdflatex)
+    local required=(pandoc pdflatex pandoc-include pandoc-crossref)
     local dep
-
-    if $crossref_enabled; then
-        required+=(pandoc-crossref)
-    fi
 
     if [[ "${#asset_links[@]}" -gt 0 ]]; then
         required+=(python3)
@@ -351,9 +345,6 @@ while [[ "$#" -gt 0 ]]; do
             fi
             template_selector="$1"
             ;;
-        --no-crossref)
-            crossref_enabled=false
-            ;;
         --list-templates)
             list_templates_mode=true
             ;;
@@ -443,7 +434,6 @@ if $debug_mode; then
     echo "[md2pdf|debug] template_select:  $template_selector"
     echo "[md2pdf|debug] template:         $template"
     echo "[md2pdf|debug] header_includes:  $header_includes"
-    echo "[md2pdf|debug] crossref_enabled: $crossref_enabled"
     echo "[md2pdf|debug] input_path:       $input_path"
     echo "[md2pdf|debug] input_file:       $input_file"
     echo "[md2pdf|debug] input_yaml:       $input_yaml"
@@ -473,11 +463,9 @@ pandoc_cmd=(pandoc
     "$input_file" -o "$output"
 )
 
+pandoc_cmd+=(-F pandoc-include)
 pandoc_cmd+=("${pandoc_filter_args[@]}")
-
-if $crossref_enabled; then
-    pandoc_cmd+=(-F pandoc-crossref)
-fi
+pandoc_cmd+=(-F pandoc-crossref)
 
 if [[ -f "$input_yaml" ]]; then
     pandoc_cmd+=(--metadata-file "$input_yaml")

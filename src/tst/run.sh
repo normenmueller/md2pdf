@@ -2,6 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$ROOT"
 JSON_ACTUAL_TMP="$(mktemp)"
 JSON_EXPECTED_TMP="$(mktemp)"
 LATEX_TMP="$(mktemp)"
@@ -22,7 +23,7 @@ if [[ -z "${MD2PDF_FILTER_FILES+x}" || "${#MD2PDF_FILTER_FILES[@]}" -eq 0 ]]; th
   exit 1
 fi
 
-BASE_ARGS=(--from=markdown-smart+fenced_code_attributes)
+BASE_ARGS=(--from=markdown-smart+fenced_code_attributes --filter=pandoc-include)
 
 for filter_file in "${MD2PDF_FILTER_FILES[@]}"; do
   filter_path="$ROOT/src/lib/filters/$filter_file"

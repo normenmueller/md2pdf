@@ -8,8 +8,21 @@ Requirements:
 
 - Pandoc with Lua support
 - A LaTeX distribution with `pdflatex`
-- `pandoc-crossref` (optional, enabled by default)
+- `pandoc-include`
+- `pandoc-crossref`
 - Python 3 (required for `--asset-link`)
+
+Install the Python-based Pandoc include filter with pipx:
+
+```bash
+pipx install pandoc-include
+```
+
+Check that the required Pandoc filters are visible on `PATH`:
+
+```bash
+command -v pandoc-include pandoc-crossref
+```
 
 Install from this repository:
 
@@ -37,10 +50,18 @@ Select a template:
 md2pdf --template article-modern -- note.md
 ```
 
-Disable cross-references for a run:
+Include a source snippet:
+
+````markdown
+```haskell
+!include`snippetStart="-- * Contexts", snippetEnd="-- * Primitives"` spc/O2I.hs
+```
+````
+
+Build the document:
 
 ```bash
-md2pdf --no-crossref -- note.md
+md2pdf -- note.md
 ```
 
 Run directly from source tree:
@@ -59,7 +80,6 @@ Options:
 
 - `-o, --output <file>`: output PDF path (default: `<input>.pdf`)
 - `--template <name|path>`: template name or explicit `.tex` path
-- `--no-crossref`: disable `pandoc-crossref` for the current run
 - `--list-templates`: list available template names and exit
 - `--asset-link <dir>`: create temporary asset symlink(s) in input directory
 - `--debug`: print resolved paths and full Pandoc command

@@ -61,7 +61,7 @@ Evidence: active user instruction; former `doc/ops/AGENTS.md`; former `doc/ops/_
 
 - The CLI is implemented as a Bash script with strict mode and array-based command construction. Evidence: `src/app/md2pdf.sh`.
 - Runtime assets are separated from the executable. The CLI resolves a data directory containing templates and filters, validating required files before execution. Evidence: `src/app/md2pdf.sh`.
-- The Pandoc command uses Markdown extensions, PDF output, a selected LaTeX template, a selected header include file, `pdflatex`, table of contents, numbered sections, syntax highlighting, ordered Lua filters, optional `pandoc-crossref`, optional input-local YAML metadata, and user-provided Pandoc arguments after `--`. Evidence: `src/app/md2pdf.sh`.
+- The Pandoc command uses Markdown extensions, PDF output, a selected LaTeX template, a selected header include file, `pdflatex`, table of contents, numbered sections, syntax highlighting, required `pandoc-include`, ordered Lua filters, required `pandoc-crossref`, optional input-local YAML metadata, and user-provided Pandoc arguments after `--`. Evidence: `src/app/md2pdf.sh`.
 - Tests apply the same ordered filter manifest to examples and compare both normalized JSON AST and LaTeX output against golden files. Evidence: `src/tst/run.sh`; `src/lib/filters/manifest.sh`.
 - Template integrity is checked structurally by ensuring each `.tex` has a paired `.icl` and that `default.tex` and `default.icl` exist. Evidence: `utl/check-templates.sh`.
 - Install and uninstall are Makefile-driven and support configurable install roots. Evidence: `Makefile`.
@@ -88,7 +88,7 @@ Evidence: active user instruction; former `doc/ops/AGENTS.md`.
 - Validate risky changes; do not silently skip checks.
 - Public release commands require explicit user approval. Evidence: former `_workflow.md`.
 - Source code and repository documentation must obey the repository character policy. Evidence: `utl/check-charset.sh`.
-- External dependencies for normal operation include Pandoc, a LaTeX distribution with `pdflatex`, optional `pandoc-crossref`, and Python 3 for `--asset-link`. Evidence: `README.md`; `src/app/md2pdf.sh`.
+- External dependencies for normal operation include Pandoc, a LaTeX distribution with `pdflatex`, `pandoc-include`, `pandoc-crossref`, and Python 3 for `--asset-link`. Evidence: `README.md`; `src/app/md2pdf.sh`.
 
 # Non-Goals
 
@@ -101,4 +101,4 @@ Evidence: active user instruction; former `doc/ops/AGENTS.md`.
 # External Context
 
 - No web or external research was consulted for this bootstrap update.
-- Project-relevant external tools are Pandoc, `pdflatex`, `pandoc-crossref`, Python 3, Bash, Make, Git, and shell completion systems. Evidence: repository files.
+- Project-relevant external tools are Pandoc, `pdflatex`, `pandoc-include`, `pandoc-crossref`, Python 3, Bash, Make, Git, and shell completion systems. Evidence: repository files.
