@@ -11,4 +11,5 @@ MD2PDF_FILTER_FILES=(
   obsidian-callout.lua
   links-normalize-internal.lua
   markdown-table-auto-width.lua
+  listing-caption-wrap.lua
 )

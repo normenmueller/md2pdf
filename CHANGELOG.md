@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.2 - 2026-06-30
+
+### Fixed
+
+- Keep Pandoc's `idiomatic` LaTeX listing backend while enabling `pandoc-crossref` listings mode for captioned `lst:` code blocks.
+- Normalize captioned `lst:` code blocks before `pandoc-crossref` so generated `lstlisting` environments contain exactly one caption option.
+
 ## 0.2.1 - 2026-06-30
 
 ### Fixed

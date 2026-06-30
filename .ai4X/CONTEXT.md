@@ -34,6 +34,7 @@ Evidence: active user instruction; former `doc/ops/AGENTS.md`; former `doc/ops/_
 - Runtime data directory: contains `templates/` and `filters/`. It can be discovered from `MD2PDF_DATADIR` or relative installed/source paths. Evidence: `src/app/md2pdf.sh`.
 - Template selector: `--template <name|path>` accepts a named template from the templates directory or an explicit `.tex` path. A matching `.icl` include file is used when available; otherwise `default.icl` is fallback. Evidence: `src/app/md2pdf.sh`.
 - Filter pipeline: `src/lib/filters/manifest.sh` defines ordered Lua filter files shared by runtime and tests.
+- Listing captions: `src/lib/filters/listing-caption-wrap.lua` converts captioned `lst:` code blocks into pandoc-crossref listing Divs for LaTeX when `listings=true` is active. This preserves Pandoc's `idiomatic`/LaTeX `listings` backend while preventing duplicate caption options in generated `lstlisting` environments. Evidence: `src/lib/filters/listing-caption-wrap.lua`; `src/tst/run.sh`.
 - Golden outputs: `src/tst/expected/*.json` and `src/tst/expected/*.tex` define expected Pandoc JSON AST and LaTeX output for examples.
 - Examples: `doc/exp` contains runnable and regression Markdown inputs, including filter-specific cases under `doc/exp/filters`.
 - Install flow: `Makefile` installs executable, templates, filters, filter manifest, and Bash/Zsh/Fish completions under configurable `PREFIX`, `DESTDIR`, and directory variables.
@@ -61,7 +62,7 @@ Evidence: active user instruction; former `doc/ops/AGENTS.md`; former `doc/ops/_
 
 - The CLI is implemented as a Bash script with strict mode and array-based command construction. Evidence: `src/app/md2pdf.sh`.
 - Runtime assets are separated from the executable. The CLI resolves a data directory containing templates and filters, validating required files before execution. Evidence: `src/app/md2pdf.sh`.
-- The Pandoc command uses Markdown extensions, PDF output, a selected LaTeX template, a selected header include file, `pdflatex`, table of contents, numbered sections, syntax highlighting, required `pandoc-include`, ordered Lua filters, required `pandoc-crossref`, optional input-local YAML metadata, and user-provided Pandoc arguments after `--`. Evidence: `src/app/md2pdf.sh`.
+- The Pandoc command uses Markdown extensions, PDF output, a selected LaTeX template, a selected header include file, `pdflatex`, table of contents, numbered sections, Pandoc `idiomatic` syntax highlighting with `listings=true`, required `pandoc-include`, ordered Lua filters, required `pandoc-crossref`, optional input-local YAML metadata, and user-provided Pandoc arguments after `--`. Evidence: `src/app/md2pdf.sh`.
 - Tests apply the same ordered filter manifest to examples and compare both normalized JSON AST and LaTeX output against golden files. Evidence: `src/tst/run.sh`; `src/lib/filters/manifest.sh`.
 - Template integrity is checked structurally by ensuring each `.tex` has a paired `.icl` and that `default.tex` and `default.icl` exist. Evidence: `utl/check-templates.sh`.
 - Install and uninstall are Makefile-driven and support configurable install roots. Evidence: `Makefile`.

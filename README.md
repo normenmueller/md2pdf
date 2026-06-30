@@ -58,6 +58,16 @@ Include a source snippet:
 ```
 ````
 
+Captioned source snippets can use `lst:` labels for `pandoc-crossref` references:
+
+````markdown
+```{#lst:o2i-context-types .haskell caption="O2I Context Types"}
+!include`snippetStart="-- * Contexts", snippetEnd="-- * Primitives"` spc/O2I.hs
+```
+````
+
+For LaTeX/PDF output, md2pdf keeps Pandoc's `idiomatic` listings backend and normalizes captioned `lst:` code blocks before `pandoc-crossref` so the generated `lstlisting` has exactly one caption.
+
 Build the document:
 
 ```bash

@@ -4,6 +4,36 @@ This file is volatile project memory for future agents. Update it after meaningf
 
 # Current Session Update
 
+- Snapshot time: 2026-06-30 14:45:00 CEST.
+- Active user request: discard the recent `mono.theme` direction and instead keep the `idiomatic`/LaTeX `listings` look while fixing duplicate captions for captioned `lst:` code blocks.
+- Reset action: local unpushed commit `d0ef2de` (`fix: use bundled mono highlighting theme`) was discarded with `git reset --hard origin/trunk`. No `v0.2.2` tag existed and nothing from that commit was pushed.
+- Diagnosis refinement: `idiomatic` is not a Pandoc theme; it is Pandoc's LaTeX `listings` backend. Therefore no custom theme is needed for the desired look.
+- Implementation changes in progress:
+  - `src/app/md2pdf.sh` version bumped to `0.2.2`.
+  - Runtime keeps `--syntax-highlighting=idiomatic` and adds `--metadata listings=true`.
+  - Added `src/lib/filters/listing-caption-wrap.lua`.
+  - `src/lib/filters/manifest.sh` now runs `listing-caption-wrap.lua` before `pandoc-crossref`.
+  - The filter converts captioned `lst:` code blocks to pandoc-crossref listing Divs only for LaTeX output with `listings=true`, so `pandoc-crossref` produces a clean `lstlisting` with exactly one `caption=` option.
+  - Updated `src/tst/run.sh` Crossref regression path to use `idiomatic` plus `listings=true`, fail on `codelisting`, and require exactly one `caption=` option.
+  - Updated `src/tst/expected/filters-include-code-crossref.tex` to expect `lstlisting`.
+  - Updated `CHANGELOG.md` for `0.2.2`.
+  - Added README documentation for captioned `lst:` source snippets and the internal normalization that preserves the `idiomatic`/`listings` backend with one caption.
+  - Updated `.ai4X/CONTEXT.md` with the durable rationale for `listing-caption-wrap.lua`.
+- Verification passed:
+  - `bash -n src/app/md2pdf.sh`
+  - `bash -n src/tst/run.sh`
+  - `./src/app/md2pdf.sh --version` returned `md2pdf, v0.2.2, (C) 2026 nemron`
+  - Targeted LaTeX command confirmed a captioned include-code fixture now emits one `lstlisting` with one `caption=` and no `codelisting`.
+  - Temporary md2pdf PDF smoke test with a local included Haskell source rendered one visible `Listing 1: Included Haskell Contexts` caption and expanded source code.
+  - `src/tst/run.sh`
+  - `make verify`
+  - `make -n install`
+  - `make -n uninstall`
+- Current commit state: the local `fix: normalize crossref listings captions` commit contains the v0.2.2 implementation and documentation updates. It is ahead of `origin/trunk` and has not been pushed or tagged.
+- Next actions: tag/push/create GitHub Release `v0.2.2` only after final approval.
+
+# Current Session Update
+
 - Snapshot time: 2026-06-30 13:39:53 CEST.
 - Active user request: decide whether a `default.icl` fix for `!include` inside a captioned Haskell code block should also be applied to the other template include files; user provided the concrete failing Markdown and LaTeX error `Environment codelisting undefined`.
 - Diagnosis: with `pandoc-include` followed by `pandoc-crossref`, a fenced code block such as ```` ```{#lst:o2i-context-types .haskell caption="O2I Kontexttypen"}```` is emitted as LaTeX `\begin{codelisting}`. Since md2pdf loads the selected template's paired `.icl`, `default.icl` does not protect named templates from the same missing-environment error.

@@ -41,7 +41,7 @@ datadir="$(resolve_datadir)"
 # ----------------------------------------------------------------------
 # Version information
 # ----------------------------------------------------------------------
-VERSION="0.2.1"
+VERSION="0.2.2"
 COPYRIGHT_YEAR="2026"
 AUTHOR="nemron"
 
@@ -459,6 +459,7 @@ pandoc_cmd=(pandoc
     --pdf-engine pdflatex
     --toc --number-sections
     --syntax-highlighting=idiomatic
+    --metadata listings=true
     --resource-path="$input_path"
     "$input_file" -o "$output"
 )

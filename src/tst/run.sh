@@ -71,9 +71,23 @@ run_case() {
 run_crossref_latex_case() {
   local name="$1"
   local input="$2"
+  local caption_count
 
-  pandoc "${BASE_ARGS[@]}" --filter=pandoc-crossref "$input" -t latex > "$LATEX_TMP"
+  pandoc "${BASE_ARGS[@]}" \
+    --filter=pandoc-crossref \
+    --syntax-highlighting=idiomatic \
+    --metadata listings=true \
+    "$input" -t latex > "$LATEX_TMP"
   diff -u "$ROOT/src/tst/expected/${name}.tex" "$LATEX_TMP"
+  if grep -q '\\begin{codelisting}' "$LATEX_TMP"; then
+    echo "Unexpected codelisting wrapper in ${name}." >&2
+    exit 1
+  fi
+  caption_count="$(grep -o 'caption=' "$LATEX_TMP" | wc -l | tr -d ' ')"
+  if [[ "$caption_count" -ne 1 ]]; then
+    echo "Expected exactly one lstlisting caption in ${name}, found ${caption_count}." >&2
+    exit 1
+  fi
   echo "Crossref LaTeX output matches golden file (${name})."
 }
 
