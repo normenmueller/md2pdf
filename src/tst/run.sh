@@ -68,6 +68,15 @@ run_case() {
   echo "LaTeX output matches golden file (${name})."
 }
 
+run_crossref_latex_case() {
+  local name="$1"
+  local input="$2"
+
+  pandoc "${BASE_ARGS[@]}" --filter=pandoc-crossref "$input" -t latex > "$LATEX_TMP"
+  diff -u "$ROOT/src/tst/expected/${name}.tex" "$LATEX_TMP"
+  echo "Crossref LaTeX output matches golden file (${name})."
+}
+
 run_case "main" "$ROOT/doc/exp/main.md"
 run_case "tikz" "$ROOT/doc/exp/tikz.md"
 run_case "mark" "$ROOT/doc/exp/mark.md"
@@ -79,3 +88,5 @@ for file in "$ROOT/doc/exp/filters/"*.md; do
   name="filters-${base%.md}"
   run_case "$name" "$file"
 done
+
+run_crossref_latex_case "filters-include-code-crossref" "$ROOT/doc/exp/filters/include-code.md"

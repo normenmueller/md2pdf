@@ -108,11 +108,16 @@
             "t": "CodeBlock",
             "c": [
                 [
-                    "",
+                    "lst:include-code-example",
                     [
                         "haskell"
                     ],
-                    []
+                    [
+                        [
+                            "caption",
+                            "Included Haskell Contexts"
+                        ]
+                    ]
                 ],
                 "data Context\n  = Ethos\n  | Mission\n  | Vision"
             ]

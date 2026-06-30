@@ -134,6 +134,11 @@
 }
 \providecommand{\passthrough}[1]{#1}
 
+\usepackage{float}
+\floatstyle{plain}
+\newfloat{codelisting}{htbp}{lol}
+\floatname{codelisting}{Listing}
+
 % -----------------------------------
 % The Graphic Packages
 % -----------------------------------

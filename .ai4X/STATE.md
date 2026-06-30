@@ -4,6 +4,26 @@ This file is volatile project memory for future agents. Update it after meaningf
 
 # Current Session Update
 
+- Snapshot time: 2026-06-30 13:39:53 CEST.
+- Active user request: decide whether a `default.icl` fix for `!include` inside a captioned Haskell code block should also be applied to the other template include files; user provided the concrete failing Markdown and LaTeX error `Environment codelisting undefined`.
+- Diagnosis: with `pandoc-include` followed by `pandoc-crossref`, a fenced code block such as ```` ```{#lst:o2i-context-types .haskell caption="O2I Kontexttypen"}```` is emitted as LaTeX `\begin{codelisting}`. Since md2pdf loads the selected template's paired `.icl`, `default.icl` does not protect named templates from the same missing-environment error.
+- Pre-existing user change: `src/lib/templates/default.icl` already had the `float`/`codelisting` definition when this session began.
+- Changes made:
+  - Added the same `\usepackage{float}`, `\floatstyle{plain}`, `\newfloat{codelisting}{htbp}{lol}`, and `\floatname{codelisting}{Listing}` block to `article-modern.icl`, `article-stylish.icl`, `article-stylish-2col.icl`, `note-modern.icl`, and `report-stylish.icl`.
+  - Updated `doc/exp/filters/include-code.md` to include a captioned `lst:` Haskell include block.
+  - Updated existing include-code golden JSON/LaTeX fixtures.
+  - Added `src/tst/expected/filters-include-code-crossref.tex`.
+  - Extended `src/tst/run.sh` with a targeted `pandoc-crossref` LaTeX regression check for the include-code fixture without adding noisy Crossref metadata to every JSON golden.
+- Verification passed:
+  - `./utl/check-templates.sh`
+  - `src/tst/run.sh`
+  - Manual PDF compile of the captioned include-code fixture through `pandoc-include`, md2pdf Lua filters, and `pandoc-crossref` for all six templates: `article-modern`, `article-stylish`, `article-stylish-2col`, `default`, `note-modern`, and `report-stylish`.
+  - `make verify`
+- Working tree after changes: modified template `.icl` files, include-code fixture/goldens, `src/tst/run.sh`, and this state file; new untracked golden file `src/tst/expected/filters-include-code-crossref.tex`.
+- Next action: review the diff and decide whether to commit this as a bug fix.
+
+# Current Session Update
+
 - Snapshot time: 2026-06-23 12:26:54 CEST.
 - Active user request: make `pandoc-include` and `pandoc-crossref` fixed md2pdf runtime dependencies, remove the optional `--no-crossref` mode, and treat the change as a clear breaking release.
 - Version decision: use `0.2.0` rather than `0.1.3` because the change removes a CLI option and adds a standard runtime dependency. User accepted `0.2` wording; implementation uses full SemVer-style `0.2.0`.
