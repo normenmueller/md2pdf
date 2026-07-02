@@ -4,6 +4,39 @@ This file is volatile project memory for future agents. Update it after meaningf
 
 # Current Session Update
 
+- Snapshot time: 2026-07-02 11:44:09 CEST.
+- Active user request: add `\usepackage{pdflscape}` cleanly to the md2pdf templates.
+- Working tree before edits: clean on `trunk...origin/trunk`.
+- Diagnosis: template-specific LaTeX package includes live in paired `.icl` files, and all runtime templates load their selected `.icl` through `-H`; therefore `pdflscape` belongs in every template include file rather than in the `.tex` bodies or CLI.
+- Changes made:
+  - Added `\usepackage{pdflscape}` after `\usepackage{graphicx}` in `src/lib/templates/article-modern.icl`, `src/lib/templates/article-stylish.icl`, `src/lib/templates/article-stylish-2col.icl`, `src/lib/templates/default.icl`, `src/lib/templates/note-modern.icl`, and `src/lib/templates/report-stylish.icl`.
+- Verification passed:
+  - `./utl/check-templates.sh`
+  - `./src/app/md2pdf.sh --list-templates`
+  - `rg -n "pdflscape" src/lib/templates/*.icl`
+  - Manual PDF smoke test compiling a raw LaTeX `landscape` environment through all six templates.
+  - `make verify`
+- Failed/non-impacting attempt:
+  - The first manual smoke test put Markdown headings and tables inside a raw LaTeX `landscape` environment, so Pandoc passed `##` through to TeX and produced `macro parameter character #` errors. The test input was corrected to use pure LaTeX content inside the raw environment and then passed for all templates.
+- Current working tree after changes: modified six template `.icl` files and this state file.
+- Release decision: user approved a patch release as `v0.2.3`.
+- Release metadata changes:
+  - `src/app/md2pdf.sh` version bumped to `0.2.3`.
+  - `CHANGELOG.md` entry added for `0.2.3 - 2026-07-02`.
+- Verification passed after release metadata update:
+  - `./src/app/md2pdf.sh --version` returned `md2pdf, v0.2.3, (C) 2026 nemron`.
+  - `make verify`
+- Release completion:
+  - Commit `8e82035` (`fix: add pdflscape to templates`) was created on `trunk`.
+  - Tag `v0.2.3` was created on commit `8e82035`.
+  - `origin/trunk` and `origin/v0.2.3` were pushed.
+  - GitHub Release `v0.2.3` was created at `https://github.com/normenmueller/md2pdf/releases/tag/v0.2.3`.
+- Post-release note: this state update is intentionally after the release tag so the tag remains on the verified release commit.
+- Current working tree after release: only `.ai4X/STATE.md` is modified.
+- Next action: no release work remains; commit the post-release state note only if desired.
+
+# Current Session Update
+
 - Snapshot time: 2026-06-30 14:45:00 CEST.
 - Active user request: discard the recent `mono.theme` direction and instead keep the `idiomatic`/LaTeX `listings` look while fixing duplicate captions for captioned `lst:` code blocks.
 - Reset action: local unpushed commit `d0ef2de` (`fix: use bundled mono highlighting theme`) was discarded with `git reset --hard origin/trunk`. No `v0.2.2` tag existed and nothing from that commit was pushed.
