@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.3 - 2026-07-02
+
+### Fixed
+
+- Load `pdflscape` in all shipped template include files so documents can use LaTeX `landscape` pages consistently across templates.
+
 ## 0.2.2 - 2026-06-30
 
 ### Fixed

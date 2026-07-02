@@ -140,6 +140,7 @@
 % -----------------------------------
 
 \usepackage{graphicx}
+\usepackage{pdflscape}
 
 \usepackage{wrapfig}
 \setlength{\intextsep}{0.5\baselineskip} % Distance between image and text at top/bottom
