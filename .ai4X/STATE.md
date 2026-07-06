@@ -4,6 +4,26 @@ This file is volatile project memory for future agents. Update it after meaningf
 
 # Current Session Update
 
+- Snapshot time: 2026-07-06 10:55:28 CEST.
+- Active user request: review whether README install requirements are still accurate and shorten the Quick Start by removing detailed source-include/caption material, then present the change for user correction.
+- Working tree before edits: `trunk...origin/trunk [ahead 1]`; no unstaged diff was present. The ahead commit is `e795c16` (`chore: record v0.2.3 release state`).
+- Evidence checked:
+  - `README.md` install and Quick Start sections.
+  - `src/app/md2pdf.sh` dependency check requires `pandoc`, `pdflatex`, `pandoc-include`, `pandoc-crossref`, and conditionally `python3` when `--asset-link` is used.
+  - `Makefile` install target uses `make` and the standard `install` utility.
+  - `doc/exp` contains runnable examples, including filter and source-include cases.
+- Documentation changes made:
+  - Renamed README `Requirements` to `Runtime requirements`.
+  - Added that repository installation also requires `make` and `install`.
+  - Removed the detailed source-snippet, captioned `lst:` snippet, internal listings-normalization note, and duplicate build command from Quick Start.
+  - Added a concise pointer to `doc/exp` for runnable examples.
+- Verification passed:
+  - README and state diff review.
+  - `./utl/check-charset.sh`
+- Current intent: leave README changes uncommitted for user correction.
+
+# Current Session Update
+
 - Snapshot time: 2026-07-02 11:44:09 CEST.
 - Active user request: add `\usepackage{pdflscape}` cleanly to the md2pdf templates.
 - Working tree before edits: clean on `trunk...origin/trunk`.

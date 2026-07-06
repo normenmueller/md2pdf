@@ -4,13 +4,15 @@
 
 ## Install
 
-Requirements:
+Runtime requirements:
 
 - Pandoc with Lua support
 - A LaTeX distribution with `pdflatex`
 - `pandoc-include`
 - `pandoc-crossref`
 - Python 3 (required for `--asset-link`)
+
+Installation from this repository also requires `make` and the standard `install` utility.
 
 Install the Python-based Pandoc include filter with pipx:
 
@@ -50,35 +52,13 @@ Select a template:
 md2pdf --template article-modern -- note.md
 ```
 
-Include a source snippet:
-
-````markdown
-```haskell
-!include`snippetStart="-- * Contexts", snippetEnd="-- * Primitives"` spc/O2I.hs
-```
-````
-
-Captioned source snippets can use `lst:` labels for `pandoc-crossref` references:
-
-````markdown
-```{#lst:o2i-context-types .haskell caption="O2I Context Types"}
-!include`snippetStart="-- * Contexts", snippetEnd="-- * Primitives"` spc/O2I.hs
-```
-````
-
-For LaTeX/PDF output, md2pdf keeps Pandoc's `idiomatic` listings backend and normalizes captioned `lst:` code blocks before `pandoc-crossref` so the generated `lstlisting` has exactly one caption.
-
-Build the document:
-
-```bash
-md2pdf -- note.md
-```
-
 Run directly from source tree:
 
 ```bash
 ./src/app/md2pdf.sh -- doc/exp/main.md
 ```
+
+See `doc/exp` for runnable examples, including filters, assets, tables, and source includes.
 
 ## Usage
 
