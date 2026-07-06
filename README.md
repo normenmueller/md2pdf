@@ -81,60 +81,13 @@ Use external assets without moving files:
 md2pdf --asset-link ../shared-assets -- note.md
 ```
 
-## Template Catalog
-
-Available templates:
-
-- `default`: balanced default style
-- `article-modern`: modern single-column article style
-- `article-stylish`: editorial article style
-- `article-stylish-2col`: lean two-column article style
-- `note-modern`: compact note-oriented style
-- `report-stylish`: report-oriented style
-
-List templates from CLI:
-
-```bash
-md2pdf --list-templates
-```
-
-## Language Handling
-
-Set `lang` in front matter to control localized labels such as the table-of-contents title.
-
-```yaml
----
-lang: de-DE
----
-```
-
-## Completion
-
-Installed completion targets:
-
-- Bash: `/usr/local/share/bash-completion/completions/md2pdf`
-- Zsh: `/usr/local/share/zsh/site-functions/_md2pdf`
-- Fish: `/usr/local/share/fish/vendor_completions.d/md2pdf.fish`
-
-## Quality Checks
-
-Run full local verification:
-
-```bash
-make verify
-```
-
-Run test suite only:
-
-```bash
-src/tst/run.sh
-```
-
 ## Project Structure
 
 ```text
 .
 |-- .ai4X
+|-- acc
+|   `-- obsidian
 |-- doc
 |   `-- exp
 |-- src

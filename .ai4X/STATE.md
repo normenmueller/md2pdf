@@ -4,6 +4,24 @@ This file is volatile project memory for future agents. Update it after meaningf
 
 # Current Session Update
 
+- Snapshot time: 2026-07-06 11:06:12 CEST.
+- Active user request: move the Obsidian-specific `md2pdf.css` out of the repository root into accompanying material, ignore `acc/3rd`, and further minimize README by removing Template Catalog, Language Handling, Completion, and Quality Checks sections.
+- Context:
+  - `md2pdf.css` is an Obsidian callout CSS snippet aligned with md2pdf's LaTeX callout scheme.
+  - `acc/` already exists locally as an accompanying-material area, with `acc/3rd` holding untracked third-party/reference material.
+- Changes made:
+  - Moved `md2pdf.css` to `acc/obsidian/md2pdf.css`.
+  - Changed `.gitignore` entry from `acc/3rd` to `acc/3rd/`.
+  - Removed README sections: Template Catalog, Language Handling, Completion, and Quality Checks.
+  - Added `acc/obsidian` to the README Project Structure.
+- Verification passed:
+  - `./utl/check-charset.sh`
+  - README structure review.
+  - `git status --short --ignored acc` confirmed `acc/3rd/` is ignored and `acc/obsidian/md2pdf.css` is trackable.
+- Current intent: leave these changes uncommitted until user review or explicit commit instruction.
+
+# Current Session Update
+
 - Snapshot time: 2026-07-06 10:55:28 CEST.
 - Active user request: review whether README install requirements are still accurate and shorten the Quick Start by removing detailed source-include/caption material, then present the change for user correction.
 - Working tree before edits: `trunk...origin/trunk [ahead 1]`; no unstaged diff was present. The ahead commit is `e795c16` (`chore: record v0.2.3 release state`).
