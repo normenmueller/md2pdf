@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.4 - 2026-07-28
+
+### Changed
+
+- Render time reduced by ~50%: removed the redundant second pandoc invocation.
+  Pandoc already reruns pdflatex internally when cross-references or labels
+  change, so calling pandoc twice caused four pdflatex runs per document instead
+  of two.
+- The success message now includes the wall-clock render duration in seconds.
+
 ## 0.2.3 - 2026-07-02
 
 ### Fixed

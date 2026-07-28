@@ -385,3 +385,21 @@ Optional follow-up:
   - Immediate next action: review diff and prepare staging or PR if requested.
   - Known risks: full verification depends on local Pandoc/LaTeX tooling, but it passed in this environment.
 - Do not restore `doc/ops` or the old `AGENTS.md -> doc/ops/AGENTS.md` adapter.
+
+# Current Session Update
+
+- Snapshot time: 2026-07-28 13:30 CEST.
+- Active user request: investigate and fix slow PDF rendering (issue #1).
+- Root cause identified: md2pdf.sh called pandoc twice externally, but pandoc 3.10.1
+  already reruns pdflatex internally when cross-references need updating. This caused
+  4x pdflatex runs per render instead of 2x.
+- Verification: pandoc --verbose confirms "LaTeX run number 1", "Rerun needed",
+  "LaTeX run number 2" in a single pandoc invocation.
+- Changes made:
+  - Removed second external pandoc call in src/app/md2pdf.sh.
+  - Added wall-clock timing (integer seconds via $SECONDS) shown in success message.
+  - Added explanatory comment in code.
+- Result: ~94s -> ~45s (~52% faster) on the o2i test document.
+- Verification passed: make verify (all golden tests green), bash -n syntax check.
+- Branch: perf/single-pass, PR #2.
+- Current intent: await user review and merge approval.
