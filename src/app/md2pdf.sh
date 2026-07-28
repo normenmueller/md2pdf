@@ -482,13 +482,17 @@ if $debug_mode; then
 fi
 
 # ----------------------------------------------------------------------
-# Execute Pandoc (twice for TOC and cross-references)
+# Execute Pandoc
+# Pandoc invokes pdflatex and re-runs it automatically when LaTeX
+# signals that labels or cross-references changed ("Rerun to get
+# cross-references right").  A single pandoc call is therefore
+# sufficient; a second external call would only double the work.
 # ----------------------------------------------------------------------
-log_info "Running Pandoc (pass 1/2)..."
-"${pandoc_cmd[@]}"
-log_info "Running Pandoc (pass 2/2)..."
+_t_start=$SECONDS
+log_info "Running Pandoc..."
 "${pandoc_cmd[@]}"
 status=$?
+_t_elapsed=$(( SECONDS - _t_start ))
 
 # ----------------------------------------------------------------------
 # Exit status and success message
@@ -497,5 +501,5 @@ if [[ $status -ne 0 ]]; then
     echo "[md2pdf|error] Error creating the PDF file."
     exit $status
 else
-    echo "[md2pdf|success] PDF created: $output"
+    echo "[md2pdf|success] PDF created: $output (${_t_elapsed}s)"
 fi
