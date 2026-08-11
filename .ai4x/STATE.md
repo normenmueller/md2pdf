@@ -6,15 +6,14 @@ This file contains volatile project memory for future agents. Update it after me
 
 - Snapshot date: 2026-08-11 CEST.
 - Project root: `/Users/normenmueller/Documents/RND/etc/md2pdf`.
-- Active branch: `chore/lowercase-ai4x`, created from `trunk` at `8ab76cd`.
-- Stable branch: local `trunk` matches `origin/trunk` at `8ab76cd`.
+- Stable integration branch: `trunk`; local and remote copies must be synchronized before new work.
 - Latest release: `v0.2.4`; `./src/app/md2pdf.sh --version` reports `md2pdf, v0.2.4, (C) 2026 nemron`.
 - Working tree was clean before the active maintenance change.
 
 # Active Objective
 
-Normalize the canonical operational-memory directory to lowercase `.ai4x/`, update all repository references and adapters, and remove stale volatile memory.
-Evidence: active user instruction on 2026-08-11.
+No active product or migration objective remains. The lowercase `.ai4x/` normalization, repository-reference updates, merge, and branch cleanup are complete.
+Evidence: active user instruction on 2026-08-11; merged PR #3.
 
 # Current State
 
@@ -25,10 +24,11 @@ Evidence: active user instruction on 2026-08-11.
 - The bootstrap migration from `doc/ops` completed in commit `8716051`; restoring those superseded files is not an active objective.
 - Release `v0.2.4` includes the single-Pandoc performance change from commit `e55f616`; Pandoc manages required internal `pdflatex` reruns.
 - Local and remote branch cleanup on 2026-08-11 removed merged or stale refs for `feat/require-pandoc-include`, `perf/single-pass`, and the local backup `pre-initial-20260311-190137` branch and tag. Only `trunk` remained before creating the active maintenance branch.
+- PR #3 merged the lowercase `.ai4x/` migration into `trunk` as `aacfefd`; its local and remote work branch was deleted afterward.
 
 # Change Ownership
 
-Changes in the active worktree are agent-owned for the user-requested lowercase migration:
+The completed PR #3 scope was user-requested and agent-owned:
 
 - Case-only rename of the legacy mixed-case directory to `.ai4x/`.
 - Reference updates in `.ai4x/BEHAVIOR.md`, `.ai4x/CONTEXT.md`, `README.md`, and `.github/agents/md2pdf.agent.md`.
@@ -55,7 +55,7 @@ Passed on 2026-08-11:
 
 # Open Decisions
 
-- Review and commit/publish the active maintenance branch only after user approval.
+- None for the completed maintenance work.
 
 # Risks And Unknowns
 
@@ -65,7 +65,7 @@ Passed on 2026-08-11:
 
 # Immediate Next Action
 
-Review the completed maintenance diff, then commit or publish `chore/lowercase-ai4x` only after user approval.
+No maintenance action remains. Begin future work from a clean, synchronized `trunk` and create a dedicated branch when required.
 
 # Handoff
 
