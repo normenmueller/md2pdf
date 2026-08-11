@@ -85,7 +85,7 @@ md2pdf --asset-link ../shared-assets -- note.md
 
 ```text
 .
-|-- .ai4X
+|-- .ai4x
 |-- acc
 |   `-- obsidian
 |-- doc

@@ -10,27 +10,22 @@ Evidence: `README.md`; `src/app/md2pdf.sh`; `src/lib/filters/manifest.sh`; `Make
 
 # Current Objective
 
-The active workstream is migration of old agent-operation artifacts into canonical `.ai4X/` bootstrap memory:
-
-- `.ai4X/BEHAVIOR.md`
-- `.ai4X/CONTEXT.md`
-- `.ai4X/STATE.md`
-
-The user instructed that existing `doc/ops/AGENTS.md` and `doc/ops/_workflow.md` be considered, adapted into `.ai4X/`, and deleted once their relevant content is safely transferred.
-Evidence: active user instruction.
+No standing product change is active. Current objectives and volatile work belong in `.ai4x/STATE.md`.
+The operational-memory bootstrap migration is complete; `.ai4x/` is the canonical location.
+Evidence: commit `8716051`; `.ai4x/BEHAVIOR.md`; active user instruction on 2026-08-11.
 
 # Background
 
-- The project previously stored agent instructions in `doc/ops/AGENTS.md` and strict workflow guidance in `doc/ops/_workflow.md`.
-- A root-level `AGENTS.md` symlink pointed to `doc/ops/AGENTS.md`.
+- The project previously stored agent instructions in `doc/ops/AGENTS.md` and strict workflow guidance in `doc/ops/_workflow.md`; both were migrated and removed.
+- The root-level `AGENTS.md` symlink is a host-specific adapter to `.ai4x/BEHAVIOR.md`.
 - The user wants long-running project memory that works across future sessions without chat history or assistant resume state.
-- The new canonical memory system is `.ai4X/`, with separate files for behavior, context, and volatile state.
+- The canonical memory system is `.ai4x/`, with separate files for behavior, context, and volatile state.
 - Agent chat remains German by default; generated repository artifacts remain English by default.
-Evidence: active user instruction; former `doc/ops/AGENTS.md`; former `doc/ops/_workflow.md`.
+Evidence: commit `8716051`; active user instruction; former `doc/ops/AGENTS.md`; former `doc/ops/_workflow.md`.
 
 # Domain Model
 
-- CLI entrypoint: `src/app/md2pdf.sh` parses options, resolves runtime asset directories, validates dependencies, resolves templates, builds filter arguments, creates optional asset symlinks, and runs Pandoc twice for TOC and cross-reference convergence.
+- CLI entrypoint: `src/app/md2pdf.sh` parses options, resolves runtime asset directories, validates dependencies, resolves templates, builds filter arguments, creates optional asset symlinks, and invokes Pandoc once. Pandoc manages any required internal `pdflatex` reruns for labels and cross-references.
 - Runtime data directory: contains `templates/` and `filters/`. It can be discovered from `MD2PDF_DATADIR` or relative installed/source paths. Evidence: `src/app/md2pdf.sh`.
 - Template selector: `--template <name|path>` accepts a named template from the templates directory or an explicit `.tex` path. A matching `.icl` include file is used when available; otherwise `default.icl` is fallback. Evidence: `src/app/md2pdf.sh`.
 - Filter pipeline: `src/lib/filters/manifest.sh` defines ordered Lua filter files shared by runtime and tests.
@@ -43,7 +38,7 @@ Evidence: active user instruction; former `doc/ops/AGENTS.md`; former `doc/ops/_
 
 # Repository Map
 
-- `.ai4X/`: canonical operational memory for future agents.
+- `.ai4x/`: canonical operational memory for future agents.
 - `src/app/md2pdf.sh`: executable Bash CLI entrypoint.
 - `src/lib/filters/`: Lua filters plus `manifest.sh` for pipeline order.
 - `src/lib/templates/`: LaTeX templates and paired header include files.
@@ -54,7 +49,7 @@ Evidence: active user instruction; former `doc/ops/AGENTS.md`; former `doc/ops/_
 - `utl/check-templates.sh`: template pair validation.
 - `utl/check-charset.sh`: repository character policy validation.
 - `Makefile`: install, uninstall, and verification targets.
-- `README.md`: user-facing install, usage, template catalog, completion, quality, and project structure documentation.
+- `README.md`: concise user-facing installation, usage, and project-structure documentation.
 - `CHANGELOG.md`: release history.
 - `.gitignore`: ignores generated PDFs and LaTeX auxiliary outputs.
 
@@ -74,7 +69,7 @@ Evidence: active user instruction; former `doc/ops/AGENTS.md`; former `doc/ops/_
 - Repository artifacts and source code must be in English unless the user explicitly requests another artifact language.
 - The user expects a senior expert peer, not a passive assistant.
 - The user values durable cross-session agent memory and wants fresh agents to become useful without chat history.
-- The user wants old operational artifacts removed after migration into `.ai4X/`.
+- The user wants canonical operational memory under the lowercase `.ai4x/` path.
 - The user expects concrete execution on disk, not only explanations.
 Evidence: active user instruction; former `doc/ops/AGENTS.md`.
 
@@ -96,10 +91,10 @@ Evidence: active user instruction; former `doc/ops/AGENTS.md`.
 - Do not redesign the CLI, filter pipeline, template architecture, install layout, or documentation structure unless explicitly requested.
 - Do not change PDF output or golden fixtures unless the behavior change is intentional and verified.
 - Do not restore old host-specific adapter files unless the user explicitly asks.
-- Do not turn `.ai4X/` files into user-facing product documentation; they are operational memory for agents.
-- Do not persist secrets, credentials, or unnecessary personal data in `.ai4X/`.
+- Do not turn `.ai4x/` files into user-facing product documentation; they are operational memory for agents.
+- Do not persist secrets, credentials, or unnecessary personal data in `.ai4x/`.
 
 # External Context
 
-- No web or external research was consulted for this bootstrap update.
 - Project-relevant external tools are Pandoc, `pdflatex`, `pandoc-include`, `pandoc-crossref`, Python 3, Bash, Make, Git, and shell completion systems. Evidence: repository files.
+- External facts should be consulted only when required by the active task and recorded with evidence.
