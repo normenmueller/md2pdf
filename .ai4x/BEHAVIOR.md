@@ -1,7 +1,7 @@
 # Purpose
 
 This file is the canonical operating contract for agentic AI agents working in this repository.
-Agents must read `.ai4X/CONTEXT.md` and `.ai4X/STATE.md` before acting.
+Agents must read `.ai4x/CONTEXT.md` and `.ai4x/STATE.md` before acting.
 This file remains canonical even if exposed through a host-specific adapter such as a root-level `AGENTS.md` symlink.
 
 # Expert Peer Role
@@ -18,15 +18,15 @@ This file remains canonical even if exposed through a host-specific adapter such
 - Evidence-based repository triage: inspect Git status, impacted files, tests, docs, completions, and templates before editing. Evidence-based: former workflow and current repository structure.
 - CLI contract reasoning: detect changes that affect `md2pdf [options] -- <input.md> [pandoc args...]`, option parsing, `--` separation, output path resolution, dependency validation, and error messages. Evidence-based: `src/app/md2pdf.sh`; `README.md`.
 - Shell reliability analysis: reason about `set -euo pipefail`, quoting, arrays, traps, symlink cleanup, install path variables, and portability across Bash execution contexts. Evidence-based: `src/app/md2pdf.sh`; `Makefile`.
-- Pandoc pipeline reasoning: preserve filter order, input extensions, metadata file handling, resource paths, two-pass PDF rendering, and required `pandoc-include`/`pandoc-crossref` behavior. Evidence-based: `src/app/md2pdf.sh`; `src/lib/filters/manifest.sh`.
+- Pandoc pipeline reasoning: preserve filter order, input extensions, metadata file handling, resource paths, the single Pandoc invocation with Pandoc-managed LaTeX reruns, and required `pandoc-include`/`pandoc-crossref` behavior. Evidence-based: `src/app/md2pdf.sh`; `src/lib/filters/manifest.sh`.
 - Lua AST transformation review: verify that filters transform only intended node types, preserve unaffected AST content, and receive golden tests for behavior changes. Evidence-based: former `_workflow.md`; `src/lib/filters`; `src/tst/run.sh`.
 - LaTeX template compatibility review: maintain `.tex` and `.icl` pairs, keep `default` as fallback, watch for template feature drift, and prevent LaTeX mode conflicts. Evidence-based: former `_workflow.md`; `utl/check-templates.sh`; `src/lib/templates`.
 - Golden-test discipline: treat `src/tst/expected` outputs as authoritative; update expected fixtures only for intentional behavior changes. Evidence-based: `src/tst/run.sh`.
 - Cross-surface change detection: when CLI paths, option names, templates, filters, or installation behavior change, update runtime code, tests, README, shell completions, and install targets in the same logical change. Evidence-based: former agent profile and workflow; repository map.
 - Release-risk analysis: map changes to semantic versioning impact, changelog needs, tag approval, push approval, and GitHub release approval. Evidence-based: former `_workflow.md`; `CHANGELOG.md`.
-- Meta-bootstrap maintenance: decide what belongs in `.ai4X/BEHAVIOR.md` as durable operating rules, `.ai4X/CONTEXT.md` as stable project understanding, `.ai4X/STATE.md` as volatile snapshot memory, README-level documentation as user-facing docs, or nowhere. Evidence-based: active user bootstrap directive.
-- Fresh-agent dry-run evaluation: after updating `.ai4X/`, review whether a new agent can identify startup protocol, active objective, constraints, relevant files, verified commands, unknowns, immediate next action, and a concise user briefing. Evidence-based: active user bootstrap directive.
-- Assumption pressure testing: if a requirement depends on uninspected files, unavailable tools, ambiguous old state, or stale documentation, mark it as UNKNOWN or INFERRED in `.ai4X/STATE.md` and either verify or ask a targeted question.
+- Meta-bootstrap maintenance: decide what belongs in `.ai4x/BEHAVIOR.md` as durable operating rules, `.ai4x/CONTEXT.md` as stable project understanding, `.ai4x/STATE.md` as volatile snapshot memory, README-level documentation as user-facing docs, or nowhere. Evidence-based: active user bootstrap directive.
+- Fresh-agent dry-run evaluation: after updating `.ai4x/`, review whether a new agent can identify startup protocol, active objective, constraints, relevant files, verified commands, unknowns, immediate next action, and a concise user briefing. Evidence-based: active user bootstrap directive.
+- Assumption pressure testing: if a requirement depends on uninspected files, unavailable tools, ambiguous old state, or stale documentation, mark it as UNKNOWN or INFERRED in `.ai4x/STATE.md` and either verify or ask a targeted question.
 
 # Source Of Truth
 
@@ -36,11 +36,11 @@ Use this precedence unless higher-priority runtime instructions override it:
 2. Latest explicit user instruction in the active session.
 3. Repository facts observed in files and command output.
 4. Existing project documentation and tests.
-5. `.ai4X/BEHAVIOR.md`, `.ai4X/CONTEXT.md`, and `.ai4X/STATE.md`.
+5. `.ai4x/BEHAVIOR.md`, `.ai4x/CONTEXT.md`, and `.ai4x/STATE.md`.
 6. Explicitly labeled assumptions and inferences.
 7. External sources, only when consulted and cited.
 
-Resolve conflicts by following the highest-precedence applicable source. If a lower-precedence source appears newer or more accurate, record the conflict in `.ai4X/STATE.md` instead of silently choosing.
+Resolve conflicts by following the highest-precedence applicable source. If a lower-precedence source appears newer or more accurate, record the conflict in `.ai4x/STATE.md` instead of silently choosing.
 
 Always distinguish:
 
@@ -54,11 +54,11 @@ Always distinguish:
 Before modifying files:
 
 1. Resolve the project root, preferably with `git rev-parse --show-toplevel`.
-2. Read `.ai4X/BEHAVIOR.md`, `.ai4X/CONTEXT.md`, and `.ai4X/STATE.md`.
+2. Read `.ai4x/BEHAVIOR.md`, `.ai4x/CONTEXT.md`, and `.ai4x/STATE.md`.
 3. Run `git status --short --branch` and identify user-owned or unknown uncommitted changes.
-4. Check whether `.ai4X/STATE.md` is stale relative to the repository, branch, or user request.
+4. Check whether `.ai4x/STATE.md` is stale relative to the repository, branch, or user request.
 5. Inspect impacted files fully enough to understand local patterns before editing.
-6. Treat host-specific adapter files as entry points only. Canonical operational memory lives in `.ai4X/`.
+6. Treat host-specific adapter files as entry points only. Canonical operational memory lives in `.ai4x/`.
 7. Define the smallest safe change and the relevant verification gates before editing.
 
 # Workflow
@@ -119,7 +119,7 @@ External tools used by the project:
 
 - Never overwrite or revert user changes unless explicitly requested.
 - Never use destructive commands such as reset, checkout overwrite, or removal of unrelated files without explicit user instruction.
-- Do not persist secrets, credentials, access tokens, private keys, passwords, session identifiers, proprietary customer data, or unnecessary personal data in `.ai4X/` or docs.
+- Do not persist secrets, credentials, access tokens, private keys, passwords, session identifiers, proprietary customer data, or unnecessary personal data in `.ai4x/` or docs.
 - If sensitive material is encountered, record only a sanitized operational summary when future agents need to know it existed.
 - Treat unexpected repository changes as user-owned or ownership UNKNOWN until proven otherwise.
 - Do not fabricate commands, architecture, dependency status, release status, or decisions.
@@ -128,10 +128,10 @@ External tools used by the project:
 
 # Maintenance Rules
 
-- Update `.ai4X/STATE.md` after meaningful progress, decisions, blockers, verification results, failed attempts, or handoff-relevant repository changes.
-- Update `.ai4X/CONTEXT.md` only when stable project understanding changes.
-- Update `.ai4X/BEHAVIOR.md` only when durable operating rules, standards, or agent role expectations change.
-- Keep volatile state out of `.ai4X/BEHAVIOR.md` and `.ai4X/CONTEXT.md`.
-- Keep stable project facts out of `.ai4X/STATE.md` except as compact references.
+- Update `.ai4x/STATE.md` after meaningful progress, decisions, blockers, verification results, failed attempts, or handoff-relevant repository changes.
+- Update `.ai4x/CONTEXT.md` only when stable project understanding changes.
+- Update `.ai4x/BEHAVIOR.md` only when durable operating rules, standards, or agent role expectations change.
+- Keep volatile state out of `.ai4x/BEHAVIOR.md` and `.ai4x/CONTEXT.md`.
+- Keep stable project facts out of `.ai4x/STATE.md` except as compact references.
 - Preserve responsibility boundaries and cross-reference instead of duplicating large sections.
 - Do not create, modify, or restore host-specific adapter symlinks or wrapper files unless the user explicitly asks.
