@@ -6,14 +6,14 @@ This file contains volatile project memory for future agents. Update it after me
 
 - Snapshot date: 2026-09-07 CEST.
 - Project root: `/Users/normenmueller/Documents/RND/etc/md2pdf`.
-- Stable integration branch: `trunk`; local and remote copies must be synchronized before new work.
-- Latest release: `v0.2.4`; `./src/app/md2pdf.sh --version` reports `md2pdf, v0.2.4, (C) 2026 nemron`.
-- Active work branch: `feat/closure-manifest` (not yet merged).
+- Stable integration branch: `trunk`; local and remote copies are synchronized (fast-forwarded to `origin/trunk` at `cb7e8b7`) after this work.
+- Latest release: `v0.2.4`; `./src/app/md2pdf.sh --version` reports `md2pdf, v0.2.4, (C) 2026 nemron`. Note: `--closure-manifest` shipped on `trunk` without a version bump (see Open Decisions).
+- PR #6 (`feat/closure-manifest` -> `trunk`) squash-merged by the user as `cb7e8b7`; issue #5 closed. Local and remote feature branch deleted; working tree is clean on `trunk`.
 
 # Active Objective
 
-Implement GitHub issue #5: expose a canonical renderer-closure identity manifest so downstream reproducible-build consumers can verify two `md2pdf` installations render with the exact same effective inputs, not just the same `--version` string.
-Evidence: issue #5; active user instruction on 2026-09-07.
+No active objective remains. Issue #5 (canonical renderer-closure identity manifest) is implemented, merged, and closed.
+Evidence: PR #6; issue #5 (state: CLOSED); user confirmation on 2026-09-07.
 
 # Current State
 
