@@ -16,6 +16,7 @@ _arguments -s -S \
   '(-o --output)'{-o,--output}'[Output PDF]:output file:_files' \
   '--template[Template name from templates/ or explicit .tex path]:template:_md2pdf_templates' \
   '--list-templates[List available template names and exit]' \
+  '--closure-manifest[Print canonical renderer-closure identity (JSON) and exit]' \
   '--asset-link[Symlink asset directory into input folder]:asset dir:_files -/' \
   '--debug[Enable debug output]' \
   '--version[Show version and exit]' \

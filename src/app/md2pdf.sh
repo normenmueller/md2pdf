@@ -37,6 +37,14 @@ resolve_datadir() {
 }
 
 datadir="$(resolve_datadir)"
+# Normalize to a canonical, symlink-free path when the directory already
+# exists so identity-sensitive output (e.g. --closure-manifest) is stable
+# across equivalent but differently-spelled invocations. Leave the raw
+# value untouched when missing so validate_datadir() reports the path the
+# user/environment actually specified.
+if [[ -d "$datadir" ]]; then
+    datadir="$(cd "$datadir" && pwd)"
+fi
 
 # ----------------------------------------------------------------------
 # Version information
@@ -60,6 +68,7 @@ Options:
   -o, --output <file>     Output PDF (default: <input>.pdf)
   --template <name|path>  Template name from templates/ or explicit .tex path
   --list-templates        List available template names and exit
+  --closure-manifest      Print canonical renderer closure identity (JSON) and exit
   --asset-link <dir>      Symlink asset directory into input folder (repeatable)
   --debug                 Enable debug output
   --version               Show version and exit
@@ -84,6 +93,7 @@ templates_dir="$datadir/templates"
 filters_dir="$datadir/filters"
 filters_manifest="$filters_dir/manifest.sh"
 list_templates_mode=false
+closure_manifest_mode=false
 extra_args=()
 asset_links=()
 asset_symlinks=()
@@ -94,9 +104,16 @@ log_msg() {
     echo "[md2pdf|$level] $*"
 }
 
+log_msg_err() {
+    local level="$1"; shift
+    echo "[md2pdf|$level] $*" >&2
+}
+
 log_info() { log_msg info "$@"; }
-log_warn() { log_msg warn "$@"; }
-log_error() { log_msg error "$@"; }
+# warn/error are diagnostics, not program output: keep stdout reserved for
+# actual results (e.g. --closure-manifest JSON, --list-templates names).
+log_warn() { log_msg_err warn "$@"; }
+log_error() { log_msg_err error "$@"; }
 
 validate_datadir() {
     if [[ ! -d "$templates_dir" || ! -d "$filters_dir" ]]; then
@@ -118,8 +135,14 @@ validate_datadir() {
 }
 
 build_filter_args() {
+    # The manifest is a sourced shell script; guard against it polluting
+    # stdout so --closure-manifest output stays pure JSON. Diagnostics on
+    # stderr (if any) remain visible.
     # shellcheck source=/dev/null
-    source "$filters_manifest"
+    if ! source "$filters_manifest" >/dev/null; then
+        log_error "Unable to load filter manifest '$filters_manifest'."
+        exit 1
+    fi
 
     if [[ -z "${MD2PDF_FILTER_FILES+x}" || "${#MD2PDF_FILTER_FILES[@]}" -eq 0 ]]; then
         log_error "Filter manifest '$filters_manifest' does not define MD2PDF_FILTER_FILES."
@@ -138,6 +161,137 @@ build_filter_args() {
         pandoc_filter_args+=(-L "$filter_path")
     done
 }
+
+# ----------------------------------------------------------------------
+# Closure manifest: canonical identity of the effective renderer inputs
+# ----------------------------------------------------------------------
+sha256_of() {
+    local target="$1"
+    if [[ ! -f "$target" ]]; then
+        log_error "Cannot compute digest: '$target' is missing or not a regular file."
+        return 1
+    fi
+    if command -v sha256sum >/dev/null 2>&1; then
+        sha256sum "$target" | awk '{print $1}'
+    elif command -v shasum >/dev/null 2>&1; then
+        shasum -a 256 "$target" | awk '{print $1}'
+    else
+        log_error "Neither 'sha256sum' nor 'shasum' is available to compute digests."
+        return 1
+    fi
+}
+
+# Minimal but complete JSON string escaper: quotes, backslashes, and all
+# C0 control characters (required by the JSON spec; anything else is
+# passed through unmodified).
+json_escape() {
+    local s="$1" out="" c code esc
+    local i len=${#s}
+    for (( i=0; i<len; i++ )); do
+        c="${s:i:1}"
+        case "$c" in
+            '"') out+='\"' ;;
+            '\\') out+='\\\\' ;;
+            *)
+                printf -v code '%d' "'$c"
+                if (( code < 32 )); then
+                    case "$code" in
+                        8) out+='\b' ;;
+                        9) out+='\t' ;;
+                        10) out+='\n' ;;
+                        12) out+='\f' ;;
+                        13) out+='\r' ;;
+                        *) printf -v esc '\\u%04x' "$code"; out+="$esc" ;;
+                    esac
+                else
+                    out+="$c"
+                fi
+                ;;
+        esac
+    done
+    printf '%s' "$out"
+}
+
+# Print a bundled asset path relative to datadir (installation-independent
+# and stable across install prefixes); pass through unchanged otherwise,
+# e.g. an explicit --template path outside datadir, where the absolute
+# path is itself part of the effective selection.
+rel_to_datadir() {
+    local target="$1"
+    if [[ "$target" == "$datadir"/* ]]; then
+        printf '%s\n' "${target#"$datadir"/}"
+    else
+        printf '%s\n' "$target"
+    fi
+}
+
+# First line of "<name> --version" under a fixed locale, so the canonical
+# manifest does not vary with the caller's LANG/LC_ALL.
+tool_version() {
+    local name="$1" out
+    if ! out="$(LC_ALL=C "$name" --version 2>&1)"; then
+        return 1
+    fi
+    printf '%s\n' "${out%%$'\n'*}"
+}
+
+print_closure_manifest() {
+    local script_sha manifest_sha template_sha header_sha
+    local pandoc_version pandoc_crossref_version pdf_engine_version
+    local manifest_rel template_rel header_rel
+    local filters_json="" first=true
+    local filter_file filter_path filter_sha
+
+    if ! script_sha="$(sha256_of "$script_path")"; then exit 1; fi
+    if ! manifest_sha="$(sha256_of "$filters_manifest")"; then exit 1; fi
+    if ! template_sha="$(sha256_of "$template")"; then exit 1; fi
+    if ! header_sha="$(sha256_of "$header_includes")"; then exit 1; fi
+
+    if ! pandoc_version="$(tool_version pandoc)"; then
+        log_error "Unable to determine Pandoc version for closure manifest."
+        exit 1
+    fi
+    if ! pdf_engine_version="$(tool_version pdflatex)"; then
+        log_error "Unable to determine PDF engine (pdflatex) version for closure manifest."
+        exit 1
+    fi
+    if ! pandoc_crossref_version="$(tool_version pandoc-crossref)"; then
+        log_error "Unable to determine pandoc-crossref version for closure manifest."
+        exit 1
+    fi
+    # pandoc-include exposes no --version/--help (it only speaks the
+    # Pandoc JSON filter protocol on stdin), so no reliable version string
+    # exists to report here. check_dependencies() already fails closed
+    # if the executable itself is missing.
+
+    manifest_rel="$(rel_to_datadir "$filters_manifest")"
+    template_rel="$(rel_to_datadir "$template")"
+    header_rel="$(rel_to_datadir "$header_includes")"
+
+    for filter_file in "${MD2PDF_FILTER_FILES[@]}"; do
+        filter_path="$filters_dir/$filter_file"
+        if ! filter_sha="$(sha256_of "$filter_path")"; then exit 1; fi
+        if $first; then first=false; else filters_json+=","; fi
+        filters_json+=$'\n'"    { \"path\": \"$(json_escape "$(rel_to_datadir "$filter_path")")\", \"sha256\": \"$filter_sha\" }"
+    done
+
+    cat <<EOF
+{
+  "schema": "md2pdf.closure-manifest/v1",
+  "script_sha256": "$script_sha",
+  "filters_manifest": { "path": "$(json_escape "$manifest_rel")", "sha256": "$manifest_sha" },
+  "filters": [$filters_json
+  ],
+  "template": { "path": "$(json_escape "$template_rel")", "sha256": "$template_sha" },
+  "header_includes": { "path": "$(json_escape "$header_rel")", "sha256": "$header_sha" },
+  "pandoc_version": "$(json_escape "$pandoc_version")",
+  "pandoc_crossref_version": "$(json_escape "$pandoc_crossref_version")",
+  "pdf_engine": "pdflatex",
+  "pdf_engine_version": "$(json_escape "$pdf_engine_version")"
+}
+EOF
+}
+
 
 check_dependencies() {
     local missing=()
@@ -348,6 +502,9 @@ while [[ "$#" -gt 0 ]]; do
         --list-templates)
             list_templates_mode=true
             ;;
+        --closure-manifest)
+            closure_manifest_mode=true
+            ;;
         --asset-link)
             if [[ "$#" -lt 2 ]]; then
                 echo "[md2pdf|error] '--asset-link' requires a path argument."
@@ -380,6 +537,11 @@ done
 # ----------------------------------------------------------------------
 validate_datadir
 
+if $list_templates_mode && $closure_manifest_mode; then
+    log_error "'--list-templates' and '--closure-manifest' are mutually exclusive."
+    exit 1
+fi
+
 if $list_templates_mode; then
     list_available_templates | sort -u
     exit 0
@@ -387,6 +549,12 @@ fi
 
 resolve_template_config "$template_selector"
 build_filter_args
+
+if $closure_manifest_mode; then
+    check_dependencies
+    print_closure_manifest
+    exit 0
+fi
 
 if [[ -z "$input" ]]; then
     print_usage

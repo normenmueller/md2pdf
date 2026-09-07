@@ -40,7 +40,7 @@ _md2pdf() {
   done
 
   if [[ "$cur" == -* ]]; then
-    COMPREPLY=( $(compgen -W "-o --output --template --list-templates --asset-link --debug --version --" -- "$cur") )
+    COMPREPLY=( $(compgen -W "-o --output --template --list-templates --closure-manifest --asset-link --debug --version --" -- "$cur") )
   else
     COMPREPLY=( $(compgen -f -- "$cur") )
   fi

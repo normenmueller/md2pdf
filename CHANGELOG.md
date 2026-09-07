@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `--closure-manifest`: prints a canonical, deterministic JSON identity of
+  the effective renderer closure (entry-script digest, ordered active Lua
+  filters with digests, filter-manifest digest, selected template and
+  header-include digests, Pandoc/pandoc-crossref/PDF-engine versions) and
+  exits without rendering. Lets downstream tooling verify that two
+  `md2pdf` installations render with the exact same inputs, not just the
+  same `--version` string. See issue #5.
+
 ## 0.2.4 - 2026-07-28
 
 ### Changed
