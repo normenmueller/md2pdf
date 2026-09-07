@@ -54,7 +54,9 @@ uninstall:
 verify:
 	bash -n src/app/md2pdf.sh
 	bash -n src/tst/run.sh
+	bash -n src/tst/closure-manifest.sh
 	./src/app/md2pdf.sh --list-templates >/dev/null
 	./utl/check-templates.sh
 	./utl/check-charset.sh
 	src/tst/run.sh
+	src/tst/closure-manifest.sh

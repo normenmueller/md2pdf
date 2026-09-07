@@ -71,6 +71,7 @@ Options:
 - `-o, --output <file>`: output PDF path (default: `<input>.pdf`)
 - `--template <name|path>`: template name or explicit `.tex` path
 - `--list-templates`: list available template names and exit
+- `--closure-manifest`: print canonical renderer-closure identity (JSON) and exit
 - `--asset-link <dir>`: create temporary asset symlink(s) in input directory
 - `--debug`: print resolved paths and full Pandoc command
 - `--version`: print version information
@@ -79,6 +80,12 @@ Use external assets without moving files:
 
 ```bash
 md2pdf --asset-link ../shared-assets -- note.md
+```
+
+Inspect the exact effective renderer identity (script, filter manifest, active filters in order, template, and header include, plus Pandoc/pandoc-crossref/PDF-engine versions) without rendering a PDF. Useful for downstream tooling that needs to verify two installations render identically:
+
+```bash
+md2pdf --template article-modern --closure-manifest
 ```
 
 ## Project Structure
