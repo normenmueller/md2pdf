@@ -29,6 +29,7 @@ No active objective remains. All requested work for this session (issue #5 featu
   7. PR #6 body was already cleaned of the trailer in the first pass. PR #2's body/comments were checked and contain no trailer text (only the commit message had it).
   8. Cleaned up `git filter-branch` backup refs (`refs/original/*`) and ran `git reflog expire --expire=now --all && git gc --prune=now` after both rewrite passes.
 - Going forward, commits made by this agent must not include a `Co-authored-by: Copilot` trailer (explicit standing user instruction).
+- Found and fixed a separate, unrelated bug: GitHub releases `v0.2.4` and `v0.2.5` had been created as **drafts** (`isDraft: true`), so GitHub's "Latest" badge on the repo Releases panel still pointed at the last *published* release, `v0.2.3`. Fixed via `gh release edit v0.2.4 --draft=false` and `gh release edit v0.2.5 --draft=false --latest`. Verified via `gh release list --json tagName,isLatest,isDraft`: `v0.2.5` now correctly shows `isLatest: true`, all releases `isDraft: false`. Lesson for future releases: always confirm `gh release view <tag> --json isDraft` after `gh release create`, since a draft release is invisible to "Latest" resolution even though `gh release view` can still show its notes.
 
 # Verification Status
 
@@ -60,8 +61,8 @@ Passed on 2026-09-07 (after the full-history rewrite, on `trunk` at `c8cb54c`):
 
 # Immediate Next Action
 
-None. All session objectives complete. A future agent picking up new work should start with the standard startup protocol (read `.ai4x/BEHAVIOR.md`, `.ai4x/CONTEXT.md`, this file, then `git status --short --branch`) and confirm `origin/trunk` still matches this snapshot's SHA before assuming any prior state.
+None. All session objectives complete, including issue #5 (closed), the Copilot-trailer history rewrite, and the release-draft/Latest-badge fix. A future agent picking up new work should start with the standard startup protocol (read `.ai4x/BEHAVIOR.md`, `.ai4x/CONTEXT.md`, this file, then `git status --short --branch`) and confirm `origin/trunk` still matches this snapshot's SHA before assuming any prior state.
 
 # Handoff
 
-Repository is in a clean, fully verified state: `trunk` at `c8cb54c` (== `origin/trunk`), tags `v0.2.4`/`v0.2.5` retagged and pushed, no Copilot co-author trailers remain anywhere in `trunk` history, legacy disjoint tags removed, `make verify` green. No uncommitted changes, no open branches besides `trunk`.
+Repository is in a clean, fully verified state: `trunk` at `faa3399` (== `origin/trunk`), tags `v0.2.4`/`v0.2.5` retagged and pushed, no Copilot co-author trailers remain anywhere in `trunk` history, legacy disjoint tags removed, GitHub releases `v0.2.4`/`v0.2.5` published (not draft) with `v0.2.5` marked Latest, `make verify` green. No uncommitted changes, no open branches besides `trunk`. Safe to end this session; a fresh session can resume by reading this file and `.ai4x/BEHAVIOR.md`/`.ai4x/CONTEXT.md` per the standard startup protocol.
