@@ -6,61 +6,62 @@ This file contains volatile project memory for future agents. Update it after me
 
 - Snapshot date: 2026-09-07 CEST.
 - Project root: `/Users/normenmueller/Documents/RND/etc/md2pdf`.
-- Stable integration branch: `trunk`; local and remote copies are synchronized (fast-forwarded to `origin/trunk` at `cb7e8b7`) after this work.
-- Latest release: `v0.2.4`; `./src/app/md2pdf.sh --version` reports `md2pdf, v0.2.4, (C) 2026 nemron`. Note: `--closure-manifest` shipped on `trunk` without a version bump (see Open Decisions).
-- PR #6 (`feat/closure-manifest` -> `trunk`) squash-merged by the user as `cb7e8b7`; issue #5 closed. Local and remote feature branch deleted; working tree is clean on `trunk`.
+- Stable integration branch: `trunk`; local and remote copies are synchronized (`origin/trunk` at `c8cb54c`) after a full-history rewrite (see below). Working tree clean.
+- Latest release: `v0.2.5`; `./src/app/md2pdf.sh --version` reports `md2pdf, v0.2.5, (C) 2026 nemron`.
+- Issue #5 (canonical renderer-closure identity manifest) implemented via `--closure-manifest`, shipped in PR #6, squash-merged, closed. `make verify` green (includes new `src/tst/closure-manifest.sh` suite).
+- Legacy disjoint tags `md2pdf-v0.4.4`/`md2pdf-v0.4.5` (unrelated history, no common ancestor with `trunk`) were deleted (local + remote) at explicit user request as stale cruft.
 
 # Active Objective
 
-No active objective remains. Issue #5 (canonical renderer-closure identity manifest) is implemented, merged, and closed.
-Evidence: PR #6; issue #5 (state: CLOSED); user confirmation on 2026-09-07.
+No active objective remains. All requested work for this session (issue #5 feature, release, and Copilot co-author trailer removal) is complete.
 
 # Current State
 
-- `src/app/md2pdf.sh` gained `--closure-manifest`: prints a flat, deterministic JSON identity (schema `md2pdf.closure-manifest/v1`) covering: entry-script SHA-256; filter-manifest path (datadir-relative) + SHA-256; ordered active Lua filters as `{path, sha256}` (datadir-relative paths); selected template + header-include (`.icl`) paths (datadir-relative, or absolute if `--template` points outside datadir) + SHA-256; `pandoc`/`pandoc-crossref`/`pdflatex` version strings. `pandoc-include` is intentionally excluded from version reporting: it exposes no `--version`/`--help` (Pandoc JSON-filter-only protocol, crashes on introspection flags); `check_dependencies()` still fail-closes if the executable itself is missing.
-- Design was deliberately kept lean per explicit user request: no `md2pdf.version`, no absolute host-specific paths for bundled assets, no `datadir`/`contract` versioning field, no `template.selector`, no duplicated `render.markdown_extensions`/`fixed_args` block - all considered redundant to the script hash or host-specific noise, per consensus of two background design-review agents (rubber-duck + independent general-purpose alternative design) explicitly commissioned for this feature.
-- Fixed a pre-existing, tightly-coupled bug discovered during this work: `log_warn`/`log_error` wrote to stdout instead of stderr, which would have contaminated the new JSON output on any diagnostic and violated the issue's "actionable stderr diagnostic" acceptance criterion. This is a behavior change affecting the whole script's error/warn channel (now stderr), not just the new feature.
-- `build_filter_args()` now guards `source "$filters_manifest"` against stdout pollution (`>/dev/null`) and fails closed with a clear message if sourcing fails, so a misbehaving filter manifest can never leak into `--closure-manifest`'s stdout.
-- `datadir` is now canonicalized (symlink-resolved, absolute, no trailing slash) via `cd "$datadir" && pwd` right after `resolve_datadir()`, when it exists - needed so datadir-relative path computation in the manifest is stable.
-- New helper functions: `sha256_of` (returns 1 instead of calling `exit`, so `set -e`/command-substitution interaction is explicit at call sites via `if ! x="$(sha256_of ...)"; then exit 1; fi`), `json_escape` (full JSON string escaping incl. all C0 control chars via `\uXXXX`, not just quotes/backslashes), `rel_to_datadir` (datadir-relative path for bundled assets, passthrough for external paths), `tool_version` (`LC_ALL=C <tool> --version`, first line only, locale-independent).
-- `--closure-manifest` and `--list-templates` are mutually exclusive (explicit error, exit 1).
-- Argument-parsing flow: `validate_datadir` -> mutual-exclusivity check -> (`--list-templates` short-circuit) -> `resolve_template_config` + `build_filter_args` (so template/filter resolution errors are fail-closed for closure-manifest too) -> (`--closure-manifest` branch: `check_dependencies` + `print_closure_manifest` + exit 0) -> normal input-file / render path unchanged.
-- README, `CHANGELOG.md` (`## Unreleased` section), and all three shell completions (`utl/completions/md2pdf.bash`, `_md2pdf`, `md2pdf.fish`) updated to document `--closure-manifest`. No version bump performed - left for an explicit release step per safety rules on release actions.
+- `src/app/md2pdf.sh` `--closure-manifest`: prints a flat, deterministic JSON identity (schema `md2pdf.closure-manifest/v1`) covering entry-script SHA-256, filter-manifest path+SHA-256, ordered active Lua filters (`{path, sha256}`), selected template + header-include (`.icl`) path+SHA-256, and `pandoc`/`pandoc-crossref`/`pdflatex` version strings. Bundled-asset paths are datadir-relative; `pandoc-include` is intentionally excluded from version reporting (no `--version`/`--help`, verified empirically). `log_warn`/`log_error` now write to stderr (bug fix, whole-script behavior change). `--closure-manifest` and `--list-templates` are mutually exclusive.
+- README, `CHANGELOG.md`, and all three shell completions document `--closure-manifest`. `VERSION="0.2.5"`.
+- **Git history was rewritten twice this session** to remove `Co-authored-by: Copilot <...>` trailers (user request, after noticing "Copilot" listed as a GitHub Contributor):
+  1. First pass: rewrote only the two commits created during this session's own work (feat commit, release commit) via `git filter-branch --msg-filter` with a `case "$GIT_COMMIT" in <full-sha>) ... esac` pattern (an earlier glob-based attempt with `[ "$GIT_COMMIT" = "sha"* ]` silently failed to match and was caught/redone).
+  2. User then reported Copilot still showing as Contributor (repo main-page panel, not just the PR). Investigation found the trailer also present in two **pre-existing, already-published** commits: `8ab76cd` (tagged `v0.2.4`, a shipped release) and `e55f616` (merged PR #2). User explicitly approved rewriting these too, accepting the risk of moving an already-published release tag.
+  3. Ran a generic Python `--msg-filter` (`/tmp/strip-copilot-trailer.py`, strips any `Co-authored-by: Copilot <...>` line plus an orphaned preceding blank line) over the **entire** `trunk` history (root..trunk, all 22 commits) via `git filter-branch -f --msg-filter 'python3 /tmp/strip-copilot-trailer.py' -- trunk`. This is the authoritative, complete rewrite; superseded the narrower first pass.
+  4. Verified: zero remaining trailer occurrences in any of the 22 `trunk` commit messages (`git log --grep` sweep); working tree/file content unchanged; `bash -n`, `--version`, and full `make verify` all still pass after rewrite.
+  5. Tags `v0.2.4` (now `792050e`) and `v0.2.5` (now `c8cb54c`) were deleted and recreated (annotated) pointing to the new rewritten commits, then force-pushed. Older tags (`v0.2.3` and earlier) are ancestors of the rewritten commits, not descendants, so their SHAs were unaffected and did not need retagging.
+  6. Force-pushed rewritten `trunk` to `origin` (`--force-with-lease`), pushed corrected tags. GitHub Release objects for `v0.2.4` and `v0.2.5` still resolve correctly (releases are keyed by tag name; `gh release view` confirms both resolve to `trunk`/the new tag SHAs).
+  7. PR #6 body was already cleaned of the trailer in the first pass. PR #2's body/comments were checked and contain no trailer text (only the commit message had it).
+  8. Cleaned up `git filter-branch` backup refs (`refs/original/*`) and ran `git reflog expire --expire=now --all && git gc --prune=now` after both rewrite passes.
+- Going forward, commits made by this agent must not include a `Co-authored-by: Copilot` trailer (explicit standing user instruction).
 
 # Verification Status
 
-Passed on 2026-09-07 (on branch `feat/closure-manifest`, not yet committed/merged):
+Passed on 2026-09-07 (after the full-history rewrite, on `trunk` at `c8cb54c`):
 
-- `bash -n src/app/md2pdf.sh` and `bash -n src/tst/run.sh` (via `make verify`).
-- `make verify` full run: template listing, `utl/check-templates.sh`, `utl/check-charset.sh`, and all golden JSON/LaTeX regression tests in `src/tst/run.sh` - all green, no regressions from the pre-existing baseline (verified by re-running the identical failing PDF-render smoke check against `git stash`ed original code: the `libpng`/`pdflatex` failure on `doc/exp/main.md`'s `assets/sample-diagram.png` is pre-existing and unrelated to this change).
-- Manual acceptance-criteria checks for `--closure-manifest`: (1) two consecutive invocations produce byte-identical stdout (`diff` clean); (2) output is valid JSON (`python3 -m json.tool`); (3) `--template article-modern` changes `template.sha256`/`header_includes.sha256`; (4) reordering two entries in `src/lib/filters/manifest.sh` changes both `filters_manifest.sha256` and the `filters[]` array order/content; (5) temporarily removing a filter file referenced in the manifest yields exit code 1, empty stdout, and a clear stderr diagnostic; (6) `--list-templates` and normal rendering (`-- doc/exp/main.md -o ...`) still work; (7) `--list-templates --closure-manifest` together correctly reports mutual-exclusivity error with exit 1.
-- Not yet run: `make -n install`/`make -n uninstall` dry-run re-check (no install-path changes were made, so low risk, but not explicitly re-verified this session).
+- `make verify`: `bash -n` checks, `utl/check-templates.sh`, `utl/check-charset.sh`, all golden JSON/LaTeX regression tests, and `src/tst/closure-manifest.sh` (5 cases: unchanged/drifted/reordered/missing-filter/custom-template) - all green.
+- `git log trunk --format='%H %s' | grep -i copilot` sweep across all 22 commits: zero matches (clean).
+- `gh release view v0.2.4` / `v0.2.5`: both resolve correctly post-retag.
+- `bash -n src/app/md2pdf.sh` and `./src/app/md2pdf.sh --version` confirmed working after rewrite.
+- Not re-verified this session: `make -n install`/`make -n uninstall` dry-run (no install-path changes were made).
 
 # Decisions
 
-- 2026-09-07: Command name is `--closure-manifest` (not `--renderer-manifest`), chosen by explicit user selection from four naming options; aligns with the issue's own "effective renderer closure" phrasing and Nix-style closure terminology. Source: explicit user choice via `ask_user`.
-- 2026-09-07: Before finalizing implementation, two background AI agents were deliberately commissioned as design consultants per explicit user request ("externe AI Agenten als Berater hinzuziehen"): a `rubber-duck` critical review of the WIP Bash code/JSON design, and an independent `general-purpose` agent producing an unconstrained alternative lean JSON design for comparison. Both converged on removing `md2pdf.version`, `script_path`, `datadir.*`, `DATADIR_CONTRACT`, `template.selector`, and the `render` block, and flattening the JSON. Source: explicit user instruction; both agents' turn-0 responses.
-- 2026-09-07: External tool version reporting is asymmetric by necessity: `pandoc`, `pdflatex`, and `pandoc-crossref` report `--version` strings; `pandoc-include` reports none (verified empirically in this environment - it crashes on `--version`/`--help` because it only implements the Pandoc JSON-filter stdin protocol). User explicitly chose "version where available" over omitting both or hashing binaries, after being shown this concrete blocker. Source: explicit user choice via `ask_user`; empirical tool probing this session.
-- 2026-09-07: Rejected hashing external tool executables (`pandoc`, `pdflatex`, `pandoc-crossref`, `pandoc-include`) despite the rubber-duck agent's robustness argument (binary hash defeats same-version-different-binary attacks). User explicitly chose the leaner `version_only` approach for pandoc/pdflatex, reasoning that binary-supply-chain integrity is out of scope for a Markdown-to-PDF CLI and belongs at the OS/packaging layer. Source: explicit user choice via `ask_user`.
-- 2026-09-07: Bundled-asset paths (filters, filter manifest, default/named templates and their `.icl` files) are reported relative to the canonicalized `datadir`, not as absolute paths, so the manifest is stable across install prefixes (`/usr/local` vs `$HOME/.local` vs source-tree). An explicit `--template /external/path.tex` outside datadir is reported with its resolved absolute path instead, since the path itself is then part of the effective selection. Source: consensus of both consulted agents.
-- 2026-09-07: No version bump (`VERSION` in `md2pdf.sh`) and no CHANGELOG entry under a concrete version number; used `## Unreleased` instead, deferring version/tag/release decisions to an explicit later release step per existing safety rules on release actions.
+- 2026-09-07: Command name is `--closure-manifest` (explicit user choice over `--renderer-manifest` and other alternatives).
+- 2026-09-07: Two background AI agents (rubber-duck critical review + independent alternative design) were commissioned before finalizing the feature, per explicit user request; both converged on a flat, lean JSON schema (see PR #6 / CHANGELOG for the final schema).
+- 2026-09-07: `--closure-manifest` shipped as `v0.2.5` (SemVer patch, purely additive per user agreement).
+- 2026-09-07: User explicitly approved removing the `Co-authored-by: Copilot` trailer from **all** history, including the already-published `v0.2.4` release tag, after being shown the risk (tag SHA change, already-shipped release). Explicit approval obtained via `ask_user` before any destructive rewrite.
+- 2026-09-07: Legacy tags `md2pdf-v0.4.4`/`md2pdf-v0.4.5` deleted at explicit user request; confirmed beforehand they share no ancestry with `trunk` and contain no Copilot trailer, so deletion carries no hidden coupling to the rewritten history.
 
 # Open Decisions
 
-- Whether to bump `VERSION` (e.g. to `0.3.0` as a minor feature addition) and cut a release now, or batch this with other pending work - not decided, needs explicit user approval per repository release conventions.
-- Whether golden/automated tests should be added for `--closure-manifest` itself (issue #5 acceptance criteria call for "tests cover the unchanged, drifted, reordered, missing-input, and custom-template cases"); so far only manual verification in this session covers these cases, no test script/fixture was added to `src/tst/`.
-- Whether `pandoc-include`'s absence from the manifest should eventually be revisited (e.g. if `pandoc-include` ever gains a `--version` flag upstream, or if a lockfile-based version pin becomes available).
+- None outstanding from this session's work.
 
 # Risks And Unknowns
 
-- No automated regression test exists yet for `--closure-manifest`'s own behavior (determinism, fail-closed paths, drift-sensitivity) - current verification is manual/interactive only from this session. A future agent or reviewer should not assume CI coverage for this feature.
-- The PR/branch has not been pushed, opened, or reviewed yet; `git status` on `feat/closure-manifest` may still show `README.md`, `CHANGELOG.md`, `src/app/md2pdf.sh`, and the three `utl/completions/*` files as modified and uncommitted, depending on when this snapshot is read.
-- `log_warn`/`log_error` now writing to stderr instead of stdout is a behavior change to the whole script, not just the new feature; any external tooling that scraped `md2pdf`'s stdout for warning/error text would need to switch to reading stderr. This was not present in `v0.2.4`.
+- GitHub's Contributors panel may take time to refresh its cache after a force-push; "Copilot" may still appear there for a while even though the underlying git history is now clean. This is expected and not a sign of a failed rewrite - re-check after some delay if the user reports it's still visible.
+- Anyone who had already cloned/pulled/pinned the old `v0.2.4` or `v0.2.5` tags, or any commit SHA reachable only from the pre-rewrite `trunk`, now has a diverged history. This was an explicit, accepted trade-off (single-maintainer repo, low external-consumer risk per user judgment) - not considered an open risk requiring further action, but worth remembering if anyone reports fetch/pull conflicts referencing old SHAs.
+- `git filter-branch` is deprecated upstream in favor of `git filter-repo` (not installed in this environment); it was used here because it was already available and sufficient for a single-branch, no-`--all`-refs rewrite. If a future large-scale history rewrite is needed, prefer installing `git filter-repo` first.
 
 # Immediate Next Action
 
-Decide with the user whether to (a) add automated tests for `--closure-manifest` under `src/tst/` before opening a PR, (b) open a PR now and treat tests as a fast-follow, and/or (c) bump `VERSION`/`CHANGELOG` to a concrete release number. Then push `feat/closure-manifest` and open a PR against `trunk` (squash-merge per repository conventions), closing issue #5.
+None. All session objectives complete. A future agent picking up new work should start with the standard startup protocol (read `.ai4x/BEHAVIOR.md`, `.ai4x/CONTEXT.md`, this file, then `git status --short --branch`) and confirm `origin/trunk` still matches this snapshot's SHA before assuming any prior state.
 
 # Handoff
 
-A future agent should read `.ai4x/BEHAVIOR.md`, `.ai4x/CONTEXT.md`, and this file, then run `git status --short --branch` on `feat/closure-manifest` before acting. If continuing this work, re-run `make verify` first to confirm the golden-test baseline is still green before making further changes.
+Repository is in a clean, fully verified state: `trunk` at `c8cb54c` (== `origin/trunk`), tags `v0.2.4`/`v0.2.5` retagged and pushed, no Copilot co-author trailers remain anywhere in `trunk` history, legacy disjoint tags removed, `make verify` green. No uncommitted changes, no open branches besides `trunk`.
