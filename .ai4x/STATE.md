@@ -2,7 +2,19 @@
 
 This file contains volatile project memory for future agents. Update it after meaningful progress, decisions, blockers, verification results, failed attempts, or handoff-relevant repository changes.
 
-# Snapshot
+# Homebrew Assessment (2026-09-17)
+
+- User requested an assessment only; no packaging implementation or publication is authorized by this discussion.
+- Observed: clean `trunk...origin/trunk` at `cba927c` before this memory update. The older snapshot and handoff below contain inconsistent historical HEAD values and must not be used as the current HEAD.
+- Inspected Makefile, README, CLI path/dependency resolution, LICENSE, template package requirements, and tracked `.github` files. Install/uninstall dry-runs with a temporary PREFIX succeeded; no installation was performed. No runtime changes; full regression suite not rerun for this assessment.
+- INFERRED recommendation: start with an own Homebrew tap. Configurable PREFIX, separated runtime assets, symlink resolution, and completions already suit packaging. Dependency integration is the main work.
+- Current external evidence: Homebrew provides pandoc-crossref (depending on pandoc) and texlive. No pandoc-include core formula was found in the web lookup; absence is not conclusively verified. A separate tap formula using a private Python virtualenv is a candidate.
+- UNKNOWN: preferred TeX policy (existing external installation versus automatic texlive dependency), clean-machine template coverage, and actual formula installation/upgrade behavior. Templates require packages beyond the pdflatex executable, including fontawesome5, tcolorbox, and awesomebox.
+- Release archives used by a formula must remain immutable and checksummed. Homebrew dependency upgrades do not freeze the complete renderer environment; retain regression checks and closure-manifest diagnostics.
+- Sources consulted: https://docs.brew.sh/How-to-Create-and-Maintain-a-Tap ; https://docs.brew.sh/Acceptable-Formulae ; https://docs.brew.sh/Language-Specific-Formulae ; https://formulae.brew.sh/formula/pandoc-crossref ; https://formulae.brew.sh/formula/texlive ; https://github.com/lierdakil/pandoc-crossref .
+- Next action, if implementation is requested: settle TeX policy, then create and validate tap formulae with a real PDF smoke test before publication. No tap or formula has been created.
+
+# Snapshot (historical, 2026-09-07)
 
 - Snapshot date: 2026-09-07 CEST.
 - Project root: `/Users/normenmueller/Documents/RND/etc/md2pdf`.
