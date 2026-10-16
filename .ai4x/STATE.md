@@ -1,3 +1,10 @@
+# Current Recovery Correction (2026-10-16)
+
+- PO explicitly approved the bounded Pandoc3.12.1 fixture correction, publication and subsequent supported restore adoption/installation/PDF acceptance. No runtime/filter/template change or release/tag action is included.
+- Only main.tex and filters-callout.tex expected outputs adopt nine image-alt line breaks emitted by current Pandoc. All16 JSON AST cases and other LaTeX output remain unchanged. Strict comparisons remain intact.
+- Independent design/isolated verification passed. Run current make verify and final review before normal branch integration/publication; preserve all published history. Actual target recovery status is owned exclusively by /Users/nrm/Resources/Zandbox/rstr/.ai4x/STATE.md.
+- Historical snapshots below do not identify the current checkout or execution authority. Current Git owns the exact revision; runtime27-file closure stays unchanged.
+
 # Purpose
 
 This file contains volatile project memory for future agents. Update it after meaningful progress, decisions, blockers, verification results, failed attempts, or handoff-relevant repository changes.
