@@ -132,7 +132,19 @@
     {Ü}{{\"U}}1
     {ß}{{\ss}}1
 }
+% Pandoc passes pre-tokenized \lstinline calls through this macro. An active
+% UTF-8 leading byte must not select Listings' direct-input scanner: the closing
+% delimiter in a macro argument is already tokenized and would not end it.
+% Always use the argument scanner here; leave standalone \lstinline unchanged.
 \providecommand{\passthrough}[1]{#1}
+\makeatletter
+\renewcommand{\passthrough}[1]{%
+  \begingroup
+    \let\lst@IfNextCharActive\@secondoftwo
+    #1%
+  \endgroup
+}
+\makeatother
 
 \usepackage{float}
 \floatstyle{plain}

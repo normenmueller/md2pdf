@@ -11,7 +11,7 @@ BASH_COMPLETION_DIR ?= $(PREFIX)/share/bash-completion/completions
 ZSH_COMPLETION_DIR ?= $(PREFIX)/share/zsh/site-functions
 FISH_COMPLETION_DIR ?= $(PREFIX)/share/fish/vendor_completions.d
 
-.PHONY: install uninstall verify
+.PHONY: install uninstall verify verify-pdf
 
 install:
 	install -d "$(DESTDIR)$(BINDIR)"
@@ -55,8 +55,12 @@ verify:
 	bash -n src/app/md2pdf.sh
 	bash -n src/tst/run.sh
 	bash -n src/tst/closure-manifest.sh
+	bash -n src/tst/inline-code-pdf.sh
 	./src/app/md2pdf.sh --list-templates >/dev/null
 	./utl/check-templates.sh
 	./utl/check-charset.sh
 	src/tst/run.sh
 	src/tst/closure-manifest.sh
+
+verify-pdf:
+	bash src/tst/inline-code-pdf.sh

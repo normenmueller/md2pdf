@@ -19,6 +19,7 @@ central constraints. Repository facts take precedence over this summary.
 - `doc/exp/`: example inputs and assets; filter cases are in `doc/exp/filters/`.
 - `src/tst/run.sh` and `src/tst/expected/`: golden JSON AST and LaTeX tests.
 - `src/tst/closure-manifest.sh`: renderer identity regression tests.
+- `src/tst/inline-code-pdf.sh`: real PDF/text regression across bundled templates.
 - `Makefile`: installation, uninstallation, and the `verify` target.
 - `utl/completions/`: Bash, Zsh, and Fish completions.
 - `utl/check-templates.sh`, `utl/check-charset.sh`: structural/character checks.
@@ -42,6 +43,10 @@ Usage: `md2pdf [options] -- <input.md> [pandoc args...]`.
   Pandoc manages required LaTeX reruns for cross-references.
 - Pipeline order is `pandoc-include`, the ordered Lua filters, then
   `pandoc-crossref`. Caller-supplied Pandoc arguments are appended.
+- Bundled includes scope Listings' argument scanner to Pandoc's `\passthrough`
+  wrapper. Its pre-tokenized inline code must not select the direct-input
+  scanner based on an active UTF-8 leading byte; standalone Listings calls
+  retain their normal scanner selection.
 - `listing-caption-wrap.lua` wraps captioned `lst:` code blocks for
   pandoc-crossref in LaTeX listings mode to avoid duplicate captions.
 - Repeatable `--asset-link <dir>` resolves relative directories from the
@@ -88,6 +93,13 @@ Evidence: `README.md`; `Makefile`; `src/lib/templates/*.icl`.
 `make verify` checks shell syntax, template listing and pairs, tracked-file
 charset, golden JSON AST/LaTeX output, and closure-manifest regressions.
 It does not compile a PDF or perform installation acceptance.
+
+`make verify-pdf` compiles `doc/exp/inline-code.md` with every bundled template
+and checks extracted text against `src/tst/expected/inline-code.txt`. It requires
+the rendering dependencies, Python 3, and Poppler's `pdftotext`, plus the actual
+LaTeX packages/fonts used by the templates. Extraction uses content order to
+avoid joining independent cases across columns. It does not check visual
+styling automatically or establish downstream/CI acceptance.
 
 Golden JSON comparisons normalize away `pandoc-api-version`; LaTeX comparisons
 are strict. Pandoc writer changes can therefore affect goldens even when ASTs

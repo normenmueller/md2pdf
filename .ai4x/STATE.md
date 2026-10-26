@@ -6,96 +6,103 @@ recheck Git before acting. Historical approvals are not new execution authority.
 
 # Objective And Authorized Scope
 
-The user requested creation of a GitHub issue, then an update and AI-readiness
-review of `.ai4x/` before ending and deleting this CLI session.
-
-Issue creation and the memory review are complete. The user subsequently
-explicitly requested committing and pushing the current memory changes; this
-is the scope of the direct commit to trunk containing this snapshot.
-No product implementation, release, installation, or recovery action is
-authorized. Issue #7 remains backlog work requiring a new implementation request.
+The user requested work on GitHub issue
+[#8 - Inline code starting with ü fails with Listings EOL error](https://github.com/normenmueller/md2pdf/issues/8).
+The implementation and local verification are complete. The user subsequently
+requested integration into trunk, fix-branch cleanup locally/remotely, and a
+new release. The selected patch version is 0.2.6. Publication, tag verification,
+and installation of 0.2.6 on this system with removal of the previous version
+are now authorized. Downstream project changes remain outside the scope.
+Issue #7 remains unrelated backlog work.
 
 # Repository Snapshot
 
-- Observed branch: `trunk`.
-- Base HEAD before memory publication: `71d80173dcd04b520b4840883612f9357f332366`
-  (`Merge Pandoc image-alt fixture compatibility`).
-- At review time, local `origin/trunk` equaled that base HEAD. Determine the
-  publication commit with `git log -1`; recheck current local/remote refs on
-  re-entry rather than treating the base revision as the current checkout.
-- The worktree was clean before issue creation. The only pre-existing edit
-  at the start of the memory review was this session's issue note in STATE.md.
-- The publication commit contains only `.ai4x/BEHAVIOR.md`,
-  `.ai4x/CONTEXT.md`, and `.ai4x/STATE.md`, all owned by this session.
-  Product files and host-specific adapters were not changed. No branch change
-  or release is part of this work.
-- This snapshot is prepared before commit/push. Their outcome must be checked
-  from Git and remote refs; the file does not claim an unobserved push result.
+- Branch: `fix/inline-code-umlauts`, created for this correction.
+- Observed HEAD: `bc883a9da306a1f201a397a1f229b1096571e5d4`
+  (`chore: refresh ai4x memory and session handoff`).
+- Local `origin/trunk` equals that HEAD. Fetch and live remote-ref inspection
+  confirmed the same trunk; neither the fix branch nor v0.2.6 exists remotely
+  at this preparation step. The new branch has no upstream yet.
+- Startup worktree was clean. All current edits and new files belong to this
+  session and remain local and uncommitted. No commit, push, PR, issue update,
+  tag, or release was performed.
+- Modified: six `src/lib/templates/*.icl` files, Makefile, README.md,
+  CHANGELOG.md, CONTEXT.md, and this snapshot.
+- Added: `doc/exp/inline-code.md`, `src/tst/expected/inline-code.txt`, and
+  `src/tst/inline-code-pdf.sh`. CLI code, filter order, existing goldens,
+  installation recipes, template `.tex` files, and host adapters are unchanged.
 
-# Completed Work
+# Diagnosis And Completed Work
 
-- Created and confirmed open:
-  [#7 - Explain each feature via example](https://github.com/normenmueller/md2pdf/issues/7).
-  It requires an inventory linking every user-facing feature to a concise,
-  reproducible example, including prerequisites, input, invocation, and expected
-  result. Existing README/doc/exp examples should be reused or improved.
-  Adding features or changing rendering behavior is out of scope.
-- Reviewed README, example paths, filters/templates, existing issues, current
-  CLI and test contracts, Git status/history, and all three memory files.
-- Replaced competing historical handoffs and obsolete recovery instructions
-  with this snapshot. Git retains the previous memory.
-- Consolidated stable implementation facts in CONTEXT.md, including
-  closure-manifest limitations and the boundary between goldens and PDF tests.
-- Preserved the standing prohibition on Copilot co-author trailers in
-  BEHAVIOR.md, and added task-specific checks and explicit memory handoff rules.
+- Read the issue and its empty comment list via the GitHub connector.
+- Reproduced the issue's minimal input with the original source renderer:
+  exit 43, `Package Listings Error: lstinline ended by EOL`.
+- Inspected the installed Listings implementation. `\lstinline@` chooses
+  `\lst@InlineM` or `\lst@InlineJ` through `\lst@IfNextCharActive`. An active
+  UTF-8 first byte incorrectly selects direct input even though Pandoc's
+  `\passthrough` argument has already tokenized the closing delimiter.
+- All six bundled includes now locally select the argument scanner inside
+  `\passthrough`. German content and the Listings backend are preserved;
+  standalone raw Listings calls retain the original scanner selection.
+- Added a 36-case PDF/text fixture covering the reported phrase, ASCII,
+  leading/internal/isolated `äöüÄÖÜß`, punctuation, explicit code language,
+  standalone raw inline listings, and a fenced code block.
+- Added documented `make verify-pdf` as a separate compilation gate.
+  `make verify` additionally syntax-checks the new test script and retains its
+  existing non-PDF checks. Changelog and CLI version now prepare patch release
+  0.2.6, dated 2026-10-26.
+- Updated CONTEXT.md with the stable integration and verification boundaries.
+  BEHAVIOR.md required no rule changes.
 
 # Verification
 
-Verified on 2026-10-26 for these memory-only changes:
+Executed locally on macOS, with Pandoc 3.12.1, pandoc-crossref 0.3.26, and
+pdfTeX 1.40.29 (TeX Live 2026):
 
-- `git diff --check`: passed.
-- `./utl/check-charset.sh`: passed.
-- Repository paths referenced in CONTEXT.md and local Markdown links: checked.
-- Fresh-agent dry-run (self-review) using the three memory files: startup, completed scope,
-  constraints, relevant files, verification limits, unknowns, next action, and
-  user briefing are identifiable without chat history.
-- Final diff/status review: only the three intended memory files changed.
+- Baseline `make verify`: passed before editing.
+- Corrected `make verify`: passed; all existing AST/LaTeX goldens and closure
+  identity tests remain green without expected-output changes.
+- `make verify-pdf`: passed, all 36 expected text cases in all six templates.
+  Both gates were rerun successfully after the version bump to 0.2.6.
+- Visual inspection of both default-template pages and the two-column page:
+  readable umlauts, monospace code styling, punctuation, and framed code block;
+  no clipping or overlap observed.
+- Initial PDF checker attempt with `pdftotext -layout` incorrectly combined
+  unrelated lines across the two-column template. Diagnosed as extraction
+  layout, corrected to `-raw`, then reran all six templates successfully.
+- Negative control with the new fixture and original HEAD's headers:
+  reproduced exit 43 and `lstinline ended by EOL`.
 
-Runtime regressions, PDF compilation, and install/uninstall acceptance were
-not run: product code, templates, filters, and golden fixtures were unchanged.
-Current runtime/dependency health is UNVERIFIED; no historical green test run
-is presented as a current result.
+- `git diff --check`, `./utl/check-charset.sh`, and new script syntax: passed.
+  New untracked fixture/test files also passed explicit whitespace and charset
+  checks, since the repository charset checker only visits tracked files.
+- Reviewed all three memory files together; local Markdown links resolve.
+  Fresh-agent re-entry dry-run (self-review): startup, objective, constraints,
+  relevant files, verified commands, remaining limits, uncommitted ownership,
+  next action, and a concise briefing are identifiable without chat history.
+- Final diff review: only the listed task files and memory changes are present.
+- Existing local installation: 0.2.5 under `~/.local`; all 27 runtime/completion
+  files match tag v0.2.5 without extra runtime files. Install/uninstall dry runs
+  with `PREFIX=$HOME/.local` were inspected. Actual replacement remains pending.
 
-# Relevant Historical Caveats
+# Limits, Decisions, And Next Action
 
-- The base already includes the Pandoc 3.12.1 image-alt wrapping fixture correction
-  in `src/tst/expected/main.tex` and `filters-callout.tex` (commit
-  `4775358`, merged by `71d8017`). Do not repeat the old integration task.
-- Earlier sessions recorded rewrites of published history/tags to remove
-  Copilot co-author trailers. Those actions are historical, not instructions
-  to repeat them. Recheck refs if an older clone reports divergence.
-- Homebrew was assessed only; no packaging implementation was requested.
-  Prior dependency-availability claims are stale and must be verified if that
-  topic resumes. TeX policy and clean-machine acceptance remain UNKNOWN.
-- Downstream recovery state belongs to the affected project. Its current
-  installation/PDF acceptance is UNKNOWN here; old approval notes do not
-  authorize recovery work from this checkout.
-- Observed policy/checker discrepancy: BEHAVIOR.md allows required LaTeX math
-  symbols, while the charset checker has no corresponding Unicode exception.
-  CONTEXT.md records the implementation boundary. These memory edits use no
-  such exception; the checker and user policy were not changed.
-
-# Open Decisions And Next Action
-
-No open decision or blocker remains for this session.
-
-On re-entry, run the startup protocol and check worktree and publication refs.
-Issue #7 exists and awaits an implementation request. Follow the user's next
-task; do not start implementing the backlog automatically. The publication
-authorization above applies only to this session's three memory files.
+- Actual Ubuntu CI, older toolchain pairs reported in the issue, and complete
+  downstream O2I PDF/project acceptance are UNVERIFIED here.
+- The scoped repair depends on Listings' existing internal scanner predicate;
+  real PDF regression tests should accompany future Listings upgrades.
+- Publication and review remain pending. Verify tag target, published state,
+  and Latest status after release creation. The exact corrected commit can
+  only be recorded after a commit is made.
+- Existing issue #7, Homebrew packaging, and downstream recovery are outside
+  this task. Historical history/tag rewrites remain non-actionable caveats.
+- The charset policy/checker discrepancy remains as recorded in CONTEXT.md;
+  this correction uses only characters accepted by the current checker.
 
 # Re-Entry Briefing
 
-Issue #7 has been created. The memory is reviewed for use without this session,
-and its commit/push was explicitly requested. Verify publication status from
-Git. There is no active product task; await the user's next instruction.
+Issue #8 is locally corrected on `fix/inline-code-umlauts`; release 0.2.6 is
+prepared. Complete release-version verification, commit/PR/integration, publish
+and verify v0.2.6, remove the fix branch, then replace the old local installation
+and verify an installed PDF render. Record observed results in this snapshot.
+Downstream acceptance belongs to the downstream project.
