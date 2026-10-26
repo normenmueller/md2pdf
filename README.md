@@ -60,6 +60,10 @@ Run directly from source tree:
 
 See `doc/exp` for runnable examples, including filters, assets, tables, and source includes.
 
+`doc/exp/inline-code.md` demonstrates inline code with German umlauts and code
+punctuation, including code beginning with an umlaut. All bundled templates
+preserve `äöüÄÖÜß` in inline code with the default Listings backend.
+
 ## Usage
 
 ```bash
@@ -106,6 +110,26 @@ md2pdf --template article-modern --closure-manifest
 `-- utl
     `-- completions
 ```
+
+## Verification
+
+From the repository root, run the syntax, structure, charset, golden-output,
+and renderer-identity checks:
+
+```bash
+make verify
+```
+
+This requires the runtime tools above, Python 3, and Perl. It does not compile
+PDFs. To compile the inline-code regression fixture with every bundled template
+and check the extracted text, also run:
+
+```bash
+make verify-pdf
+```
+
+The PDF check additionally requires Poppler's `pdftotext` and a LaTeX
+installation with the packages and fonts used by the bundled templates.
 
 ## License
 

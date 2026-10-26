@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.6 - 2026-10-26
+
+### Fixed
+
+- Preserve leading German umlauts in inline code with every bundled template.
+  Pandoc's pre-tokenized Listings calls now use the argument scanner inside
+  `\passthrough`, avoiding the `lstinline ended by EOL` error (issue #8).
+
+### Added
+
+- `make verify-pdf` to compile inline-code controls, German characters,
+  and punctuation with all bundled templates and check extracted PDF text.
+
 ## 0.2.5 - 2026-09-07
 
 ### Added
