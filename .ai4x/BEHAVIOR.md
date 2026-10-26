@@ -4,6 +4,10 @@ This file is the canonical operating contract for agentic AI agents working in t
 Agents must read `.ai4x/CONTEXT.md` and `.ai4x/STATE.md` before acting.
 This file remains canonical even if exposed through a host-specific adapter such as a root-level `AGENTS.md` symlink.
 
+Memory entry points: [CONTEXT.md](CONTEXT.md) contains stable project facts;
+[STATE.md](STATE.md) contains the single current handoff. Read all three files;
+do not depend on previous chat sessions or tool resume state.
+
 # Expert Peer Role
 
 - Act as a critical, experienced, highly professional engineering peer for the user.
@@ -64,12 +68,22 @@ Before modifying files:
 # Workflow
 
 - Prefer the smallest safe change first, then iterate.
+- Keep redesigns of the CLI, filter pipeline, template architecture, installation layout, or documentation structure within the user's requested scope.
 - Proceed autonomously when requirements are clear and the safe path is supported by repository evidence.
 - Ask concise questions only when missing information would materially change implementation, validation, release behavior, or the expert peer role.
 - Before substantial edits, identify touched areas and acceptance checks.
 - After meaningful progress, run verification relevant to the changed scope.
 - Do not conclude with skipped checks unless the reason and residual risk are explicit.
 - For re-entry briefings, report: current objective, current state, open decisions, immediate next action, and known risks.
+- A backlog item or historical approval is not a new implementation request. Preserve its scope and completion status when handing off.
+
+# Task-Specific Verification
+
+- Memory-only changes: review all three `.ai4x/` files together, check referenced repository paths, run `git diff --check` and `./utl/check-charset.sh`, and perform the fresh-agent dry-run described under Maintenance Rules. Runtime regression tests are unnecessary unless product files change or a runtime claim needs verification.
+- CLI, filter, or template changes: run `make verify`; additionally render a representative PDF when the affected behavior requires LaTeX compilation. Golden AST/LaTeX tests alone do not prove PDF compilation works.
+- Installation changes: inspect `make -n install` and `make -n uninstall`; validate actual installation and cleanup in a disposable prefix when appropriate.
+- Documentation examples: reproduce the documented commands with their stated prerequisites and working directory. Distinguish commands inspected in source from checks executed successfully.
+- Release publication: verify the resulting tag, draft/published status, and intended Latest designation after an authorized release action. Creating a release object alone does not establish public availability.
 
 # Project Standards
 
@@ -110,6 +124,8 @@ External tools used by the project:
 - Prefer pull requests for integration.
 - Prefer squash merges to keep history linear and readable.
 - Direct commits to `trunk` are exceptions and require explicit user approval.
+- Public release and tag publication require explicit user authorization. Keep authorization tied to the requested action and scope.
+- Do not add a `Co-authored-by: Copilot` trailer to commits. Evidence: explicit standing user instruction preserved from the 2026-09-07 handoff.
 - Keep one logical change per branch.
 - Keep template `.tex` and `.icl` pairs consistent.
 - Keep filter order centralized in `src/lib/filters/manifest.sh`.
@@ -134,4 +150,8 @@ External tools used by the project:
 - Keep volatile state out of `.ai4x/BEHAVIOR.md` and `.ai4x/CONTEXT.md`.
 - Keep stable project facts out of `.ai4x/STATE.md` except as compact references.
 - Preserve responsibility boundaries and cross-reference instead of duplicating large sections.
+- Maintain one current snapshot in `STATE.md`; replace superseded objectives and verification claims instead of accumulating competing handoffs. Keep history in Git, issues, and release records, retaining only operationally relevant historical caveats.
+- Record snapshot date, observed revision, branch, local tracking-ref comparison, uncommitted file ownership, authorized scope, completed work, verification limits, open decisions, and next action. A local tracking ref does not prove live remote freshness.
+- Preserve durable user decisions in `BEHAVIOR.md` and stable implementation facts in `CONTEXT.md` before removing obsolete state. Past approvals must not become standing execution authority.
+- Before handoff, simulate re-entry using only these files and the repository: confirm startup, objective, constraints, relevant files, verification status, unknowns, next action, and a concise user briefing. Clearly state whether edits remain local and uncommitted.
 - Do not create, modify, or restore host-specific adapter symlinks or wrapper files unless the user explicitly asks.

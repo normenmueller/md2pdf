@@ -1,100 +1,112 @@
 # Purpose
 
-This file contains stable project understanding for future agents working on `md2pdf`.
+Stable project understanding for md2pdf. Read [BEHAVIOR.md](BEHAVIOR.md) for
+operating rules and [STATE.md](STATE.md) for the current handoff, task scope,
+verification results, and unknowns. Current objectives belong only in STATE.md.
 
-# Project Summary
+# Project And Entry Points
 
-`md2pdf` converts Markdown into structured PDF files using Pandoc, LaTeX templates, and a curated Lua filter pipeline.
-The practical goal is a deterministic, ergonomic CLI that supports repeatable PDF generation, reusable templates, filter-based Markdown transformations, installable runtime assets, and shell completions.
-Evidence: `README.md`; `src/app/md2pdf.sh`; `src/lib/filters/manifest.sh`; `Makefile`.
+md2pdf converts Markdown into PDF through a Bash CLI, Pandoc, a fixed filter
+pipeline, and LaTeX templates. Deterministic rendering and CLI ergonomics are
+central constraints. Repository facts take precedence over this summary.
 
-# Current Objective
+- `src/app/md2pdf.sh`: CLI parsing, runtime discovery, dependency checks,
+  template selection, asset links, renderer identity, and Pandoc invocation.
+- `src/lib/filters/manifest.sh`: ordered Lua filter list shared by runtime
+  and golden tests. Inspect it rather than maintaining a second filter list.
+- `src/lib/filters/`: Markdown/AST transformations.
+- `src/lib/templates/`: paired `.tex` templates and `.icl` header includes.
+- `doc/exp/`: example inputs and assets; filter cases are in `doc/exp/filters/`.
+- `src/tst/run.sh` and `src/tst/expected/`: golden JSON AST and LaTeX tests.
+- `src/tst/closure-manifest.sh`: renderer identity regression tests.
+- `Makefile`: installation, uninstallation, and the `verify` target.
+- `utl/completions/`: Bash, Zsh, and Fish completions.
+- `utl/check-templates.sh`, `utl/check-charset.sh`: structural/character checks.
+- `README.md`: installation and CLI documentation.
+- `CHANGELOG.md`: release history; Git and GitHub hold commit/issue history.
 
-No standing product change is active. Current objectives and volatile work belong in `.ai4x/STATE.md`.
-The operational-memory bootstrap migration is complete; `.ai4x/` is the canonical location.
-Evidence: commit `8716051`; `.ai4x/BEHAVIOR.md`; active user instruction on 2026-08-11.
+# CLI And Rendering Contract
 
-# Background
+Usage: `md2pdf [options] -- <input.md> [pandoc args...]`.
 
-- The project previously stored agent instructions in `doc/ops/AGENTS.md` and strict workflow guidance in `doc/ops/_workflow.md`; both were migrated and removed.
-- The root-level `AGENTS.md` symlink is a host-specific adapter to `.ai4x/BEHAVIOR.md`.
-- The user wants long-running project memory that works across future sessions without chat history or assistant resume state.
-- The canonical memory system is `.ai4x/`, with separate files for behavior, context, and volatile state.
-- Agent chat remains German by default; generated repository artifacts remain English by default.
-Evidence: commit `8716051`; active user instruction; former `doc/ops/AGENTS.md`; former `doc/ops/_workflow.md`.
+- Runtime assets contain `templates/` and `filters/`. Discovery uses
+  `MD2PDF_DATADIR`, then paths relative to the resolved entry script.
+- `--template <name|path>` selects a bundled name or an explicit path.
+  A matching `.icl` is preferred; `default.icl` is the fallback.
+- The default PDF is beside the input. An explicit relative output path is
+  relative to the caller's working directory.
+- Rendering runs inside the input directory. A sibling `<input-base>.yaml`
+  is loaded as metadata when present.
+- One Pandoc invocation uses `pdflatex`, a table of contents, numbered
+  sections, `idiomatic` syntax highlighting, and `listings=true`.
+  Pandoc manages required LaTeX reruns for cross-references.
+- Pipeline order is `pandoc-include`, the ordered Lua filters, then
+  `pandoc-crossref`. Caller-supplied Pandoc arguments are appended.
+- `listing-caption-wrap.lua` wraps captioned `lst:` code blocks for
+  pandoc-crossref in LaTeX listings mode to avoid duplicate captions.
+- Repeatable `--asset-link <dir>` resolves relative directories from the
+  input directory and creates basename symlinks there, cleaned on exit.
+  Existing symlinks can be replaced; existing files/directories are rejected.
+- `--list-templates` lists bundled names and exits without rendering.
+- `--closure-manifest` emits deterministic JSON and exits without rendering.
+  It is mutually exclusive with `--list-templates`.
 
-# Domain Model
+Evidence: `src/app/md2pdf.sh`; `src/lib/filters/manifest.sh`;
+`src/lib/filters/listing-caption-wrap.lua`.
 
-- CLI entrypoint: `src/app/md2pdf.sh` parses options, resolves runtime asset directories, validates dependencies, resolves templates, builds filter arguments, creates optional asset symlinks, and invokes Pandoc once. Pandoc manages any required internal `pdflatex` reruns for labels and cross-references.
-- Runtime data directory: contains `templates/` and `filters/`. It can be discovered from `MD2PDF_DATADIR` or relative installed/source paths. Evidence: `src/app/md2pdf.sh`.
-- Template selector: `--template <name|path>` accepts a named template from the templates directory or an explicit `.tex` path. A matching `.icl` include file is used when available; otherwise `default.icl` is fallback. Evidence: `src/app/md2pdf.sh`.
-- Filter pipeline: `src/lib/filters/manifest.sh` defines ordered Lua filter files shared by runtime and tests.
-- Listing captions: `src/lib/filters/listing-caption-wrap.lua` converts captioned `lst:` code blocks into pandoc-crossref listing Divs for LaTeX when `listings=true` is active. This preserves Pandoc's `idiomatic`/LaTeX `listings` backend while preventing duplicate caption options in generated `lstlisting` environments. Evidence: `src/lib/filters/listing-caption-wrap.lua`; `src/tst/run.sh`.
-- Golden outputs: `src/tst/expected/*.json` and `src/tst/expected/*.tex` define expected Pandoc JSON AST and LaTeX output for examples.
-- Examples: `doc/exp` contains runnable and regression Markdown inputs, including filter-specific cases under `doc/exp/filters`.
-- Install flow: `Makefile` installs executable, templates, filters, filter manifest, and Bash/Zsh/Fish completions under configurable `PREFIX`, `DESTDIR`, and directory variables.
-- Asset links: `--asset-link <dir>` creates temporary symlinks in the input directory and cleans them on exit. Evidence: `src/app/md2pdf.sh`.
-- Character policy: tracked repository text is checked for disallowed non-ASCII characters by `utl/check-charset.sh`.
+# Renderer Identity Limits
 
-# Repository Map
+The schema `md2pdf.closure-manifest/v1` reports the entry-script SHA-256,
+filter-manifest path/digest, ordered active filter paths/digests, selected
+template/header paths/digests, and Pandoc/pandoc-crossref/pdflatex versions.
+Bundled paths are data-directory-relative.
 
-- `.ai4x/`: canonical operational memory for future agents.
-- `src/app/md2pdf.sh`: executable Bash CLI entrypoint.
-- `src/lib/filters/`: Lua filters plus `manifest.sh` for pipeline order.
-- `src/lib/templates/`: LaTeX templates and paired header include files.
-- `src/tst/run.sh`: golden regression test runner.
-- `src/tst/expected/`: expected JSON AST and LaTeX outputs.
-- `doc/exp/`: runnable and regression examples.
-- `utl/completions/`: Bash, Zsh, and Fish completion definitions.
-- `utl/check-templates.sh`: template pair validation.
-- `utl/check-charset.sh`: repository character policy validation.
-- `Makefile`: install, uninstall, and verification targets.
-- `README.md`: concise user-facing installation, usage, and project-structure documentation.
-- `CHANGELOG.md`: release history.
-- `.gitignore`: ignores generated PDFs and LaTeX auxiliary outputs.
+It does not capture the entire rendering environment: for example,
+pandoc-include has no reported version, and TeX packages, fonts, document
+inputs, and arbitrary Pandoc arguments are not identified by this schema.
+Do not treat equal manifests alone as proof of byte-identical PDFs.
 
-# Architecture And Design
+Evidence: `print_closure_manifest` in `src/app/md2pdf.sh`.
 
-- The CLI is implemented as a Bash script with strict mode and array-based command construction. Evidence: `src/app/md2pdf.sh`.
-- Runtime assets are separated from the executable. The CLI resolves a data directory containing templates and filters, validating required files before execution. Evidence: `src/app/md2pdf.sh`.
-- The Pandoc command uses Markdown extensions, PDF output, a selected LaTeX template, a selected header include file, `pdflatex`, table of contents, numbered sections, Pandoc `idiomatic` syntax highlighting with `listings=true`, required `pandoc-include`, ordered Lua filters, required `pandoc-crossref`, optional input-local YAML metadata, and user-provided Pandoc arguments after `--`. Evidence: `src/app/md2pdf.sh`.
-- Tests apply the same ordered filter manifest to examples and compare both normalized JSON AST and LaTeX output against golden files. Evidence: `src/tst/run.sh`; `src/lib/filters/manifest.sh`.
-- Template integrity is checked structurally by ensuring each `.tex` has a paired `.icl` and that `default.tex` and `default.icl` exist. Evidence: `utl/check-templates.sh`.
-- Install and uninstall are Makefile-driven and support configurable install roots. Evidence: `Makefile`.
-- INFERRED: The project favors deterministic outputs over convenience because PDF rendering, golden tests, and explicit validation gates are central to the workflow.
+# Dependencies And Installation
 
-# User Preferences
+- Rendering requires `pandoc`, `pdflatex`, `pandoc-include`, and
+  `pandoc-crossref`. Asset links additionally require `python3`.
+- Golden tests require Python 3. Charset checking uses Perl.
+- A working pdflatex executable alone does not establish template readiness.
+  Shipped includes use packages such as fontawesome5, tcolorbox, awesomebox,
+  and pdflscape.
+- `make install` installs the executable, templates, filters, manifest, and
+  completions. `PREFIX`, `DESTDIR`, and component directory variables are
+  configurable. Install/uninstall prune matching runtime files in the chosen
+  data directories; use a disposable prefix for installation tests.
 
-- Chat responses must be in German unless the user requests another language.
-- Repository artifacts and source code must be in English unless the user explicitly requests another artifact language.
-- The user expects a senior expert peer, not a passive assistant.
-- The user values durable cross-session agent memory and wants fresh agents to become useful without chat history.
-- The user wants canonical operational memory under the lowercase `.ai4x/` path.
-- The user expects concrete execution on disk, not only explanations.
-Evidence: active user instruction; former `doc/ops/AGENTS.md`.
+Evidence: `README.md`; `Makefile`; `src/lib/templates/*.icl`.
 
-# Constraints
+# Verification Boundaries
 
-- Keep output behavior deterministic.
-- Keep user-facing CLI stable unless explicitly changed.
-- Keep documentation aligned with implementation.
-- Keep shell completions aligned with CLI options.
-- Keep template `.tex` and `.icl` pairs consistent.
-- Keep filter order synchronized through `src/lib/filters/manifest.sh`.
-- Validate risky changes; do not silently skip checks.
-- Public release commands require explicit user approval. Evidence: former `_workflow.md`.
-- Source code and repository documentation must obey the repository character policy. Evidence: `utl/check-charset.sh`.
-- External dependencies for normal operation include Pandoc, a LaTeX distribution with `pdflatex`, `pandoc-include`, `pandoc-crossref`, and Python 3 for `--asset-link`. Evidence: `README.md`; `src/app/md2pdf.sh`.
+`make verify` checks shell syntax, template listing and pairs, tracked-file
+charset, golden JSON AST/LaTeX output, and closure-manifest regressions.
+It does not compile a PDF or perform installation acceptance.
 
-# Non-Goals
+Golden JSON comparisons normalize away `pandoc-api-version`; LaTeX comparisons
+are strict. Pandoc writer changes can therefore affect goldens even when ASTs
+are unchanged. Investigate the renderer version and exact diff before changing
+expected fixtures.
 
-- Do not redesign the CLI, filter pipeline, template architecture, install layout, or documentation structure unless explicitly requested.
-- Do not change PDF output or golden fixtures unless the behavior change is intentional and verified.
-- Do not restore old host-specific adapter files unless the user explicitly asks.
-- Do not turn `.ai4x/` files into user-facing product documentation; they are operational memory for agents.
-- Do not persist secrets, credentials, or unnecessary personal data in `.ai4x/`.
+The charset checker currently permits ASCII plus German umlauts, sharp s, and
+the copyright symbol. The broader text policy in BEHAVIOR.md mentions required
+LaTeX math symbols; such an exception is not implemented in the checker. Use
+ASCII LaTeX commands when possible and surface any required exception.
 
-# External Context
+Evidence: `Makefile`; `src/tst/run.sh`; `src/tst/closure-manifest.sh`;
+`utl/check-charset.sh`.
 
-- Project-relevant external tools are Pandoc, `pdflatex`, `pandoc-include`, `pandoc-crossref`, Python 3, Bash, Make, Git, and shell completion systems. Evidence: repository files.
-- External facts should be consulted only when required by the active task and recorded with evidence.
+# Memory And Adapters
+
+`.ai4x/` is the canonical operational memory. `AGENTS.md` is an adapter
+symlink to `.ai4x/BEHAVIOR.md`; `.github/agents/md2pdf.agent.md` also points
+agents there. Do not modify adapters unless explicitly requested.
+
+Memory must remain useful without chat history, session storage, temporary
+scripts, or an absolute checkout path. Discover the current root through Git.
