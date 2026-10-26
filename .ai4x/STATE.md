@@ -6,103 +6,120 @@ recheck Git before acting. Historical approvals are not new execution authority.
 
 # Objective And Authorized Scope
 
-The user requested work on GitHub issue
-[#8 - Inline code starting with ü fails with Listings EOL error](https://github.com/normenmueller/md2pdf/issues/8).
-The implementation and local verification are complete. The user subsequently
-requested integration into trunk, fix-branch cleanup locally/remotely, and a
-new release. The selected patch version is 0.2.6. Publication, tag verification,
-and installation of 0.2.6 on this system with removal of the previous version
-are now authorized. Downstream project changes remain outside the scope.
-Issue #7 remains unrelated backlog work.
+The user requested work on issue #8, then integration into trunk, a new release,
+local/remote fix-branch deletion, and replacement of the current system's old
+installation. All product, release, cleanup, and installation work is complete.
+The selected patch version is 0.2.6. Downstream project changes were not requested;
+issue #7 remains unrelated backlog work.
+The user subsequently explicitly approved committing and pushing only this final
+STATE.md update directly on trunk. That approval is limited to this handoff.
 
-# Repository Snapshot
+# Repository And Publication Snapshot
 
-- Branch: `fix/inline-code-umlauts`, created for this correction.
-- Observed HEAD: `bc883a9da306a1f201a397a1f229b1096571e5d4`
-  (`chore: refresh ai4x memory and session handoff`).
-- Local `origin/trunk` equals that HEAD. Fetch and live remote-ref inspection
-  confirmed the same trunk; neither the fix branch nor v0.2.6 exists remotely
-  at this preparation step. The new branch has no upstream yet.
-- Startup worktree was clean. All current edits and new files belong to this
-  session and remain local and uncommitted. No commit, push, PR, issue update,
-  tag, or release was performed.
-- Modified: six `src/lib/templates/*.icl` files, Makefile, README.md,
-  CHANGELOG.md, CONTEXT.md, and this snapshot.
-- Added: `doc/exp/inline-code.md`, `src/tst/expected/inline-code.txt`, and
-  `src/tst/inline-code-pdf.sh`. CLI code, filter order, existing goldens,
-  installation recipes, template `.tex` files, and host adapters are unchanged.
+- Product integration: [PR #9](https://github.com/normenmueller/md2pdf/pull/9),
+  squash-merged into trunk at `2ded5ac8fa39e40a665fd6acf13e94fa58a9c2ee`.
+- [Issue #8](https://github.com/normenmueller/md2pdf/issues/8) is confirmed
+  closed as completed after the merge.
+- Annotated tag `v0.2.6`: object `c5f89ae6bde09ae192da290efce45e253544b785`,
+  resolves to the product integration commit above. Local and live remote tag
+  refs were compared, including the dereferenced commit.
+- [Release v0.2.6](https://github.com/normenmueller/md2pdf/releases/tag/v0.2.6)
+  was published at 2026-10-26 21:46:13 UTC, is neither draft nor prerelease,
+  and is confirmed as GitHub's Latest release. Release notes record the exact
+  corrected revision and verification limits.
+- `fix/inline-code-umlauts` was deleted locally and remotely after proving its
+  tree identical to the squash merge. Live remote-ref lookup confirms absence.
+- After product completion, local trunk and origin/trunk both equaled the
+  release commit, and the worktree was clean. A fetch/live remote check was
+  performed in this session; future freshness must be checked again.
+- Current branch: trunk, at the release commit and equal to origin/trunk.
+  At preparation time only STATE.md differs, owned by this session and approved
+  for direct commit/push. This snapshot precedes its own publication; establish
+  the resulting handoff commit, push outcome, and clean worktree from Git.
+  No product files differ from the release. The temporary local
+  `chore/v0.2.6-handoff` branch was removed; it was never pushed.
 
-# Diagnosis And Completed Work
+# Completed Correction
 
-- Read the issue and its empty comment list via the GitHub connector.
-- Reproduced the issue's minimal input with the original source renderer:
-  exit 43, `Package Listings Error: lstinline ended by EOL`.
-- Inspected the installed Listings implementation. `\lstinline@` chooses
-  `\lst@InlineM` or `\lst@InlineJ` through `\lst@IfNextCharActive`. An active
-  UTF-8 first byte incorrectly selects direct input even though Pandoc's
-  `\passthrough` argument has already tokenized the closing delimiter.
-- All six bundled includes now locally select the argument scanner inside
-  `\passthrough`. German content and the Listings backend are preserved;
-  standalone raw Listings calls retain the original scanner selection.
-- Added a 36-case PDF/text fixture covering the reported phrase, ASCII,
-  leading/internal/isolated `äöüÄÖÜß`, punctuation, explicit code language,
-  standalone raw inline listings, and a fenced code block.
-- Added documented `make verify-pdf` as a separate compilation gate.
-  `make verify` additionally syntax-checks the new test script and retains its
-  existing non-PDF checks. Changelog and CLI version now prepare patch release
-  0.2.6, dated 2026-10-26.
-- Updated CONTEXT.md with the stable integration and verification boundaries.
-  BEHAVIOR.md required no rule changes.
+- Reproduced the reported minimal input: exit 43 and
+  `Package Listings Error: lstinline ended by EOL`.
+- Diagnosed Listings' scanner choice for Pandoc's pre-tokenized
+  `\passthrough` argument. All six includes now locally select the argument
+  scanner, preserving German text and code styling. Standalone raw Listings
+  calls retain their normal behavior. See CONTEXT.md for the stable contract.
+- Added `doc/exp/inline-code.md`, `src/tst/expected/inline-code.txt`, and
+  `src/tst/inline-code-pdf.sh`: 36 PDF/text cases per template.
+- Added and documented `make verify-pdf`; `make verify` additionally checks
+  the new script's syntax. Existing goldens, filter order, template `.tex`
+  files, installation recipes, and host adapters were unchanged.
+- Version/changelog identify 0.2.6. CONTEXT.md records the integration and
+  verification boundaries; BEHAVIOR.md required no changes.
 
 # Verification
 
-Executed locally on macOS, with Pandoc 3.12.1, pandoc-crossref 0.3.26, and
+Executed locally on macOS with Pandoc 3.12.1, pandoc-crossref 0.3.26, and
 pdfTeX 1.40.29 (TeX Live 2026):
 
-- Baseline `make verify`: passed before editing.
-- Corrected `make verify`: passed; all existing AST/LaTeX goldens and closure
-  identity tests remain green without expected-output changes.
-- `make verify-pdf`: passed, all 36 expected text cases in all six templates.
-  Both gates were rerun successfully after the version bump to 0.2.6.
-- Visual inspection of both default-template pages and the two-column page:
-  readable umlauts, monospace code styling, punctuation, and framed code block;
-  no clipping or overlap observed.
-- Initial PDF checker attempt with `pdftotext -layout` incorrectly combined
-  unrelated lines across the two-column template. Diagnosed as extraction
-  layout, corrected to `-raw`, then reran all six templates successfully.
-- Negative control with the new fixture and original HEAD's headers:
-  reproduced exit 43 and `lstinline ended by EOL`.
+- `make verify`: passed on the baseline and correction; rerun successfully
+  after the 0.2.6 version bump. All AST/LaTeX goldens and closure tests pass.
+- `make verify-pdf`: all 36 expected cases pass for all six templates,
+  including after the version bump.
+- Visual inspection: both default pages and the two-column page show readable
+  umlauts, monospace code, punctuation, and the framed code block, without
+  observed clipping or overlap.
+- Negative control: the new fixture with original headers reproduces exit 43.
+- Initial checker attempt with `pdftotext -layout` joined unrelated cases
+  across columns; diagnosed and corrected to content-order extraction (`-raw`).
+- `git diff --check`, charset, and script syntax checks passed. New files were
+  explicitly checked before staging and included in the tracked charset check
+  before commit.
+- PR head and squash-merge trees were compared and found identical. GitHub
+  returned no commit status checks; no Ubuntu CI result is claimed.
+- Final memory review: all three files considered together, local Markdown
+  links checked, whitespace/charset passed. Fresh-agent dry-run (self-review)
+  identifies startup, completed scope, release/install evidence, constraints,
+  limits, ownership, next action, and briefing without chat history.
 
-- `git diff --check`, `./utl/check-charset.sh`, and new script syntax: passed.
-  New untracked fixture/test files also passed explicit whitespace and charset
-  checks, since the repository charset checker only visits tracked files.
-- Reviewed all three memory files together; local Markdown links resolve.
-  Fresh-agent re-entry dry-run (self-review): startup, objective, constraints,
-  relevant files, verified commands, remaining limits, uncommitted ownership,
-  next action, and a concise briefing are identifiable without chat history.
-- Final diff review: only the listed task files and memory changes are present.
-- Existing local installation: 0.2.5 under `~/.local`; all 27 runtime/completion
-  files match tag v0.2.5 without extra runtime files. Install/uninstall dry runs
-  with `PREFIX=$HOME/.local` were inspected. Actual replacement remains pending.
+# Local Installation Acceptance
 
-# Limits, Decisions, And Next Action
+- Previously installed 0.2.5 was found under `~/.local`. All 27 runtime and
+  completion files matched tag v0.2.5; no extra runtime files were present.
+- Inspected `make -n PREFIX=$HOME/.local install` and `uninstall`.
+- Disposable-prefix 0.2.6 install/uninstall passed, including runtime byte
+  comparison and removal of installed runtime/completion files.
+- Ran `make PREFIX=$HOME/.local uninstall`; verified removal of the old binary,
+  runtime data directory, and all three completions before reinstalling.
+- Ran `make PREFIX=$HOME/.local install` from the exact tagged product tree.
+- Active binary: `~/.local/bin/md2pdf`; `md2pdf --version` reports 0.2.6.
+  All 27 installed runtime/completion files match tag v0.2.6 exactly, without
+  stale runtime files. No other md2pdf binary was found on PATH.
+- Without MD2PDF_DATADIR override, installed/source closure manifests match for
+  all six templates. The installed renderer compiles the 36-case fixture and
+  preserves every expected text line. Both installed PDF pages were visually
+  checked successfully. Temporary test artifacts are not required for re-entry.
+
+# Limits And Next Action
 
 - Actual Ubuntu CI, older toolchain pairs reported in the issue, and complete
-  downstream O2I PDF/project acceptance are UNVERIFIED here.
-- The scoped repair depends on Listings' existing internal scanner predicate;
-  real PDF regression tests should accompany future Listings upgrades.
-- Publication and review remain pending. Verify tag target, published state,
-  and Latest status after release creation. The exact corrected commit can
-  only be recorded after a commit is made.
-- Existing issue #7, Homebrew packaging, and downstream recovery are outside
-  this task. Historical history/tag rewrites remain non-actionable caveats.
-- The charset policy/checker discrepancy remains as recorded in CONTEXT.md;
-  this correction uses only characters accepted by the current checker.
+  downstream O2I PDF/project acceptance remain UNVERIFIED here.
+- The repair uses Listings' existing internal scanner predicate; retain real
+  PDF regression testing during future Listings upgrades.
+- Issue #7, Homebrew packaging, and downstream recovery remain outside scope.
+  Historical history/tag rewrites are not instructions to repeat them.
+- The existing charset policy/checker discrepancy remains as documented in
+  CONTEXT.md; this task needed no character-policy exception.
+- No product decision or blocker remains. Automatic approval review rejected
+  the additional memory commit/push: the release/installation authorization
+  did not cover a separate post-completion handoff publication. The user then
+  explicitly approved the requested direct trunk commit/push of only STATE.md,
+  resolving that authorization blocker. Verify its publication from Git, then
+  await the user's next task.
 
 # Re-Entry Briefing
 
-Issue #8 is locally corrected on `fix/inline-code-umlauts`; release 0.2.6 is
-prepared. Complete release-version verification, commit/PR/integration, publish
-and verify v0.2.6, remove the fix branch, then replace the old local installation
-and verify an installed PDF render. Record observed results in this snapshot.
-Downstream acceptance belongs to the downstream project.
+Issue #8 is fixed, merged, and published as stable Latest v0.2.6. The old 0.2.5
+installation was removed and 0.2.6 installed and PDF-tested on this system.
+The fix branch is gone locally/remotely. Product work is committed and published;
+this final STATE.md update is explicitly approved for direct commit/push.
+Check Git for its publication outcome and any remaining local changes.
+Downstream project acceptance remains the downstream project's responsibility.
